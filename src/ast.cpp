@@ -1,12 +1,6 @@
 #include "ast.h"
 
 
-void Ast::Draw(SDL_Renderer* renderer){
-	GameObject::Draw(renderer);
-	// circleRGBA(renderer,m_pos.x,m_pos.y,m_radius,255,255,0,255);
-}
-
-
 Ast::~Ast(){
 	if (m_astSize > 1){
 		new Ast(m_astSize-1,m_pos);
@@ -16,6 +10,8 @@ Ast::~Ast(){
 }
 
 Ast::Ast(int size) : m_astSize(size) {
+	m_type = OBJ_AST;
+	m_collisionFlag = OBJ_NONE;
 	m_granularityMax = 6 + 3 * m_astSize;
 	m_granularityMin = 4 + m_astSize;
 	m_radius = 5.5 * pow(2,m_astSize-1);
@@ -40,6 +36,8 @@ Ast::Ast(int size) : m_astSize(size) {
 }
 
 Ast::Ast(int size,Point pos) : m_astSize(size) {
+	m_type = OBJ_AST;
+	m_collisionFlag = OBJ_NONE;
 	m_pos = pos;
 	m_granularityMax = 6 + 3 * m_astSize;
 	m_granularityMin = 4 + m_astSize;

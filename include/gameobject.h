@@ -36,6 +36,16 @@ class GameObject{
 	// int m_type;
 	// unsigned int m_collisionFlags;
 	// int m_lifeTimer;
+
+	enum {
+		OBJ_NONE = 0x00000001,
+		OBJ_SHIP = 0x00000001,
+		OBJ_AST = 0x00000001,
+		OBJ_TARGET = 0x00000001,
+		OBJ_BULLET = 0x00000001
+	};
+	unsigned int m_type;
+	unsigned int m_collisionFlag;
 };	
 
 

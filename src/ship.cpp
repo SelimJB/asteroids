@@ -7,7 +7,8 @@ Ship::Ship(){
 	m_pos = Point(20,20);
 	m_axis = Point(0,1);
 	m_normal = Point(1,0);
-
+	m_collisionFlag = OBJ_AST;
+	m_type = OBJ_SHIP;
 	m_acceleration = 0.0075;
 	m_angVelocity = 360;
 	m_dragFactor = 0.00052;
@@ -105,6 +106,5 @@ void Ship::ShipCheckCollision(){
 }
 
 Ship::~Ship(){
-	cout << "GaETHaN JTechidANl3sDENTs" << endl;
 	GameObject::m_ship = NULL;
 }

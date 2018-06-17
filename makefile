@@ -7,7 +7,8 @@ INCL=-Iinclude
 LIB=-Llib
 EXE=Main
 
-SRC=$(wildcard $(SRC_PATH)*.cpp)
+SRC:=$(wildcard $(SRC_PATH)*.cpp)
+SRC := $(filter-out $(SRC_PATH)main_temp.cpp, $(SRC))
 OBJ=$(subst ./src, ./obj, $(SRC:.cpp=.o))
 
 all: $(SRC) $(EXE)
@@ -19,4 +20,4 @@ $(EXE): $(OBJ)
 	$(CC) -g -o $@ $< $(CFLAGS) $(INCL) 
 
 clean:
-	rm -rf Main $(OBJ)
+	del .\obj\*

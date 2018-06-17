@@ -3,6 +3,8 @@
 int Bullet::bulletnbr = 0;
 
 Bullet::Bullet(Point pos, Point axis){
+	m_type = OBJ_BULLET;
+	m_collisionFlag = OBJ_AST;
 	bulletnbr++;
 	m_pos = pos;
 	// m_axis = axis;
@@ -21,7 +23,6 @@ Bullet::~Bullet(){
 }
 
 void Bullet::Update(float deltaTime){ 
-	cout << "GaETHaN JTechidANl3sDENTs" << endl;
 	m_pos.x += m_velocity.x;
 	m_pos.y += m_velocity.y;
     if (m_pos.x < 0) m_pos.x += WINDOW_SIZE;
@@ -59,6 +60,7 @@ void Bullet::CheckCollisions(){
 		if (CollisionPointCircle(m_pos,a.m_pos,a.m_radius)){
 			a.m_isdead = true;
 			m_isdead = true;
+			
 		}
 	}
 }

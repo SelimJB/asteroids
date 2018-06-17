@@ -3,17 +3,18 @@
 #include <math.h>
 #include <iostream>
 #include <vector>
-#include "bullet.h"
 #include "ast.h"
+#include "bullet.h"
 #include "ship.h"
+#include "gamesession.h"
 using namespace std;
 
 const Uint32 fps = 60;
 const Uint32 minimumFrameTime = 1000 / fps;
 
 int main(int argc, char* args[]){
-	cout << "YOYOYOYO" << endl;
-	srand(time(NULL));
+	GameSession* gameSession = new GameSession();
+	// Context set up
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	SDL_Init(SDL_INIT_VIDEO);
@@ -32,22 +33,18 @@ int main(int argc, char* args[]){
 
 	bool quit = false;
 	SDL_Event event;
+	
 	Uint32 frameTime;
 	Uint32 lastFrameTime = 0;
 	Uint32 deltaTime = 0;
 	
+	srand(time(NULL));
+
 	// Ast generation
-	vector<Ast *> asts;
-	for (int i = 0;i<20;i++){
-		asts.push_back(new Ast(GetRandomInt(2,4)));
-	}
+	gameSession->LaunchAsteroidWave();
 	
-	int i = 0;
-	int j = 255;
+	// GameLoop
 	while (!quit) {
-		i = (i + 1) % 255;  
-		j = (j - 1) % 255;  
-		j+=255;
 		frameTime = SDL_GetTicks();
 
 		// Input management
@@ -96,7 +93,7 @@ int main(int argc, char* args[]){
 
 		SDL_SetRenderDrawColor(renderer,255,255,255,255);
 		SDL_RenderClear(renderer);
-		SDL_SetRenderDrawColor(renderer,i*5,7*j,2*j,255);
+		SDL_SetRenderDrawColor(renderer,100,7,2,255);
 
 		for (vector<list<GameObject*>*>::iterator vectIt = GameObject::m_GameObjects.begin(); vectIt!=GameObject::m_GameObjects.end(); vectIt++){
 

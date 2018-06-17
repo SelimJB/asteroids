@@ -29,7 +29,8 @@ class Ship : public GameObject{
 	void ThrustReverse(float deltaTime);
 	void ThrustOff(float deltaTime);
 	void Shoot();
-	void ShipCheckCollision();
+	void ShipCheckCollision();	// TODO delet
+	bool IsColliding(GameObject& obj);
 };
 
 #endif

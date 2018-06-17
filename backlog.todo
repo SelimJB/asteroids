@@ -1,0 +1,23 @@
+TEMP : 
+
+RENSEIGNEMENTS : 
+	☐ Collision Flag
+
+GameSession : 
+	✔ Tag : Object Type and collision Flag @done(18-06-17 23:28)
+	☐ Implement IsColliding for Bullet, Ship, and GameObject 
+	☐ Single GameObject List
+	☐ Draw
+	☐ Update
+	
+CleanCode :
+	☐ Ast
+	☐ Bullet
+	☐ Helper
+	☐ Ship
+	☐ GameObject
+	☐ Ship
+	
+
+Lointain : 
+	☐ 
