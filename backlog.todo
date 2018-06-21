@@ -1,36 +1,18 @@
-TEMP : 
-	☐ Ou mettre les headers ? Dans les .c ou les .h ?
-	☐ Reflechir à ou remplir ma liste de GameObjects, gamesession.h à mettre dans  gameobject.cpp ou dans gameobject.h ? ou ailleurs ?
+TODO :
+	✔ Finish GameSession @done(18-06-21 16:21)
+		✔ Ship in GameSession @done(18-06-21 16:21)
+		✔ Human Control @done(18-06-21 15:53)
+	☐ Clean code
+	Todo more latter : 
+		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
 RENSEIGNEMENTS : 
 	☐ Collision Flag
 	☐ Dynamic cast cost
 	☐ Foncteurs 
-	☐ Debugging et jeux vidéo
-	☐ Faire une classe de logging pour pouvoir suivre les states de mon jeu frame par frames
-
-Bug :
-	✔ pb de vitesse des asteroides qui est différente en fonction de la boucle d'update @done(18-06-21 11:16)
-	
-GameSession :
-	✔ Implement IsColliding for Bullet, Ship, and GameObject @done(18-06-18 16:04)
-	✔ Spliting responsabilities of Update -> Implement DoCollid and Update for positions @done(18-06-19 11:07)
-	✔ Implement a working Gamesession Update method @done(18-06-20 16:42)
-	✔ Implement a working Gamesession Draw method @done(18-06-21 11:25)
-	✔ Single GameObject List, managed by game session, and handeling object destruction @done(18-06-21 11:25)
 	
 Divers : 
 	☐ Choisir ou apparait ma fenêtre de debuggage
-	✔ Logger @done(18-06-21 11:12)
 	☐ Json, xml, or yaml config system 
-
-CleanCode :
-	☐ Ast
-	☐ Bullet
-	☐ Helper
-	☐ Ship
-	☐ GameObject
-	☐ Ship
-	
 Lointain : 
 	☐ Implement collider class for point, pentagone, circle
 		☐ Use this collider class in CheckCollisions methodes instead of dynamic_cast
@@ -38,4 +20,11 @@ Lointain :
 	☐ GameSession flag for disabling / enabling collisions
 
 Archive:
+  ✔ pb de vitesse des asteroides qui est différente en fonction de la boucle d'update @done(18-06-21 11:16) @project(Bug )
+  ✔ Implement IsColliding for Bullet, Ship, and GameObject @done(18-06-18 16:04) @project(GameSession )
+  ✔ Spliting responsabilities of Update -> Implement DoCollid and Update for positions @done(18-06-19 11:07) @project(GameSession )
+  ✔ Implement a working Gamesession Update method @done(18-06-20 16:42) @project(GameSession )
+  ✔ Implement a working Gamesession Draw method @done(18-06-21 11:25) @project(GameSession )
+  ✔ Single GameObject List, managed by game session, and handeling object destruction @done(18-06-21 11:25) @project(GameSession )
+  ✔ Logger @done(18-06-21 11:12) @project(Divers )
   ✔ Tag : Object Type and collision Flag @done(18-06-17 23:28) @project(GameSession )

@@ -2,9 +2,6 @@
 #include "bullet.h"
 #include "ast.h"
 
-Ship* GameObject::m_ship = new Ship();
-
-
 Ship::Ship(){
 	m_pos = Point(20,20);
 	m_axis = Point(0,1);
@@ -157,7 +154,6 @@ bool Ship::IsColliding(GameObject* obj){
 }
 
 Ship::~Ship(){
-	GameObject::m_ship = NULL;
 }
 
 void Ship::Log(){

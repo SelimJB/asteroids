@@ -3,8 +3,6 @@
 
 #include "helper.h"
 
-class Ship;
-
 class GameObject{
 	private:
 	public:
@@ -32,7 +30,6 @@ class GameObject{
 	float m_size;
 	bool m_isdead = false;
 	vector<Point> m_DrawPoints;
-	static Ship* m_ship;
 	// Sphere3f m_boundSphere;
 	// int m_type;
 	// unsigned int m_collisionFlags;

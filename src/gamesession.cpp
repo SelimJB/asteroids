@@ -1,10 +1,14 @@
 #include "gamesession.h"
 #include "ast.h"
+#include "ship.h"
 
 GameObjectList GameSession::m_activeObjectList;
+Ship* GameSession::m_mainShip = new Ship();
+bool GameSession::m_quit = false;
 
 GameSession::GameSession()
 {
+	m_humanControl = new HumanControl();
 }
 
 void GameSession::Update(float dt)

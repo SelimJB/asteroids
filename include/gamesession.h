@@ -7,6 +7,7 @@
 #include "helper.h"
 
 typedef std::list<GameObject *> GameObjectList;
+class Ship;
 
 class GameSession
 {
@@ -53,7 +54,7 @@ class GameSession
 	void KillShip(GameObject * ship);
 
 
-	Ship *m_mainShip;
+	static Ship *m_mainShip;
 	HumanControl *m_humanControl;
 	AIControl *m_AIControl;
 	bool m_bonusUsed;
@@ -68,6 +69,7 @@ class GameSession
 	int m_waveNumber;
 	int m_numAsteroids;
 	bool m_AIOn;
+	static bool m_quit;
 	enum
 	{
 		STATE_PLAY,
