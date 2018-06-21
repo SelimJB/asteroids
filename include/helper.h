@@ -10,6 +10,7 @@
 #include <string>
 #include <stdlib.h>
 #include "SDL2_gfxPrimitives.h"
+#include "logger.h"
 using namespace std;
 
 const int WINDOW_SIZE = 640, WINDOW_SIZE_Y = 480;

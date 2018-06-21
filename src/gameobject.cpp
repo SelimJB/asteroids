@@ -14,6 +14,7 @@ GameObject::GameObject(){
 void GameObject::Draw(SDL_Renderer* renderer){
 	float x = m_pos.x, y = m_pos.y;
 	// SDL_SetRenderDrawColor(renderer,0,255,255,255);
+	Logger::Log(this);
 	for (vector<Point>::iterator i = m_DrawPoints.begin(); i != m_DrawPoints.end(); ++i)
 	{
 		SDL_RenderDrawLine(renderer, 

@@ -7,6 +7,7 @@
 #include "bullet.h"
 #include "ship.h"
 #include "gamesession.h"
+#include "logger.h"
 using namespace std;
 
 const Uint32 fps = 60;
@@ -89,6 +90,7 @@ int main(int argc, char* args[]){
 			}	
 		}		
 
+		Logger::PrintFrame();
 		deltaTime = frameTime - lastFrameTime;
 		lastFrameTime = frameTime;
 

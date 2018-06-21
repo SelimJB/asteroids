@@ -20,9 +20,7 @@ void GameSession::Update(float dt)
 			++gameObj1;
 			continue;
 		}
-		if ((*gameObj1)->m_type == GameObject::OBJ_BULLET){
-			Logger::Log(*gameObj1);
-		}
+
 		// Check for collisions
 		if ((*gameObj1)->m_collisionFlag != GameObject::OBJ_NONE)
 		{
