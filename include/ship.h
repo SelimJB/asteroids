@@ -2,7 +2,6 @@
 #define SHIP
 
 #include "gameobject.h"
-#include "bullet.h"
 
 class Ship : public GameObject{
 	public:
@@ -30,7 +29,10 @@ class Ship : public GameObject{
 	void ThrustOff(float deltaTime);
 	void Shoot();
 	void ShipCheckCollision();	// TODO delet
-	bool IsColliding(GameObject& obj);
+	bool IsColliding(GameObject*);
+	void DoCollision(GameObject*);
+	void UpdatePosition(float deltaTime); // Change name to Update
+	void Log();
 };
 
 #endif

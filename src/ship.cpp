@@ -1,4 +1,6 @@
 #include "ship.h"
+#include "bullet.h"
+#include "ast.h"
 
 Ship* GameObject::m_ship = new Ship();
 
@@ -23,7 +25,6 @@ void Ship::Shoot(){
 	if (m_ShipCanShoot){
 		Bullet* bibi = new Bullet(m_pos,m_axis);
 		m_GameObjects[BULLETS]->push_back(bibi);
-		m_GameObjectsList.push_back(bibi);
 		m_ShipCanShoot = false;
 	}
 }
@@ -87,24 +88,78 @@ void Ship::Update(float deltaTime){
     if (m_pos.y >= WINDOW_SIZE_Y) m_pos.y -= WINDOW_SIZE_Y;	
 }
 
+void Ship::UpdatePosition(float deltaTime){
+	if (m_DirState == CENTER){
+	}
+	else if (m_DirState == LEFT){
+		TurnLeft(deltaTime);
+	}	
+	else if (m_DirState == RIGHT){
+		TurnRight(deltaTime);
+	}
+	if (m_ThrustState == THRUSTOFF){
+		ThrustOff(deltaTime);
+	}
+	else if (m_ThrustState == THRUSTON){
+		ThrustOn(deltaTime);
+	}	
+	else if (m_ThrustState == THRUSTREVERSE){
+		ThrustReverse(deltaTime);
+	}		
+	m_pos.x += m_velocity.x;
+	m_pos.y += m_velocity.y;
+    if (m_pos.x < 0) m_pos.x += WINDOW_SIZE;
+    if (m_pos.x >= WINDOW_SIZE) m_pos.x -= WINDOW_SIZE;
+    if (m_pos.y < 0) m_pos.y += WINDOW_SIZE_Y;
+    if (m_pos.y >= WINDOW_SIZE_Y) m_pos.y -= WINDOW_SIZE_Y;	
+}
+
+void Ship::DoCollision(GameObject* obj){
+	m_pos = Point(WINDOW_SIZE/2,WINDOW_SIZE_Y/2);
+}
+
 void Ship::ShipCheckCollision(){
 	for (list<GameObject*>::iterator it = m_GameObjects[ASTS]->begin(); it != m_GameObjects[ASTS]->end(); it++)
 	{
-		Ast& a = dynamic_cast<Ast&>(**it);
-		if (
-			CollisionSegCircle(m_DrawPoints[0]+m_pos,m_DrawPoints[1]+m_pos,a.m_pos,a.m_radius) ||
-			CollisionSegCircle(m_DrawPoints[1]+m_pos,m_DrawPoints[3]+m_pos,a.m_pos,a.m_radius) ||
-			CollisionSegCircle(m_DrawPoints[3]+m_pos,m_DrawPoints[0]+m_pos,a.m_pos,a.m_radius) ||
-			CollisionPointCircle(m_DrawPoints[3]+m_pos,a.m_pos,a.m_radius) ||
-			CollisionPointCircle(m_DrawPoints[0]+m_pos,a.m_pos,a.m_radius) ||
-			CollisionPointCircle(m_DrawPoints[1]+m_pos,a.m_pos,a.m_radius) 
-		){
-			// m_isdead = true;
-			m_pos = Point(WINDOW_SIZE/2,WINDOW_SIZE_Y/2);
+		GameObject& obj = **it;
+		if (obj.m_type == OBJ_AST){
+			Ast& ast = dynamic_cast<Ast&>(obj);
+			if (
+				CollisionSegCircle(m_DrawPoints[0]+m_pos,m_DrawPoints[1]+m_pos,ast.m_pos,ast.m_radius) ||
+				CollisionSegCircle(m_DrawPoints[1]+m_pos,m_DrawPoints[3]+m_pos,ast.m_pos,ast.m_radius) ||
+				CollisionSegCircle(m_DrawPoints[3]+m_pos,m_DrawPoints[0]+m_pos,ast.m_pos,ast.m_radius) ||
+				CollisionPointCircle(m_DrawPoints[3]+m_pos,ast.m_pos,ast.m_radius) ||
+				CollisionPointCircle(m_DrawPoints[0]+m_pos,ast.m_pos,ast.m_radius) ||
+				CollisionPointCircle(m_DrawPoints[1]+m_pos,ast.m_pos,ast.m_radius) 
+			){
+				// m_isdead = true;
+				m_pos = Point(WINDOW_SIZE/2,WINDOW_SIZE_Y/2);
+			}
 		}
 	}
 }
 
+bool Ship::IsColliding(GameObject* obj){
+	if (obj->m_type == OBJ_AST){
+		Ast& ast = dynamic_cast<Ast&>(*obj);
+		if (
+			CollisionSegCircle(m_DrawPoints[0]+m_pos,m_DrawPoints[1]+m_pos,ast.m_pos,ast.m_radius) ||
+			CollisionSegCircle(m_DrawPoints[1]+m_pos,m_DrawPoints[3]+m_pos,ast.m_pos,ast.m_radius) ||
+			CollisionSegCircle(m_DrawPoints[3]+m_pos,m_DrawPoints[0]+m_pos,ast.m_pos,ast.m_radius) ||
+			CollisionPointCircle(m_DrawPoints[3]+m_pos,ast.m_pos,ast.m_radius) ||
+			CollisionPointCircle(m_DrawPoints[0]+m_pos,ast.m_pos,ast.m_radius) ||
+			CollisionPointCircle(m_DrawPoints[1]+m_pos,ast.m_pos,ast.m_radius) 
+		){
+			return true;
+		}
+	}
+	return false;
+}
+
 Ship::~Ship(){
 	GameObject::m_ship = NULL;
+}
+
+void Ship::Log(){
+	cout << "\tType : SHIP" << endl;
 }

@@ -2,7 +2,6 @@
 #define BULLET
 
 #include "gameobject.h"
-#include "ast.h"
 
 class Bullet : public GameObject {
 	public:
@@ -13,8 +12,10 @@ class Bullet : public GameObject {
 	int m_time = 800;
 	bool Remove();
 	~Bullet();
-	bool Collid(Ast& ast);
-	void CheckCollisions();
+	void CheckCollisions(); // Supress
+	bool IsColliding(GameObject*);
+	void DoCollision(GameObject*);
+	void UpdatePosition(float deltaTime); // Change name to Update
 };
 
 #endif

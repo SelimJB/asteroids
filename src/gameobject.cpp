@@ -1,12 +1,15 @@
 #include "gameobject.h"
-
-vector<GameObject *> GameObject::m_GameObjectsList;
+#include "gamesession.h"
 
 vector<list<GameObject*>*> GameObject::m_GameObjects {
 	new list<GameObject*>(),
 	new list<GameObject*>(),
 	new list<GameObject*>()
 };
+
+GameObject::GameObject(){
+	GameSession::PostGameObj(this);
+}
 
 void GameObject::Draw(SDL_Renderer* renderer){
 	float x = m_pos.x, y = m_pos.y;

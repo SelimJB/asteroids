@@ -4,23 +4,24 @@
 #include "gameobject.h"
 #include "humancontrol.h"
 #include "aicontrol.h"
-#include "ast.h"
-
+#include "helper.h"
 
 typedef std::list<GameObject *> GameObjectList;
 
 class GameSession
 {
   public:
-
 	GameSession();
 	void Update(float dt);
-	void Draw();
+	void Draw(SDL_Renderer*);
 	void DrawLives();
 
-	void PostGameObj(GameObject * obj)
+	static void PostGameObj(GameObject * obj)
 	{
-		m_activeObj.push_back(obj);
+		m_activeObjectList.push_back(obj);
+	}
+	static int GetGameObjNumber(){
+		return m_activeObjectList.size();
 	}
 
 	enum {
@@ -37,10 +38,13 @@ class GameSession
 		CONTROL_AION,
 		CONTROL_AIOFF
 	};
+	// void UseControl(int control);
 
+	//score functions
 	void IncrementScore(int inc) { m_score += inc; }
 	void ResetScore() { m_score = 0; }
 
+	//game related functions
 	void StartGame();
 	void StartNextWave();
 	void LaunchAsteroidWave();
@@ -48,10 +52,14 @@ class GameSession
 	void GameOver();
 	void KillShip(GameObject * ship);
 
+
 	Ship *m_mainShip;
 	HumanControl *m_humanControl;
 	AIControl *m_AIControl;
 	bool m_bonusUsed;
+	int m_screenW;
+	int m_screenH;
+	int m_spaceSize;
 	float m_respawnTimer;
 	float m_powerupTimer;
 	int m_state;
@@ -69,7 +77,7 @@ class GameSession
 	};
 
   private:
-	GameObjectList m_activeObj;
+	static GameObjectList m_activeObjectList;
 };
 
 #endif

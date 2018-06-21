@@ -15,7 +15,7 @@ class Ast : public GameObject {
 	int m_granularityMax = 15;
 	int m_granularityMin = 7;
 	int m_radiusVariation = 5;
-	// void Draw(SDL_Renderer*);
+	void UpdatePosition(float deltaTime); // Change name to Update	
 };
 
 #endif

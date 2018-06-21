@@ -1,4 +1,5 @@
 #include "bullet.h"
+#include "ast.h"
 
 int Bullet::bulletnbr = 0;
 
@@ -37,30 +38,44 @@ void Bullet::Update(float deltaTime){
 		m_isdead = true;
 }
 
-bool Bullet::Collid(Ast& ast){
-	return pow(ast.m_pos.x - m_pos.x,2) + pow(ast.m_pos.y - m_pos.y,2) <= pow(ast.m_radius,2);
+void Bullet::UpdatePosition(float deltaTime){
+	m_pos.x += m_velocity.x;
+	m_pos.y += m_velocity.y;
+    if (m_pos.x < 0) m_pos.x += WINDOW_SIZE;
+    if (m_pos.x >= WINDOW_SIZE) m_pos.x -= WINDOW_SIZE;
+    if (m_pos.y < 0) m_pos.y += WINDOW_SIZE_Y;
+    if (m_pos.y >= WINDOW_SIZE_Y) m_pos.y -= WINDOW_SIZE_Y;
+	m_time -= deltaTime;
+	if (m_time < 0)
+		m_isdead = true;
 }
 
-// void Bullet::CheckCollisions(){
-// 	for (list<GameObject*>::iterator it = m_GameObjects[ASTS]->begin(); it != m_GameObjects[ASTS]->end(); it++)
-// 	{
-// 		Ast& a = dynamic_cast<Ast&>(**it);
-// 		if (Collid(a)){
-// 			cout << "coll"<<endl;
-// 			a.m_isdead = true;
-// 			m_isdead = true;
-// 		}
-// 	}
-// }
+void Bullet::DoCollision(GameObject* obj){
+	obj->m_isdead = true;
+	m_isdead = true;
+}
+
+bool Bullet::IsColliding(GameObject* obj){
+	if (obj->m_type == OBJ_AST){
+		Ast& ast = dynamic_cast<Ast&>(*obj);
+		if (CollisionPointCircle(m_pos, ast.m_pos, ast.m_radius)){
+			return true;
+		}
+	}
+	return false;
+}
 
 void Bullet::CheckCollisions(){
 	for (list<GameObject*>::iterator it = m_GameObjects[ASTS]->begin(); it != m_GameObjects[ASTS]->end(); it++)
 	{
-		Ast& a = dynamic_cast<Ast&>(**it);
-		if (CollisionPointCircle(m_pos,a.m_pos,a.m_radius)){
-			a.m_isdead = true;
-			m_isdead = true;
-			
+		GameObject& obj = **it;
+		if (obj.m_type == OBJ_AST){
+			Ast& ast = dynamic_cast<Ast&>(obj);
+			if (CollisionPointCircle(m_pos, ast.m_pos, ast.m_radius)){
+				ast.m_isdead = true;
+				m_isdead = true;
+			}
 		}
 	}
 }
+

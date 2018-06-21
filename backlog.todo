@@ -1,15 +1,28 @@
 TEMP : 
-
+	☐ Ou mettre les headers ? Dans les .c ou les .h ?
+	☐ Reflechir à ou remplir ma liste de GameObjects, gamesession.h à mettre dans  gameobject.cpp ou dans gameobject.h ? ou ailleurs ?
 RENSEIGNEMENTS : 
 	☐ Collision Flag
+	☐ Dynamic cast cost
+	☐ Foncteurs 
+	☐ Debugging et jeux vidéo
+	☐ Faire une classe de logging pour pouvoir suivre les states de mon jeu frame par frames
 
-GameSession : 
-	✔ Tag : Object Type and collision Flag @done(18-06-17 23:28)
-	☐ Implement IsColliding for Bullet, Ship, and GameObject 
-	☐ Single GameObject List
-	☐ Draw
-	☐ Update
+Bug :
+	✔ pb de vitesse des asteroides qui est différente en fonction de la boucle d'update @done(18-06-21 11:16)
 	
+GameSession :
+	✔ Implement IsColliding for Bullet, Ship, and GameObject @done(18-06-18 16:04)
+	✔ Spliting responsabilities of Update -> Implement DoCollid and Update for positions @done(18-06-19 11:07)
+	✔ Implement a working Gamesession Update method @done(18-06-20 16:42)
+	✔ Implement a working Gamesession Draw method @done(18-06-21 11:25)
+	✔ Single GameObject List, managed by game session, and handeling object destruction @done(18-06-21 11:25)
+	
+Divers : 
+	☐ Choisir ou apparait ma fenêtre de debuggage
+	✔ Logger @done(18-06-21 11:12)
+	☐ Json, xml, or yaml config system 
+
 CleanCode :
 	☐ Ast
 	☐ Bullet
@@ -18,6 +31,11 @@ CleanCode :
 	☐ GameObject
 	☐ Ship
 	
-
 Lointain : 
-	☐ 
+	☐ Implement collider class for point, pentagone, circle
+		☐ Use this collider class in CheckCollisions methodes instead of dynamic_cast
+	☐ Implement Shape class 
+	☐ GameSession flag for disabling / enabling collisions
+
+Archive:
+  ✔ Tag : Object Type and collision Flag @done(18-06-17 23:28) @project(GameSession )

@@ -13,6 +13,7 @@ const Uint32 fps = 60;
 const Uint32 minimumFrameTime = 1000 / fps;
 
 int main(int argc, char* args[]){
+	
 	GameSession* gameSession = new GameSession();
 	// Context set up
 	SDL_Window *window;
@@ -95,22 +96,24 @@ int main(int argc, char* args[]){
 		SDL_RenderClear(renderer);
 		SDL_SetRenderDrawColor(renderer,100,7,2,255);
 
-		for (vector<list<GameObject*>*>::iterator vectIt = GameObject::m_GameObjects.begin(); vectIt!=GameObject::m_GameObjects.end(); vectIt++){
+		gameSession->Update(deltaTime);
+		gameSession->Draw(renderer);
+		// for (vector<list<GameObject*>*>::iterator vectIt = GameObject::m_GameObjects.begin(); vectIt!=GameObject::m_GameObjects.end(); vectIt++){
 
-			list<GameObject*>::iterator it = (*vectIt)->begin();
-			while (it != (*vectIt)->end() && (*vectIt)->size() != 0)
-			{
-				// Ship **it;
-				(*it)->Update(deltaTime);
-				(*it)->Draw(renderer);				
-				if ((*it)->m_isdead){
-					delete *it;
-					list<GameObject*>::iterator prev = it++;
-					(*vectIt)->erase(prev);				
-				}
-				else ++it;
-			}				
-		}
+		// 	list<GameObject*>::iterator it = (*vectIt)->begin();
+		// 	while (it != (*vectIt)->end() && (*vectIt)->size() != 0)
+		// 	{
+		// 		// Ship **it;
+		// 		(*it)->Update(deltaTime);
+		// 		(*it)->Draw(renderer);
+		// 		if ((*it)->m_isdead){
+		// 			delete *it;
+		// 			list<GameObject*>::iterator prev = it++;
+		// 			(*vectIt)->erase(prev);				
+		// 		}
+		// 		else ++it;
+		// 	}		
+		// }
 
 		SDL_RenderPresent(renderer);
 		if ((SDL_GetTicks() - frameTime) < minimumFrameTime)
