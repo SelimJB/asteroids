@@ -14,7 +14,7 @@ const Uint32 fps = 60;
 const Uint32 minimumFrameTime = 1000 / fps;
 
 int main(int argc, char* args[]){
-	
+	Logger::Initialize(fileName);
 	GameSession* gameSession = new GameSession();
 	SDL_Window *window;
 	SDL_Renderer *renderer;
@@ -46,7 +46,7 @@ int main(int argc, char* args[]){
 	while (!GameSession::m_quit) {
 
 		Logger::PrintFrame();
-
+		Logger::LogInTextFile();
 		frameTime = SDL_GetTicks();
 		deltaTime = frameTime - lastFrameTime;
 		lastFrameTime = frameTime;
@@ -69,5 +69,6 @@ int main(int argc, char* args[]){
 	SDL_DestroyWindow(window); 
 	SDL_Quit(); 
 
+	Logger::Release();
 	return 1;
 }
