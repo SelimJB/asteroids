@@ -1,23 +1,32 @@
 TODO :
+	✔ Clean code @done(18-06-21 16:34)
+	☐ Derniers tests log et relecture avant de valider
 	✔ Finish GameSession @done(18-06-21 16:21)
 		✔ Ship in GameSession @done(18-06-21 16:21)
 		✔ Human Control @done(18-06-21 15:53)
-	☐ Clean code
+	☐ Sensors
+	☐ Handling Python
 	Todo more latter : 
 		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
+
+
 RENSEIGNEMENTS : 
 	☐ Collision Flag
 	☐ Dynamic cast cost
 	☐ Foncteurs 
 	
+
 Divers : 
 	☐ Choisir ou apparait ma fenêtre de debuggage
 	☐ Json, xml, or yaml config system 
+	☐ Script Python pour mettre en forme mes Archives
 Lointain : 
 	☐ Implement collider class for point, pentagone, circle
 		☐ Use this collider class in CheckCollisions methodes instead of dynamic_cast
 	☐ Implement Shape class 
 	☐ GameSession flag for disabling / enabling collisions
+
+
 
 Archive:
   ✔ pb de vitesse des asteroides qui est différente en fonction de la boucle d'update @done(18-06-21 11:16) @project(Bug )

@@ -23,21 +23,6 @@ Bullet::~Bullet(){
 	bulletnbr--;
 }
 
-void Bullet::Update(float deltaTime){ 
-	m_pos.x += m_velocity.x;
-	m_pos.y += m_velocity.y;
-    if (m_pos.x < 0) m_pos.x += WINDOW_SIZE;
-    if (m_pos.x >= WINDOW_SIZE) m_pos.x -= WINDOW_SIZE;
-    if (m_pos.y < 0) m_pos.y += WINDOW_SIZE_Y;
-    if (m_pos.y >= WINDOW_SIZE_Y) m_pos.y -= WINDOW_SIZE_Y;
-	m_time -= deltaTime;
-	// Bullet Collisions
-	CheckCollisions();
-	// Bullet life end
-	if (m_time < 0)
-		m_isdead = true;
-}
-
 void Bullet::UpdatePosition(float deltaTime){
 	m_pos.x += m_velocity.x;
 	m_pos.y += m_velocity.y;
@@ -63,19 +48,5 @@ bool Bullet::IsColliding(GameObject* obj){
 		}
 	}
 	return false;
-}
-
-void Bullet::CheckCollisions(){
-	for (list<GameObject*>::iterator it = m_GameObjects[ASTS]->begin(); it != m_GameObjects[ASTS]->end(); it++)
-	{
-		GameObject& obj = **it;
-		if (obj.m_type == OBJ_AST){
-			Ast& ast = dynamic_cast<Ast&>(obj);
-			if (CollisionPointCircle(m_pos, ast.m_pos, ast.m_radius)){
-				ast.m_isdead = true;
-				m_isdead = true;
-			}
-		}
-	}
 }
 

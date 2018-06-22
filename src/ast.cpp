@@ -32,7 +32,6 @@ Ast::Ast(int size) : m_astSize(size) {
 			-cos(i)*(m_radiusVariation*GetRandomFloat(-1,1)+m_radius)
 		));
 	}
-	m_GameObjects[ASTS]->push_front(this);
 }
 
 Ast::Ast(int size,Point pos) : m_astSize(size) {
@@ -55,19 +54,6 @@ Ast::Ast(int size,Point pos) : m_astSize(size) {
 			-cos(i)*(m_radiusVariation*GetRandomFloat(-1,1)+m_radius)
 		));
 	}
-	m_GameObjects[ASTS]->push_front(this);
-}
-
-void Ast::Update(float deltaTime){
-	m_pos.x += m_velocity.x;
-	m_pos.y += m_velocity.y;
-    if (m_pos.x < 0) m_pos.x += WINDOW_SIZE;
-    if (m_pos.x >= WINDOW_SIZE) m_pos.x -= WINDOW_SIZE;
-    if (m_pos.y < 0) m_pos.y += WINDOW_SIZE_Y;
-    if (m_pos.y >= WINDOW_SIZE_Y) m_pos.y -= WINDOW_SIZE_Y;		
-	float dA = - m_angVelocity * deltaTime / 1000;
-	Matrix2D rotMatrix = getRotationMatrix2(dA);	
-	FormRotation(m_DrawPoints,rotMatrix);
 }
 
 void Ast::UpdatePosition(float deltaTime){

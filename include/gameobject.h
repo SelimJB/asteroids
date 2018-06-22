@@ -3,21 +3,24 @@
 
 #include "helper.h"
 
-class GameObject{
-	private:
-	public:
+class GameObject
+{
+  private:
+  public:
 	virtual ~GameObject(){};
 	GameObject();
-	enum ObjectsType {
+	enum ObjectsType
+	{
 		SHIPS,
 		ASTS,
 		BULLETS
 	};
-	static vector<list<GameObject*>*> m_GameObjects;	
-	virtual void Draw(SDL_Renderer*);
-	virtual void Update(float deltaTime)= 0;
-	virtual bool IsColliding(GameObject*) {return false;};
-	// virtual bool Remove(){return false;}
+	unsigned int m_type;
+	unsigned int m_collisionFlag;
+	virtual void DoCollision(GameObject *){};
+	virtual void UpdatePosition(float deltaTime) = 0;
+	virtual void Draw(SDL_Renderer *);
+	virtual bool IsColliding(GameObject *) { return false; };
 	Point m_pos;
 	Point m_axis;
 	Point m_normal;
@@ -30,23 +33,15 @@ class GameObject{
 	float m_size;
 	bool m_isdead = false;
 	vector<Point> m_DrawPoints;
-	// Sphere3f m_boundSphere;
-	// int m_type;
-	// unsigned int m_collisionFlags;
-	// int m_lifeTimer;
 
-	enum {
+	enum
+	{
 		OBJ_NONE = 0x00000001,
 		OBJ_SHIP = 0x00000010,
 		OBJ_AST = 0x00000100,
 		OBJ_TARGET = 0x00001000,
 		OBJ_BULLET = 0x00010000
 	};
-	unsigned int m_type;
-	unsigned int m_collisionFlag;
-	virtual void DoCollision(GameObject*){};
-	virtual void UpdatePosition(float deltaTime)=0; // Change name to Update	
-};	
-
+};
 
 #endif

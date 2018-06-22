@@ -1,12 +1,6 @@
 #include "gameobject.h"
 #include "gamesession.h"
 
-vector<list<GameObject*>*> GameObject::m_GameObjects {
-	new list<GameObject*>(),
-	new list<GameObject*>(),
-	new list<GameObject*>()
-};
-
 GameObject::GameObject(){
 	GameSession::PostGameObj(this);
 }
