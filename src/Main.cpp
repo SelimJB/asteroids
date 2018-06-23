@@ -14,7 +14,6 @@ const Uint32 fps = 60;
 const Uint32 minimumFrameTime = 1000 / fps;
 
 int main(int argc, char* args[]){
-	Logger::Initialize(fileName);
 	GameSession* gameSession = new GameSession();
 	SDL_Window *window;
 	SDL_Renderer *renderer;
@@ -31,6 +30,7 @@ int main(int argc, char* args[]){
 		printf("Erreur lors de la creation d'un renderer : %s",SDL_GetError());
 		return 1;
 	}
+	Logger::Initialize(fileName);
 
 	
 	Uint32 frameTime;
@@ -54,6 +54,11 @@ int main(int argc, char* args[]){
 		SDL_SetRenderDrawColor(renderer,255,255,255,255);
 		SDL_RenderClear(renderer);
 		SDL_SetRenderDrawColor(renderer,100,7,2,255);
+
+
+		// sensors
+		gameSession->m_sensors->GetNearestAst();
+
 
 		gameSession->m_humanControl->Input();
 		gameSession->Update(deltaTime);

@@ -1,20 +1,24 @@
 #ifndef GAMESESSION
 #define GAMESESSION
 
-#include "gameobject.h"
 #include "humancontrol.h"
 #include "aicontrol.h"
 #include "helper.h"
+#include "sensors.h"
+#include "ship.h"
 
 typedef std::list<GameObject *> GameObjectList;
-class Ship;
+
+class Sensors;
+class GameObject; 
 
 class GameSession
 {
   public:
+	friend Sensors; 
 	GameSession();
 	void Update(float dt);
-	void Draw(SDL_Renderer*);
+	void Draw(SDL_Renderer*); // Moove the SDL_Renderer
 	void DrawLives();
 
 	static void PostGameObj(GameObject * obj)
@@ -55,6 +59,7 @@ class GameSession
 
 
 	static Ship *m_mainShip;
+	static Sensors *m_sensors;
 	HumanControl *m_humanControl;
 	AIControl *m_AIControl;
 	bool m_bonusUsed;
@@ -77,6 +82,7 @@ class GameSession
 		STATE_NEXTWAVE,
 		STATE_GAMEOVER
 	};
+
 
   private:
 	static GameObjectList m_activeObjectList;

@@ -1,11 +1,13 @@
 #ifndef SENSORS
 #define SENSORS
 
+class GameSession;
+class GameObject;
 
 class Sensors
 {
-	private:
 	public:
+	const GameObject* GetNearestAst();
 };
 
 #endif

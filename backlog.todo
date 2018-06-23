@@ -1,14 +1,22 @@
 TODO :
-	☐ Derniers tests log et relecture avant de valider
 	☐ Handling Python
 	☐ Sensors
+		✔ Sensors classe @done(18-06-23 09:18)
+		✔ Get nearest asteroid @done(18-06-23 09:18)
 		☐ Singleton sensor
 		☐ X et Y du vecteur entre le vaisseau et le plus proche asteroid
 		☐ vitesse commune des objets (produit scalaire entre v vaisseau et v asteroid )
 		☐ Direction du vaisseau (a convertir en degres pk pas ?)
 		☐ Output
-	☐ Debug Class
+	☐ Log
+		✔ Recording logs in a txt file @done(18-06-23 09:18)
+		☐ For a game : log all the player inputs and the sensors
 	☐ Config file
+	☐ Clean code 
+		☐ Enlever using namespace std des .h ( et savoir pk c'est pas bien ? ) 
+		☐ Singleton for sensor, logger, debug, gamesession
+		☐ Sensor, logger, debbug as member of gamesession
+		☐ Encapsulation
 	Todo more latter : 
 		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
 

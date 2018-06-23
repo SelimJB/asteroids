@@ -31,11 +31,16 @@ void Logger::Log(GameObject* obj){
 }
 
 void Logger::LogShip(){
-	if (Switch_Ship ){
+	if (Switch_ShipAxis){
 		cout << "\t (x, y) : (" 
 			<< GameSession::m_mainShip->m_axis.x << ", " 
 			<< GameSession::m_mainShip->m_axis.y << ")" << endl;
 	}
+	if (Switch_ShipPos){
+		cout << "\t (x, y) : (" 
+			<< GameSession::m_mainShip->m_pos.x << ", " 
+			<< GameSession::m_mainShip->m_pos.y << ")" << endl;
+	}	
 }
 
 void Logger::PrintFrame(){
@@ -43,6 +48,6 @@ void Logger::PrintFrame(){
 		FrameNum++;
 		cout << "\n\n" << FrameNum << endl;
 		if (Switch_GameObjNum) cout << "\tNbr : " << GameSession::GetGameObjNumber() << endl;
-		LogShip();
 	}
+	LogShip();
 }

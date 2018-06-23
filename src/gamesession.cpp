@@ -1,9 +1,13 @@
 #include "gamesession.h"
+#include "gameobject.h"
 #include "ast.h"
 #include "ship.h"
-
+#include "sensors.h"
 GameObjectList GameSession::m_activeObjectList;
+
 Ship* GameSession::m_mainShip = new Ship();
+Sensors* GameSession::m_sensors = new Sensors();
+
 bool GameSession::m_quit = false;
 
 GameSession::GameSession()
@@ -68,8 +72,8 @@ void GameSession::DrawLives(){
 
 void GameSession::LaunchAsteroidWave()
 {
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 20; i++)
 	{
-		new Ast(4,Point(i*100,200));
+		new Ast(GetRandomInt(1,4));
 	}
 }
