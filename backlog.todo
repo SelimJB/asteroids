@@ -8,6 +8,7 @@ TODO :
 		☐ vitesse commune des objets (produit scalaire entre v vaisseau et v asteroid )
 		☐ Direction du vaisseau (a convertir en degres pk pas ?)
 		☐ Output
+	✔ Debug Class @done(18-06-23 09:15)
 	☐ Log
 		✔ Recording logs in a txt file @done(18-06-23 09:18)
 		☐ For a game : log all the player inputs and the sensors

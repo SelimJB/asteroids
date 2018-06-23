@@ -2,6 +2,7 @@
 #include "gamesession.h"
 #include "ast.h"
 #include "math.h"
+#include "debug.h"
 
 float GetDist(Point A, Point B){
 	return sqrt(pow(A.x - B.x, 2) + pow(A.y - B.y, 2));
@@ -25,6 +26,7 @@ const GameObject* Sensors::GetNearestAst(){
 	}
 
 	cout << "Dist : " << nearestDist << endl;
+	Debug::Draw(vector<Point>{GameSession::m_mainShip->m_pos, ast->m_pos});
 
 	return ast;
 }

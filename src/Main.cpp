@@ -8,6 +8,7 @@
 #include "ship.h"
 #include "gamesession.h"
 #include "logger.h"
+#include "debug.h"
 using namespace std;
 
 const Uint32 fps = 60;
@@ -31,6 +32,7 @@ int main(int argc, char* args[]){
 		return 1;
 	}
 	Logger::Initialize(fileName);
+	Debug::Initialise(renderer);
 
 	
 	Uint32 frameTime;
