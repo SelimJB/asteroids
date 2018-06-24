@@ -2,6 +2,7 @@
 #include "gamesession.h"
 #include <iostream>
 #include "ship.h"
+using namespace std;
 
 int Logger::FrameNum = 0;
 ofstream* Logger::recordFile = new ofstream();

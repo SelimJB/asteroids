@@ -1,4 +1,4 @@
-	#ifndef HELPER
+#ifndef HELPER
 #define HELPER
 
 #include <math.h>
@@ -11,21 +11,8 @@
 #include <stdlib.h>
 #include "SDL2_gfxPrimitives.h"
 #include "logger.h"
-using namespace std;
 
 const int WINDOW_SIZE = 640, WINDOW_SIZE_Y = 480;
-
-typedef struct {
-	float a1;
-	float a2;
-	float a3;
-	float a4;
-} RotMatrix;
-
-typedef struct {
-	float x;
-	float y;
-} Point2;
 
 class Matrix2D{
 	public:
@@ -49,7 +36,7 @@ float operator*(Point const& a,Point const& b);
 Point operator+(Point const& a,Point const& b);
 Point operator-(Point const& a,Point const& b);
 
-void FormRotation(vector<Point>&,Matrix2D);
+void FormRotation(std::vector<Point>&,Matrix2D);
 Matrix2D getRotationMatrix2(float angle);
 float radianConv(float angle);
 int GetRandomInt(int min,int max);

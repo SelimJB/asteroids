@@ -3,6 +3,8 @@
 #include "ast.h"
 #include "ship.h"
 #include "sensors.h"
+using namespace std;
+
 GameObjectList GameSession::m_activeObjectList;
 
 Ship* GameSession::m_mainShip = new Ship();

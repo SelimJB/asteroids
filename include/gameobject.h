@@ -32,7 +32,7 @@ class GameObject
 	bool m_active = true;
 	float m_size;
 	bool m_isdead = false;
-	vector<Point> m_DrawPoints;
+	std::vector<Point> m_DrawPoints;
 
 	enum
 	{

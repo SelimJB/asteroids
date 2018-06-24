@@ -58,8 +58,8 @@ class GameSession
 	void KillShip(GameObject * ship);
 
 
-	static Ship *m_mainShip;
-	static Sensors *m_sensors;
+	static Ship *m_mainShip; // ! static
+	static Sensors *m_sensors; // ! static
 	HumanControl *m_humanControl;
 	AIControl *m_AIControl;
 	bool m_bonusUsed;

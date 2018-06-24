@@ -1,5 +1,5 @@
 #include "helper.h"
-
+using namespace std;
 
 void FormRotation(vector<Point> &pts,Matrix2D m){
 	for (vector<Point>::iterator i = pts.begin(); i != pts.end(); ++i){

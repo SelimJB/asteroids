@@ -1,6 +1,7 @@
 #include "ship.h"
 #include "bullet.h"
 #include "ast.h"
+using namespace std;
 
 Ship::Ship(){
 	m_pos = Point(20,20);

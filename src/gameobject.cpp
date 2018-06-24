@@ -1,5 +1,6 @@
 #include "gameobject.h"
 #include "gamesession.h"
+using namespace std;
 
 GameObject::GameObject(){
 	GameSession::PostGameObj(this);

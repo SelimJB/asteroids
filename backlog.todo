@@ -1,22 +1,23 @@
 TODO :
 	☐ Handling Python
 	☐ Sensors
-		✔ Sensors classe @done(18-06-23 09:18)
-		✔ Get nearest asteroid @done(18-06-23 09:18)
-		☐ Singleton sensor
 		☐ X et Y du vecteur entre le vaisseau et le plus proche asteroid
 		☐ vitesse commune des objets (produit scalaire entre v vaisseau et v asteroid )
 		☐ Direction du vaisseau (a convertir en degres pk pas ?)
 		☐ Output
-	✔ Debug Class @done(18-06-23 09:15)
 	☐ Log
-		✔ Recording logs in a txt file @done(18-06-23 09:18)
 		☐ For a game : log all the player inputs and the sensors
 	☐ Config file
 	☐ Clean code 
-		☐ Enlever using namespace std des .h ( et savoir pk c'est pas bien ? ) 
-		☐ Singleton for sensor, logger, debug, gamesession
-		☐ Sensor, logger, debbug as member of gamesession
+		✔ Header file without using namespace std @done(18-06-23 17:30)
+		☐ Singleton for :   ?????? A reflechir, cf remarque
+			☐ sensor 
+			☐ logger 
+			☐ debug 
+			☐ gamesession
+			" SI il ne doit y avoir qu'une seule instance, il suffit de n'en créer qu'une "
+				=> GameSession Singleton avec Parametre Sensor, Logger, Debug
+		☐ Sensor, logger, debbug as member of gamesession : Initialise Logger, Debbug, Member, and then pass them as the GameSession Initialiser / Constructor
 		☐ Encapsulation
 	Todo more latter : 
 		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
@@ -28,6 +29,7 @@ RENSEIGNEMENTS :
 	
 Divers : 
 	☐ Choisir ou apparait ma fenêtre de debuggage
+	☐ Make : write error
 	☐ Json, xml, or yaml config system 
 	☐ Script Python pour mettre en forme mes Archives
 Lointain : 
@@ -37,6 +39,10 @@ Lointain :
 	☐ GameSession flag for disabling / enabling collisions
 
 Archive:
+  ✔ Debug Class @done(18-06-23 09:15) @project(TODO )
+  ✔ Recording logs in a txt file @done(18-06-23 09:18) @project(TODO )
+  ✔ Sensors classe @done(18-06-23 09:18) @project(TODO )
+  ✔ Get nearest asteroid @done(18-06-23 09:18) @project(TODO )
   ✔ Clean code @done(18-06-21 16:34) @project(TODO )
   ✔ Finish GameSession @done(18-06-21 16:21) @project(TODO )
   ✔ Ship in GameSession @done(18-06-21 16:21) @project(TODO )

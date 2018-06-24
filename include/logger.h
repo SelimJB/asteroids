@@ -4,12 +4,11 @@
 #include <map>
 #include <fstream>
 #include <string>
-using namespace std;
 
 class GameObject;
 class GameSession;
 
-static const string fileName = "Inputs.txt"; // Put in the config file
+static const std::string fileName = "Inputs.txt"; // Put in the config file
 
 class Logger
 {
@@ -21,9 +20,9 @@ class Logger
 	static const bool Switch_ShipPos = false;
 	static const bool Switch_GameObjNum = false;
 	static const bool Switch_TxtLog = false;
-	static ofstream *recordFile;
+	static std::ofstream *recordFile;
   public:
-  	static void Initialize(string fileName);
+  	static void Initialize(std::string fileName);
 	static void Release();
 	static int FrameNum;
 	static void Log(GameObject *);

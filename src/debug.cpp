@@ -1,4 +1,5 @@
 #include "debug.h"
+using namespace std;
 
 SDL_Renderer* Debug::renderer = NULL;
 

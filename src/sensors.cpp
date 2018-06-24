@@ -3,6 +3,7 @@
 #include "ast.h"
 #include "math.h"
 #include "debug.h"
+using namespace std;
 
 float GetDist(Point A, Point B){
 	return sqrt(pow(A.x - B.x, 2) + pow(A.y - B.y, 2));

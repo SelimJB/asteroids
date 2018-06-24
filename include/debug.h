@@ -8,7 +8,7 @@ class Debug
 	static SDL_Renderer* renderer;
   public:
 	static void Initialise(SDL_Renderer *); 
-	static void Draw(vector<Point>);
+	static void Draw(std::vector<Point>);
 };
 
 #endif

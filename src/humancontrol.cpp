@@ -2,6 +2,7 @@
 #include "ship.h"
 #include "gamesession.h"
 
+
 void HumanControl::Input(){
 		// Input management
 		while( SDL_PollEvent( event ) != 0 && GameSession::m_mainShip != NULL){
