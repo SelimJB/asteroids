@@ -3,6 +3,9 @@
 #include "ast.h"
 #include "math.h"
 #include "debug.h"
+#include "math.h"
+#include "helper.h"
+#include "logger.h"
 using namespace std;
 
 float GetDist(Point A, Point B){
@@ -20,14 +23,42 @@ const GameObject* Sensors::GetNearestAst(){
 			float dist = GetDist((*it)->m_pos, GameSession::m_mainShip->m_pos);
 			if (nearestDist == -1 || dist < nearestDist){
 				nearestDist = dist;
-				// ast = dynamic_cast<Ast*>(*it);
 				ast = *it;
 			}
 		}
 	}
 
-	cout << "Dist : " << nearestDist << endl;
-	Debug::Draw(vector<Point>{GameSession::m_mainShip->m_pos, ast->m_pos});
-
 	return ast;
 }
+
+float Sensors::GetShipRadianAngle(){
+	return atan2(GameSession::m_mainShip->m_axis.x,GameSession::m_mainShip->m_axis.y);
+}
+
+Point* Sensors::GetDirectionVectorBetweenShipAndNearestAst(const GameObject* obj){
+	if (obj == NULL){
+		return NULL;
+	}
+
+	float x = GameSession::m_mainShip->m_pos.x - obj->m_pos.x;
+	float y = GameSession::m_mainShip->m_pos.y - obj->m_pos.y;
+	float norm = sqrt(pow(x,2) + pow(y,2));
+	Point* res = new Point(x/norm, y/norm);
+	return res;
+};
+
+float* Sensors::GetRelativeSpeed(const GameObject* obj){
+	if (obj == NULL){
+		return NULL;
+	}
+
+	const Point& vShip = GameSession::m_mainShip->m_velocity;
+	const Point& vAst = obj->m_velocity;
+
+	float *res = new float();
+	float s = abs(vAst.x - vShip.x) > abs(vAst.y - vShip.y) ? 
+				-( vAst.x - vShip.x ) / abs(vAst.x - vShip.x) : 
+				( vAst.y - vShip.y ) / abs(vAst.y - vShip.y);
+	*res = s*sqrt( pow(abs(vAst.x - vShip.x),2) + pow (abs(vAst.y - vShip.y),2));
+	return res;	
+};

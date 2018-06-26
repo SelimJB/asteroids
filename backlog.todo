@@ -1,14 +1,25 @@
+Logger::LogInTextFile
 TODO :
 	☐ Handling Python
-	☐ Sensors
-		☐ X et Y du vecteur entre le vaisseau et le plus proche asteroid
-		☐ vitesse commune des objets (produit scalaire entre v vaisseau et v asteroid )
-		☐ Direction du vaisseau (a convertir en degres pk pas ?)
-		☐ Output
+	✔ Sensors @done(18-06-26 18:42)
+		✔ X et Y du vecteur entre le vaisseau et le plus proche asteroid @done(18-06-26 16:26)
+		✔ vitesse commune des objets (produit scalaire entre v vaisseau et v asteroid ) (donne aussi le sens) @done(18-06-26 18:34)
+			✔ Gerer les cas null @done(18-06-26 15:49)
+			✔ Gerer les vitesses negatives @done(18-06-26 16:24)
+			✔ Clean code et debug @done(18-06-26 18:34)
+		✔ Rotation du vaisseau @done(18-06-23 17:56)
+		✔ Un beau debug pour la direction du vaisseau +  vaisseau @done(18-06-26 18:31)
 	☐ Log
+		☐ Log sensors method
+		☐ Round Sensors and handle null case
+		☐ Output and Log output
 		☐ For a game : log all the player inputs and the sensors
 	☐ Config file
-	☐ Clean code 
+	☐ Drawing : 
+		☐ Encapsulate renderer / drawing elements
+		☐ Better color choice
+		☐ Shape Class
+	☐ Clean code
 		✔ Header file without using namespace std @done(18-06-23 17:30)
 		☐ Singleton for :   ?????? A reflechir, cf remarque
 			☐ sensor 
@@ -26,7 +37,9 @@ RENSEIGNEMENTS :
 	☐ Collision Flag
 	☐ Dynamic cast cost
 	☐ Foncteurs 
-	
+
+Bug : 
+	☐ GetNearestAst : Detection de l'asteroide le plus proche ne marche pas pour les astéroids proches mais de l'autre côté d'un bord de l'écran
 Divers : 
 	☐ Choisir ou apparait ma fenêtre de debuggage
 	☐ Make : write error

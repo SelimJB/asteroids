@@ -17,8 +17,8 @@ Ast::Ast(int size) : m_astSize(size) {
 	m_radius = 5.5 * pow(2,m_astSize-1);
 	m_radiusVariation = 1 + (m_astSize-1)*2;
 	m_velocity = Point(
-		GetRandomFloat(-2,2),
-		GetRandomFloat(-2,2)
+		GetRandomFloat(-2,3),
+		GetRandomFloat(-3,2)
 	);
 	m_angVelocity = GetRandomFloat(5,100);
 	m_pos = Point(

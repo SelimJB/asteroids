@@ -48,7 +48,6 @@ int main(int argc, char* args[]){
 	while (!GameSession::m_quit) {
 
 		Logger::PrintFrame();
-		Logger::LogInTextFile();
 		frameTime = SDL_GetTicks();
 		deltaTime = frameTime - lastFrameTime;
 		lastFrameTime = frameTime;
@@ -58,13 +57,12 @@ int main(int argc, char* args[]){
 		SDL_SetRenderDrawColor(renderer,100,7,2,255);
 
 
-		// sensors
-		gameSession->m_sensors->GetNearestAst();
-
-
-		gameSession->m_humanControl->Input();
-		gameSession->Update(deltaTime);
 		gameSession->Draw(renderer);
+		gameSession->Update(deltaTime);
+		Logger::LogInTextFile();
+		Debug::ShowIndicators();
+		
+		gameSession->m_humanControl->Input();
 
 		SDL_RenderPresent(renderer);
 
