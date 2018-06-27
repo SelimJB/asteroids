@@ -8,15 +8,15 @@ class Ship : public GameObject
   public:
 	enum ShipThrustStates
 	{
+		THRUSTOFF,
 		THRUSTON,
-		THRUSTREVERSE,
-		THRUSTOFF
+		THRUSTREVERSE
 	};
 	enum ShipDirStates
 	{
+		CENTER,
 		LEFT,
-		RIGHT,
-		CENTER
+		RIGHT
 	};
 	~Ship();
 	ShipDirStates m_DirState = CENTER;

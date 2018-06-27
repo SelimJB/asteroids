@@ -1,18 +1,9 @@
-Logger::LogInTextFile
 TODO :
 	☐ Handling Python
-	✔ Sensors @done(18-06-26 18:42)
-		✔ X et Y du vecteur entre le vaisseau et le plus proche asteroid @done(18-06-26 16:26)
-		✔ vitesse commune des objets (produit scalaire entre v vaisseau et v asteroid ) (donne aussi le sens) @done(18-06-26 18:34)
-			✔ Gerer les cas null @done(18-06-26 15:49)
-			✔ Gerer les vitesses negatives @done(18-06-26 16:24)
-			✔ Clean code et debug @done(18-06-26 18:34)
-		✔ Rotation du vaisseau @done(18-06-23 17:56)
-		✔ Un beau debug pour la direction du vaisseau +  vaisseau @done(18-06-26 18:31)
 	☐ Log
-		☐ Log sensors method
+		✔ Log sensors method @done(18-06-27 21:38)
 		☐ Round Sensors and handle null case
-		☐ Output and Log output
+		✔ Output and Log output @done(18-06-27 21:38)
 		☐ For a game : log all the player inputs and the sensors
 	☐ Config file
 	☐ Drawing : 
@@ -20,7 +11,6 @@ TODO :
 		☐ Better color choice
 		☐ Shape Class
 	☐ Clean code
-		✔ Header file without using namespace std @done(18-06-23 17:30)
 		☐ Singleton for :   ?????? A reflechir, cf remarque
 			☐ sensor 
 			☐ logger 
@@ -40,6 +30,7 @@ RENSEIGNEMENTS :
 
 Bug : 
 	☐ GetNearestAst : Detection de l'asteroide le plus proche ne marche pas pour les astéroids proches mais de l'autre côté d'un bord de l'écran
+	☐ Vitesse commune bizarre (cf debug rouge) quand Asteroid le plus proche et vaisseau immobiles
 Divers : 
 	☐ Choisir ou apparait ma fenêtre de debuggage
 	☐ Make : write error
@@ -52,6 +43,15 @@ Lointain :
 	☐ GameSession flag for disabling / enabling collisions
 
 Archive:
+  ✔ Un beau debug pour la direction du vaisseau +  vaisseau @done(18-06-26 18:31) @project(TODO )
+  ✔ Header file without using namespace std @done(18-06-23 17:30) @project(TODO )
+  ✔ Sensors @done(18-06-26 18:42) @project(TODO )
+  ✔ X et Y du vecteur entre le vaisseau et le plus proche asteroid @done(18-06-26 16:26) @project(TODO )
+  ✔ vitesse commune des objets (produit scalaire entre v vaisseau et v asteroid ) (donne aussi le sens) @done(18-06-26 18:34) @project(TODO )
+  ✔ Gerer les cas null @done(18-06-26 15:49) @project(TODO )
+  ✔ Gerer les vitesses negatives @done(18-06-26 16:24) @project(TODO )
+  ✔ Clean code et debug @done(18-06-26 18:34) @project(TODO )
+  ✔ Rotation du vaisseau @done(18-06-23 17:56) @project(TODO )
   ✔ Debug Class @done(18-06-23 09:15) @project(TODO )
   ✔ Recording logs in a txt file @done(18-06-23 09:18) @project(TODO )
   ✔ Sensors classe @done(18-06-23 09:18) @project(TODO )

@@ -30,10 +30,13 @@ void Logger::LogInTextFile()
 		float shipAngle = GameSession::m_sensors->GetShipRadianAngle();
 		float *relativeSpeed = GameSession::m_sensors->GetRelativeSpeed(ast);
 		Point *dir = GameSession::m_sensors->GetDirectionVectorBetweenShipAndNearestAst(ast);
-
+		int output = GameSession::m_mainShip->m_ThrustState + GameSession::m_mainShip->m_DirState * 3; 
+		
 		*recordFile << shipAngle << "\t"
-					<< "aze" << "\t"
-					<< "aze" << "\n";
+					<< *relativeSpeed << "\t"
+					<< dir->x << "\t"
+					<< dir->y << "\t"
+					<< output << "\n";
 	}
 }
 
