@@ -27,16 +27,25 @@ void Logger::LogInTextFile()
 	if (Switch_TxtLog)
 	{
 		const GameObject *ast = GameSession::m_sensors->GetNearestAst();
-		float shipAngle = GameSession::m_sensors->GetShipRadianAngle();
-		float *relativeSpeed = GameSession::m_sensors->GetRelativeSpeed(ast);
-		Point *dir = GameSession::m_sensors->GetDirectionVectorBetweenShipAndNearestAst(ast);
-		int output = GameSession::m_mainShip->m_ThrustState + GameSession::m_mainShip->m_DirState * 3; 
-		
-		*recordFile << shipAngle << "\t"
-					<< *relativeSpeed << "\t"
-					<< dir->x << "\t"
-					<< dir->y << "\t"
-					<< output << "\n";
+		float shipAngle = round(GameSession::m_sensors->GetShipRadianAngle() * 1000) / 1000;
+		int output = GameSession::m_mainShip->m_ThrustState + GameSession::m_mainShip->m_DirState * 3;
+		if (ast != NULL)
+		{
+			float *relativeSpeed = GameSession::m_sensors->GetRelativeSpeed(ast);
+			Point *dir = GameSession::m_sensors->GetDirectionVectorBetweenShipAndNearestAst(ast);
+				*recordFile << shipAngle << "\t"
+							<< round(*relativeSpeed * 1000) / 1000 << "\t"
+							<< round (dir->x * 1000) / 1000 << "\t"
+							<< round (dir->y * 1000 ) / 1000 << "\t"
+							<< output << "\n";
+		}
+		else {
+				*recordFile << shipAngle << "\t"
+							<< 'X' << "\t"
+							<< 'X' << "\t"
+							<< 'X' << "\t"
+							<< output << "\n";
+		}
 	}
 }
 
