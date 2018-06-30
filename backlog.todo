@@ -4,6 +4,7 @@ TODO :
 		☐ Input sensors into ia_ship python script
 		☐ Specific method for python embeding
 		☐ Clean code
+		✔ Embeding python @done(18-06-30 12:51)
 		✔ AI controler : method for mooving the ship with scripting @done(18-06-28 23:42)
 	☐ Config file
 		☐ Json, xml, or yaml config system 

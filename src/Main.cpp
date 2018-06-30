@@ -1,3 +1,5 @@
+#include <Python.h>
+#include <stdexcept>
 #include "SDL2/SDL.h"
 #include <stdio.h>
 #include <math.h>
@@ -15,6 +17,29 @@ const Uint32 fps = 60;
 const Uint32 minimumFrameTime = 1000 / fps;
 
 int main(int argc, char* args[]){
+
+
+	// Python setup
+	PyObject *pName, *pModule, *pFunc, *pyValue, *pyResult, *pArgs;
+	Py_Initialize();
+    pName = PyString_FromString("ia_ship");
+    pModule = PyImport_Import(pName);
+	Py_DECREF(pName);
+    bool switch_pythonScript = true; // move to config
+
+	if (pModule != NULL && switch_pythonScript == true){
+		pFunc = PyObject_GetAttrString(pModule, "GetOutput");
+		try{
+			if (!pFunc || !PyCallable_Check(pFunc))
+				throw runtime_error("Python script error");
+		}
+		catch (exception const& err){
+			cout <<  "Error : " << err.what() << endl;
+			return 0;
+		}
+	}
+
+
 	GameSession* gameSession = new GameSession();
 	SDL_Window *window;
 	SDL_Renderer *renderer;
@@ -56,7 +81,6 @@ int main(int argc, char* args[]){
 		SDL_RenderClear(renderer);
 		SDL_SetRenderDrawColor(renderer,100,7,2,255);
 
-
 		gameSession->Draw(renderer);
 		gameSession->Update(deltaTime);
 		Logger::LogInTextFile();
@@ -64,6 +88,20 @@ int main(int argc, char* args[]){
 		
 		gameSession->m_humanControl->Input();
 
+		int input1 = 2;
+		int input2 = 2;
+		pArgs = PyTuple_New(2);
+		pyValue = PyInt_FromLong(input1);
+		PyTuple_SetItem(pArgs, 0, pyValue);
+		pyValue = PyInt_FromLong(input2);
+		PyTuple_SetItem(pArgs, 1, pyValue);
+		// Py_DECREF(pArgs);
+		// Py_DECREF(pyValue);
+		pyResult = PyObject_CallObject(pFunc, pArgs);
+		int output = PyInt_AsLong(pyResult);
+		// Py_DECREF(pyResult);
+		gameSession->m_IAControl->MooveShip(output);
+	
 		SDL_RenderPresent(renderer);
 
 		if ((SDL_GetTicks() - frameTime) < minimumFrameTime)

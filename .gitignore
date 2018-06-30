@@ -9,3 +9,4 @@ scripts
 lib
 Brouillon.txt
 Inputs.txt
+*.pyc
