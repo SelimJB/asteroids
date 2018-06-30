@@ -2,7 +2,7 @@
 #define GAMESESSION
 
 #include "humancontrol.h"
-#include "aicontrol.h"
+#include "iacontrol.h"
 #include "helper.h"
 #include "sensors.h"
 #include "ship.h"
@@ -61,7 +61,7 @@ class GameSession
 	static Ship *m_mainShip; // ! static
 	static Sensors *m_sensors; // ! static
 	HumanControl *m_humanControl;
-	AIControl *m_AIControl;
+	IAControl *m_IAControl;
 	bool m_bonusUsed;
 	int m_screenW;
 	int m_screenH;

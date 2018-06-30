@@ -2,13 +2,13 @@
 SRC_PATH=./src/
 CC=g++ 
 CFLAGS=-c -Wall
-LDFLAGS=-w -lmingw32 -lSDL2main -lSDL2 
-INCL=-Iinclude
-LIB=-Llib
+LDFLAGS=-w -lpython27 -lmingw32 -lSDL2main -lSDL2 
+INCL=-Iinclude -IC:\Python27\include
+LIB=-Llib -LC:\Python27\libs
 EXE=Main
 
 SRC:=$(wildcard $(SRC_PATH)*.cpp)
-SRC := $(filter-out $(SRC_PATH)main_temp.cpp, $(SRC))
+SRC := $(filter-out $(SRC_PATH)main_noscripting.cpp, $(SRC))
 OBJ=$(subst ./src, ./obj, $(SRC:.cpp=.o))
 
 all: $(SRC) $(EXE)

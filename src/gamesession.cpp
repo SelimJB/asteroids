@@ -15,6 +15,7 @@ bool GameSession::m_quit = false;
 GameSession::GameSession()
 {
 	m_humanControl = new HumanControl();
+	m_IAControl = new IAControl();
 }
 
 void GameSession::Update(float dt)

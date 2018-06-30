@@ -1,27 +1,31 @@
 TODO :
+	☐ Sensors : method for getting all rounded sensors in a vector
 	☐ Handling Python
-	☐ Log
-		✔ Log sensors method @done(18-06-27 21:38)
-		☐ Round Sensors and handle null case
-		✔ Output and Log output @done(18-06-27 21:38)
-		☐ For a game : log all the player inputs and the sensors
+		☐ Input sensors into ia_ship python script
+		☐ Specific method for python embeding
+		☐ Clean code
+		✔ AI controler : method for mooving the ship with scripting @done(18-06-28 23:42)
 	☐ Config file
+		☐ Json, xml, or yaml config system 
+		☐ Add parameter to use python scripting or not
 	☐ Drawing : 
 		☐ Encapsulate renderer / drawing elements
 		☐ Better color choice
 		☐ Shape Class
-	☐ Clean code
-		☐ Singleton for :   ?????? A reflechir, cf remarque
-			☐ sensor 
-			☐ logger 
-			☐ debug 
-			☐ gamesession
-			" SI il ne doit y avoir qu'une seule instance, il suffit de n'en créer qu'une "
-				=> GameSession Singleton avec Parametre Sensor, Logger, Debug
+		☐ Clean code
+	☐ Singleton for :   ?????? A reflechir, cf remarque
+		☐ sensor 
+		☐ logger 
+		☐ debug 
+		☐ gamesession
+		" SI il ne doit y avoir qu'une seule instance, il suffit de n'en créer qu'une "
+		=> GameSession Singleton avec Parametre Sensor, Logger, Debug
 		☐ Sensor, logger, debbug as member of gamesession : Initialise Logger, Debbug, Member, and then pass them as the GameSession Initialiser / Constructor
-		☐ Encapsulation
+	☐ For a game : log all the player inputs and the sensors
 	Todo more latter : 
 		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
+		☐ Encapsulation
+		☐ Having the possibility to have IA ships and Player ships
 
 RENSEIGNEMENTS : 
 	☐ Collision Flag
@@ -34,7 +38,6 @@ Bug :
 Divers : 
 	☐ Choisir ou apparait ma fenêtre de debuggage
 	☐ Make : write error
-	☐ Json, xml, or yaml config system 
 	☐ Script Python pour mettre en forme mes Archives
 Lointain : 
 	☐ Implement collider class for point, pentagone, circle
@@ -43,6 +46,9 @@ Lointain :
 	☐ GameSession flag for disabling / enabling collisions
 
 Archive:
+  ✔ Log sensors method @done(18-06-27 21:38) @project(TODO )
+  ✔ Round Sensors and handle null case @done(18-06-28 09:03) @project(TODO )
+  ✔ Output and Log output @done(18-06-27 21:38) @project(TODO )
   ✔ Un beau debug pour la direction du vaisseau +  vaisseau @done(18-06-26 18:31) @project(TODO )
   ✔ Header file without using namespace std @done(18-06-23 17:30) @project(TODO )
   ✔ Sensors @done(18-06-26 18:42) @project(TODO )
