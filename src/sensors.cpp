@@ -62,3 +62,28 @@ float* Sensors::GetRelativeSpeed(const GameObject* obj){
 	*res = s*sqrt( pow(abs(vAst.x - vShip.x),2) + pow (abs(vAst.y - vShip.y),2));
 	return res;	
 };
+
+IAInputs::~IAInputs(){
+	delete X_dirShipNearestAst;
+	delete Y_dirShipNearestAst;
+	delete RelativeSpeed;
+}
+
+IAInputs Sensors::GetIAInputs(){
+	const GameObject *ast = GameSession::m_sensors->GetNearestAst();
+	float shipAngle = round(GameSession::m_sensors->GetShipRadianAngle() * 1000) / 1000;
+	float *relativeSpeed = NULL;
+	float* dir_x = NULL;
+	float* dir_y = NULL;
+	bool isNearestAst = false;
+	if (ast != NULL){
+		relativeSpeed = GameSession::m_sensors->GetRelativeSpeed(ast);
+		*relativeSpeed = round(*relativeSpeed * 1000) / 1000;
+		Point* dir = GameSession::m_sensors->GetDirectionVectorBetweenShipAndNearestAst(ast);
+		dir_x = new float(round(dir->x * 1000) / 1000);
+		dir_y = new float(round(dir->y * 1000) / 1000);
+		isNearestAst = true;
+		delete dir;
+	}
+	return IAInputs(shipAngle, dir_x, dir_y, relativeSpeed, isNearestAst);
+}

@@ -44,7 +44,7 @@ int main(int argc, char* args[]){
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	SDL_Init(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow("SDL2 Window", 100, 100, WINDOW_SIZE, WINDOW_SIZE_Y, 0); 
+	window = SDL_CreateWindow("SDL2 Window", 870, 37, WINDOW_SIZE, WINDOW_SIZE_Y, 0); 
 	if(window==NULL)
 	{   
 		printf("Could not create window: %s\n", SDL_GetError());
@@ -58,7 +58,6 @@ int main(int argc, char* args[]){
 	}
 	Logger::Initialize(fileName);
 	Debug::Initialise(renderer);
-
 	
 	Uint32 frameTime;
 	Uint32 lastFrameTime = 0;
@@ -87,6 +86,7 @@ int main(int argc, char* args[]){
 		Debug::ShowIndicators();
 		
 		gameSession->m_humanControl->Input();
+		gameSession->m_sensors->GetIAInputs();
 
 		int input1 = 2;
 		int input2 = 2;

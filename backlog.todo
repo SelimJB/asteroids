@@ -1,34 +1,46 @@
 TODO :
-	☐ Sensors : method for getting all rounded sensors in a vector
+	✔ Sensors : method for getting all rounded sensors in an object @done(18-07-01 23:09)
 	☐ Handling Python
 		☐ Input sensors into ia_ship python script
 		☐ Specific method for python embeding
 		☐ Clean code
-		✔ Embeding python @done(18-06-30 12:51)
-		✔ AI controler : method for mooving the ship with scripting @done(18-06-28 23:42)
-	☐ Config file
-		☐ Json, xml, or yaml config system 
+	☐ For a game : log all the player inputs and the sensors
+	Config file :
+		☐ Setup a config system
+			☐ Json, xml, or yaml gestion 
 		☐ Add parameter to use python scripting or not
-	☐ Drawing : 
+	Architecture : 
+		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
+		☐ Singleton for :   ?????? A reflechir, cf remarque
+			☐ sensor 
+			☐ logger 
+			☐ debug 
+			" SI il ne doit y avoir qu'une seule instance, il suffit de n'en créer qu'une "
+			=> GameSession Singleton avec Parametre Sensor, Logger, Debug
+		☐ Sensor, logger, debbug as member of gamesession : Initialise Logger, Debbug, Member, and then pass them as the GameSession Initialiser / Constructor
+	Drawing : 
 		☐ Encapsulate renderer / drawing elements
 		☐ Better color choice
 		☐ Shape Class
 		☐ Clean code
-	☐ Singleton for :   ?????? A reflechir, cf remarque
-		☐ sensor 
-		☐ logger 
-		☐ debug 
-		☐ gamesession
-		" SI il ne doit y avoir qu'une seule instance, il suffit de n'en créer qu'une "
-		=> GameSession Singleton avec Parametre Sensor, Logger, Debug
-		☐ Sensor, logger, debbug as member of gamesession : Initialise Logger, Debbug, Member, and then pass them as the GameSession Initialiser / Constructor
-	☐ For a game : log all the player inputs and the sensors
+	Collider : 
+		☐ Collider class 
+		☐ Implement collider class for point, pentagone, circle
+		☐ Use this collider class in CheckCollisions methodes instead of dynamic_cast
 	Todo more latter : 
-		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
+		☐ Verifier que tt est correctement désaloué
 		☐ Encapsulation
 		☐ Having the possibility to have IA ships and Player ships
+		☐ Tester les fuites de mémoire
+		☐ Menu
+		☐ Collider
+		☐ Drawing
+		☐ Gameplay
 
-RENSEIGNEMENTS : 
+RENSEIGNEMENTS :
+	☐ Tester et trouver un truc cool de dataviz
+	☐ Les jeux avec la sdl en général (gestion des assets graphiques)
+	☐ Comment limiter le taf de la carte graphique
 	☐ Collision Flag
 	☐ Dynamic cast cost
 	☐ Foncteurs 
@@ -37,16 +49,17 @@ Bug :
 	☐ GetNearestAst : Detection de l'asteroide le plus proche ne marche pas pour les astéroids proches mais de l'autre côté d'un bord de l'écran
 	☐ Vitesse commune bizarre (cf debug rouge) quand Asteroid le plus proche et vaisseau immobiles
 Divers : 
-	☐ Choisir ou apparait ma fenêtre de debuggage
-	☐ Make : write error
+	✔ Make : write error @done(18-07-01 20:17)
 	☐ Script Python pour mettre en forme mes Archives
-Lointain : 
-	☐ Implement collider class for point, pentagone, circle
-		☐ Use this collider class in CheckCollisions methodes instead of dynamic_cast
-	☐ Implement Shape class 
+	☐ voir pour cmake
+	☐ Corriger orthographe backlog
+Configuration : 
 	☐ GameSession flag for disabling / enabling collisions
 
+
 Archive:
+  ✔ Embeding python @done(18-06-30 12:51) @project(TODO )
+  ✔ AI controler : method for mooving the ship with scripting @done(18-06-28 23:42) @project(TODO )
   ✔ Log sensors method @done(18-06-27 21:38) @project(TODO )
   ✔ Round Sensors and handle null case @done(18-06-28 09:03) @project(TODO )
   ✔ Output and Log output @done(18-06-27 21:38) @project(TODO )

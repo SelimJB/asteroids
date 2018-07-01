@@ -26,25 +26,21 @@ void Logger::LogInTextFile()
 {
 	if (Switch_TxtLog)
 	{
-		const GameObject *ast = GameSession::m_sensors->GetNearestAst();
-		float shipAngle = round(GameSession::m_sensors->GetShipRadianAngle() * 1000) / 1000;
 		int output = GameSession::m_mainShip->m_ThrustState + GameSession::m_mainShip->m_DirState * 3;
-		if (ast != NULL)
-		{
-			float *relativeSpeed = GameSession::m_sensors->GetRelativeSpeed(ast);
-			Point *dir = GameSession::m_sensors->GetDirectionVectorBetweenShipAndNearestAst(ast);
-				*recordFile << shipAngle << "\t"
-							<< round(*relativeSpeed * 1000) / 1000 << "\t"
-							<< round (dir->x * 1000) / 1000 << "\t"
-							<< round (dir->y * 1000 ) / 1000 << "\t"
-							<< output << "\n";
+		IAInputs inputs = GameSession::m_sensors->GetIAInputs();
+		if (inputs.IsNearestAst){
+			*recordFile << inputs.ShipAngle << "\t"
+						<< *inputs.RelativeSpeed << "\t"
+						<< *inputs.X_dirShipNearestAst << "\t"
+						<< *inputs.Y_dirShipNearestAst << "\t"
+						<< output << "\n";
 		}
 		else {
-				*recordFile << shipAngle << "\t"
-							<< 'X' << "\t"
-							<< 'X' << "\t"
-							<< 'X' << "\t"
-							<< output << "\n";
+			*recordFile << inputs.ShipAngle << "\t"
+						<< 'X' << "\t"
+						<< 'X' << "\t"
+						<< 'X' << "\t"
+						<< output << "\n";
 		}
 	}
 }

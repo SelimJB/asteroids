@@ -20,6 +20,8 @@ void Debug::ShowIndicators()
 			Point *dir = GameSession::m_sensors->GetDirectionVectorBetweenShipAndNearestAst(ast);
 			Debug::Draw(vector<Point>{Point(600, 40), Point(600 + dir->x * (*relativeSpeed) * 3, 40 + dir->y * (*relativeSpeed) * 3)}, 255, 0, 0, 255);
 			Debug::Draw(vector<Point>{GameSession::m_mainShip->m_pos, ast->m_pos}, 0, 255, 0, 255);
+			delete relativeSpeed;
+			delete dir;
 		}
 	}
 }
