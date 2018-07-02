@@ -86,20 +86,29 @@ int main(int argc, char* args[]){
 		Debug::ShowIndicators();
 		
 		gameSession->m_humanControl->Input();
-		gameSession->m_sensors->GetIAInputs();
 
-		int input1 = 2;
-		int input2 = 2;
-		pArgs = PyTuple_New(2);
-		pyValue = PyInt_FromLong(input1);
-		PyTuple_SetItem(pArgs, 0, pyValue);
-		pyValue = PyInt_FromLong(input2);
-		PyTuple_SetItem(pArgs, 1, pyValue);
-		// Py_DECREF(pArgs);
-		// Py_DECREF(pyValue);
+		IAInputs inputs = gameSession->m_sensors->GetIAInputs();
+		pArgs = PyTuple_New(4);
+		pyValue = PyFloat_FromDouble(inputs.ShipAngle);
+		PyTuple_SetItem(pArgs, 0, pyValue);		
+		if (inputs.IsNearestAst){
+			pyValue = PyFloat_FromDouble(*inputs.X_dirShipNearestAst);
+			PyTuple_SetItem(pArgs, 1, pyValue);
+			pyValue = PyFloat_FromDouble(*inputs.Y_dirShipNearestAst);
+			PyTuple_SetItem(pArgs, 2, pyValue);
+			pyValue = PyFloat_FromDouble(*inputs.RelativeSpeed);
+			PyTuple_SetItem(pArgs, 3, pyValue);			
+		}
+		else {
+			pyValue = PyBool_FromLong(0);
+			PyTuple_SetItem(pArgs, 1, pyValue);
+			pyValue = PyBool_FromLong(0);
+			PyTuple_SetItem(pArgs, 2, pyValue);
+			pyValue = PyBool_FromLong(0);
+			PyTuple_SetItem(pArgs, 3, pyValue);		
+		}
 		pyResult = PyObject_CallObject(pFunc, pArgs);
 		int output = PyInt_AsLong(pyResult);
-		// Py_DECREF(pyResult);
 		gameSession->m_IAControl->MooveShip(output);
 	
 		SDL_RenderPresent(renderer);

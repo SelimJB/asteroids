@@ -1,3 +1,4 @@
-def GetOutput(input1 = 0, input2 = 0):
-	# print input1 , " , " ,  input2
-	return input1
+def GetOutput(shipAngle, x_dirShipNearestAst, y_dirShipNearestAst, relativeSpeed):
+	print shipAngle, " , " , x_dirShipNearestAst, " , " , y_dirShipNearestAst, " , " , relativeSpeed
+	# print args
+	return 5
