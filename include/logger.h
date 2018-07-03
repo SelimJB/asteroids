@@ -24,6 +24,7 @@ class Logger
 	static const bool Switch_TxtLog = true;
 	static std::ofstream *recordFile;
   public:
+	static const bool Switch_PythonScript = true;
   	static void Initialize(std::string fileName);
 	static void Release();
 	static int FrameNum;

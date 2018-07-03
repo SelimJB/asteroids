@@ -1,5 +1,5 @@
-#ifndef AICONTROL
-#define AICONTROL
+#ifndef IACONTROL
+#define IACONTROL
 
 class IAControl{
 	public:

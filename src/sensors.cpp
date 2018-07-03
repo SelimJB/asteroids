@@ -72,9 +72,7 @@ IAInputs::~IAInputs(){
 IAInputs Sensors::GetIAInputs(){
 	const GameObject *ast = GameSession::m_sensors->GetNearestAst();
 	float shipAngle = round(GameSession::m_sensors->GetShipRadianAngle() * 1000) / 1000;
-	float *relativeSpeed = NULL;
-	float* dir_x = NULL;
-	float* dir_y = NULL;
+	float *relativeSpeed = NULL, *dir_x = NULL, *dir_y = NULL;
 	bool isNearestAst = false;
 	if (ast != NULL){
 		relativeSpeed = GameSession::m_sensors->GetRelativeSpeed(ast);
