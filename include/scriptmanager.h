@@ -2,6 +2,7 @@
 #define SCRIPTMANAGER
 
 #include <Python.h>
+#include <vector>
 
 class ScriptManager{
 	private:
@@ -9,6 +10,7 @@ class ScriptManager{
 	static bool Py_Initialized;
 	public:
 	ScriptManager(const char* scriptName, const char* functionName);
+	int GetOuput(std::vector<float*> inputs);
 };
 
 #endif

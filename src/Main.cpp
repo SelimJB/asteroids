@@ -11,6 +11,7 @@
 #include "gamesession.h"
 #include "logger.h"
 #include "debug.h"
+#include "scriptmanager.h"
 using namespace std;
 
 const Uint32 fps = 60;
@@ -18,27 +19,17 @@ const Uint32 minimumFrameTime = 1000 / fps;
 
 int main(int argc, char* args[]){
 
-
-	// Python setup
-	PyObject *pName, *pModule, *pFunc, *pyValue, *pyResult, *pArgs;
-	Py_Initialize();
-    pName = PyString_FromString("ia_ship");
-    pModule = PyImport_Import(pName);
-	Py_DECREF(pName);
-    bool switch_pythonScript = true; // move to config
-
-	if (pModule != NULL && switch_pythonScript == true){
-		pFunc = PyObject_GetAttrString(pModule, "GetOutput");
-		try{
-			if (!pFunc || !PyCallable_Check(pFunc))
-				throw runtime_error("Python script error");
+	ScriptManager* scriptManager;
+    bool switch_pythonScript = true; // TODO : move to config
+	if (switch_pythonScript){
+		try {
+			scriptManager = new ScriptManager("ia_ship", "GetOutput");
 		}
 		catch (exception const& err){
-			cout <<  "Error : " << err.what() << endl;
+			cout << err.what() << endl;
 			return 0;
 		}
 	}
-
 
 	GameSession* gameSession = new GameSession();
 	SDL_Window *window;
@@ -85,32 +76,15 @@ int main(int argc, char* args[]){
 		Logger::LogInTextFile();
 		Debug::ShowIndicators();
 		
-		gameSession->m_humanControl->Input();
-
-		IAInputs inputs = gameSession->m_sensors->GetIAInputs();
-		pArgs = PyTuple_New(4);
-		pyValue = PyFloat_FromDouble(inputs.ShipAngle);
-		PyTuple_SetItem(pArgs, 0, pyValue);		
-		if (inputs.IsNearestAst){
-			pyValue = PyFloat_FromDouble(*inputs.X_dirShipNearestAst);
-			PyTuple_SetItem(pArgs, 1, pyValue);
-			pyValue = PyFloat_FromDouble(*inputs.Y_dirShipNearestAst);
-			PyTuple_SetItem(pArgs, 2, pyValue);
-			pyValue = PyFloat_FromDouble(*inputs.RelativeSpeed);
-			PyTuple_SetItem(pArgs, 3, pyValue);			
+		
+		if (switch_pythonScript){
+			int output = scriptManager->GetOuput(gameSession->m_sensors->GetIAInputs());
+			gameSession->m_IAControl->MooveShip(output);
 		}
 		else {
-			pyValue = PyBool_FromLong(0);
-			PyTuple_SetItem(pArgs, 1, pyValue);
-			pyValue = PyBool_FromLong(0);
-			PyTuple_SetItem(pArgs, 2, pyValue);
-			pyValue = PyBool_FromLong(0);
-			PyTuple_SetItem(pArgs, 3, pyValue);		
+			gameSession->m_humanControl->Input();
 		}
-		pyResult = PyObject_CallObject(pFunc, pArgs);
-		int output = PyInt_AsLong(pyResult);
-		gameSession->m_IAControl->MooveShip(output);
-	
+
 		SDL_RenderPresent(renderer);
 
 		if ((SDL_GetTicks() - frameTime) < minimumFrameTime)

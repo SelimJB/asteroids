@@ -27,21 +27,16 @@ void Logger::LogInTextFile()
 	if (Switch_TxtLog)
 	{
 		int output = GameSession::m_mainShip->m_ThrustState + GameSession::m_mainShip->m_DirState * 3;
-		IAInputs inputs = GameSession::m_sensors->GetIAInputs();
-		if (inputs.IsNearestAst){
-			*recordFile << inputs.ShipAngle << "\t"
-						<< *inputs.RelativeSpeed << "\t"
-						<< *inputs.X_dirShipNearestAst << "\t"
-						<< *inputs.Y_dirShipNearestAst << "\t"
-						<< output << "\n";
+		vector<float*> inputs = GameSession::m_sensors->GetIAInputs();
+		for (size_t i = 0; i<inputs.size(); i++){
+			if( inputs[i] == NULL ){
+				*recordFile << 'X' << "\t";
+			}
+			else {
+				*recordFile << *inputs[i] << "\t";
+			}
 		}
-		else {
-			*recordFile << inputs.ShipAngle << "\t"
-						<< 'X' << "\t"
-						<< 'X' << "\t"
-						<< 'X' << "\t"
-						<< output << "\n";
-		}
+		*recordFile << output << "\n";
 	}
 }
 

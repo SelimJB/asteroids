@@ -1,18 +1,18 @@
 TODO :
-	☐ Handling Python
-		✔ Input sensors into ia_ship python script @done(18-07-02 23:29)
-		☐ Input Python class and clean python script
-		☐ Specific method for python embeding
-		☐ Clean code
-		☐ Inputs as Vector of Float* (to generalize IA inputs handling) 
-		☐ Python Nullable ?
-	☐ For a game : log all the player inputs and the sensors
+	☐ Read Handling and Catching errors in C/C++ : Game Engine Architecture 
 	☐ Set up environment in big pc (cf gitignore)
+	☐ For a game : log all the player inputs and the sensors
+	Handling Python :
+		✔ Inputs as Vector of Float* (to generalize IA inputs handling) @done(18-07-06 18:29)
+		✔ Specific method for python embeding @done(18-07-06 18:52)
+		✔ Clean code @done(18-07-06 18:52)
 	Config file :
 		☐ Setup a config system
 			☐ Json, xml, or yaml gestion 
-		☐ Add parameter to use python scripting or not
+		☐ Add parameter to use python scripting or not : switch_pythonScript
+
 	Architecture : 
+		☐ INJECTION ou Singleton ? (cf mes notes sur le sujet)
 		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
 		☐ Singleton for :   ?????? A reflechir, cf remarque
 			☐ sensor 
@@ -26,6 +26,10 @@ TODO :
 		☐ Better color choice
 		☐ Shape Class
 		☐ Clean code
+	Error handling : 
+		☐ 
+	2D Game Engine architecture : 
+		☐
 	Collider : 
 		☐ Collider class 
 		☐ Implement collider class for point, pentagone, circle
@@ -41,6 +45,7 @@ TODO :
 		☐ Gameplay
 		☐ Stop using gfx
 		☐ Py_DECREF : managing reference count
+		☐ Adding a GameManager class
 
 RENSEIGNEMENTS :
 	☐ Tester et trouver un truc cool de dataviz
@@ -62,8 +67,11 @@ Configuration :
 	☐ Recording Inputs
 	☐ Using Python Script
 	☐ Debug
+Idées : 
+	☐ Pouvoir scripter d'autres trucs comme des ennemies, des bonus, ...
 
 Archive:
+  ✔ Input sensors into ia_ship python script @done(18-07-02 23:29) @project(TODO )
   ✔ Sensors : method for getting all rounded sensors in an object @done(18-07-01 23:09) @project(TODO )
   ✔ Make : write error @done(18-07-01 20:17) @project(Divers )
   ✔ Embeding python @done(18-06-30 12:51) @project(TODO )
