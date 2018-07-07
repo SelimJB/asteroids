@@ -1,0 +1,100 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build & run current file",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "type": "shell",
+            "command": "g++ -g ${file} -o ${fileBasenameNoExtension};./${fileBasenameNoExtension}.exe"
+        },
+        {
+            "label": "clean obj",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "type": "shell",
+            "command": "mingw32-make clean"
+        },        
+        {
+            "label": "build current file",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "type": "shell",
+            "command": "g++ -g -c ${file}",
+            "problemMatcher": []
+        },
+        {
+            "label": "build and run sdl file",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "type": "shell",
+            "command": "g++ -g ${file} -w -lmingw32 -lSDL2main -lSDL2 -o ${fileBasenameNoExtension}.exe; ./${fileBasenameNoExtension}.exe",
+            "problemMatcher": []            
+        },
+        {
+            "label": "Build with makefile",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                
+            },
+            "type": "shell",
+            // "command": "g++ -g ${file} src/helper.cpp src/gameobject.cpp src/ship.cpp src/ast.cpp src/bullet.cpp -Iinclude -Llib -w -lSDL2_gfx -lmingw32 -lSDL2main -lSDL2 -o ${fileBasenameNoExtension}.exe",
+            "command": "mingw32-make all; sleep 0.1",
+            "problemMatcher": []            
+        },
+        {
+            "label": "test",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": true,
+                "panel": "shared"
+            },
+            "type": "shell",
+            // "command": "g++ -g ${file} src/helper.cpp src/gameobject.cpp src/ship.cpp src/ast.cpp src/bullet.cpp -Iinclude -Llib -w -lSDL2_gfx -lmingw32 -lSDL2main -lSDL2 -o ${fileBasenameNoExtension}.exe",
+            "command": "g++ -o asteroid.dll ./obj/helper.o ./obj/gameobject.o ./obj/ship.o ./obj/bullet.o ./obj/ast.o -shared -Llib -lmingw32 -lSDL2main -lSDL2  ; g++ -g -o pololo ./test.cpp -lmingw32 -lSDL2main -lSDL2  -Iinclude  -L. -lasteroid",
+            "problemMatcher": []            
+        },
+        {
+            "label": "build and run python embeding",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "type": "shell",
+            "command": "g++ -o pythonloopembeding ./PythonEmbeding/pythonloopembeding.cpp -IC:/Python27/include/ -LC:/Python27/libs/ -lpython27 -lmingw32 -lSDL2main -lSDL2; ./PythonEmbeding/pythonloopembeding.exe",
+            "problemMatcher": []            
+        },                  
+    ]
+    
+}
