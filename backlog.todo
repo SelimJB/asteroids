@@ -1,16 +1,23 @@
-
+☐ Script : Propagation
 
 TODO :
 	☐ Set up environment in big pc (cf gitignore)
-	Config file :
-		☐ Setup a config system
-		☐ Json, xml, or yaml gestion 
-		☐ Add parameter to use python scripting or not : switch_pythonScript
 	ML : 
 		☐ Read the neural netwrok chapter of : AI Game Engine Programming
 		☐ Prepare Dataset : For a game session log all inputs and outputs
-		☐ Implement it
-		☐ Train it
+		☐ Script : Read Inputs
+		✔ Script : Read / Write Neural Network representation file @done(18-07-09 23:44)
+		☐ Script : Propagation
+		☐ Script : BackPropagation
+		☐ Script : Use a Neural Network
+		☐ Script : Train a Neural Network
+		☐ Script : Profiling tools
+		☐ Profile, adjust, test my algorithm
+		☐ Train a successful Ship
+	Config file :
+		☐ Setup a config system
+		☐ Json, xml, or yaml gestion 
+		☐ Add parameter to use python scripting or not : switch_pythonScript	
 	Architecture : 
 		☐ INJECTION ou Singleton ? (cf mes notes sur le sujet)
 		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
