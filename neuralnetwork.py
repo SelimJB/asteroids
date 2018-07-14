@@ -1,4 +1,4 @@
-from numpy import exp, array, random, dot
+from numpy import exp, array, random, dot, transpose, matrix
 
 class NeuralNetwork():
 
@@ -9,6 +9,9 @@ class NeuralNetwork():
     Dimensions = None
     SynapseMatrix1 = []
     SynapseMatrix2 = []
+
+    
+    
 
     def __init__(self,fileName):
         self.FileName = fileName
@@ -34,8 +37,13 @@ class NeuralNetwork():
     
     def Propagate(self, inputs):
         assert len(inputs) == self.Dimensions[0], "Wrong input array size"
+        self.HiddenLayer = dot(inputs, transpose(self.SynapseMatrix1))
+        self.OutputLayer = dot(self.HiddenLayer, transpose(self.SynapseMatrix2))
 
-        
+    def BackPropagate(self, outputTest):
+        sig = self.__sigmoid_der(sum([sum(x) for x in self.SynapseMatrix2]))
+        print [ sig*(out - a) for out, a in zip(outputTest, self.OutputLayer)]
+
     def WriteNeuralNetwork(self):
         file = open(self.FileName, "w")
         file.write('\t'.join(str(e) for e in self.Dimensions)+'\n')
@@ -60,7 +68,7 @@ class NeuralNetwork():
         return 1 / (1 + exp(-x))
 
     def __sigmoid_der(self, x):
-        return x * (1 - x)
+        return self.__sigmoid(x) * (1 - self.__sigmoid(x))
 
     def printDer(self, x):
         print "SIGMO", self.__sigmoid(x)
@@ -78,8 +86,7 @@ class InputManager():
 
 
 n = NeuralNetwork("neuralnetwork_4_7_1.txt")
-n.PrintNeuralNetwork()
-n.Toto()
-n.Propagate([1,1,1,1])
+n.Propagate([2,0,1,3])
+n.BackPropagate([1,2])
 # n.WriteNeuralNetwork()
 # InputManager("Inputs.txt").iterate(n.printDer)

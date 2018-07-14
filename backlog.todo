@@ -1,6 +1,8 @@
-☐ Script : Propagation
+☐ Finir propagation (cf les 2 todos)
+☐ BackPropagation
 
 TODO :
+	☐ Deallocate GetAIInputs pointers : Main.cpp / Logger.cpp. Maybe use float*[] and delete[]
 	☐ Set up environment in big pc (cf gitignore)
 	ML : 
 		☐ Read the neural netwrok chapter of : AI Game Engine Programming
