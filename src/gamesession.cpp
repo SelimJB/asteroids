@@ -75,7 +75,7 @@ void GameSession::DrawLives(){
 
 void GameSession::LaunchAsteroidWave()
 {
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 50; i++)
 	{
 		new Ast(GetRandomInt(1,2));
 	}

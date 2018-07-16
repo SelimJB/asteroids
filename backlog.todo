@@ -1,21 +1,23 @@
-☐ Finir propagation (cf les 2 todos)
-☐ BackPropagation
-
 TODO :
 	☐ Deallocate GetAIInputs pointers : Main.cpp / Logger.cpp. Maybe use float*[] and delete[]
-	☐ Set up environment in big pc (cf gitignore)
+	☐ Add a setting to invalidate all the logs produced x seconds before and after a death
+	✔ Set up environment in big pc (cf gitignore) @done(18-07-15 19:48)
+	☐ Le problème de freez incompréhensible
 	ML : 
-		☐ Read the neural netwrok chapter of : AI Game Engine Programming
-		☐ Prepare Dataset : For a game session log all inputs and outputs
-		☐ Script : Read Inputs
+		✔ Read the neural netwrok chapter of : AI Game Engine Programming @done(18-07-15 18:58)
 		✔ Script : Read / Write Neural Network representation file @done(18-07-09 23:44)
-		☐ Script : Propagation
-		☐ Script : BackPropagation
-		☐ Script : Use a Neural Network
-		☐ Script : Train a Neural Network
-		☐ Script : Profiling tools
-		☐ Profile, adjust, test my algorithm
-		☐ Train a successful Ship
+		✔ Script : Propagation @done(18-07-14 22:04)
+		✔ Script : BackPropagation @done(18-07-15 18:58)
+		☐ Create Use, Test, and Train Script
+		☐ Clean Script
+		☐ 1 OUTPUT
+			☐ Prepare Training et Test Dataset
+			☐ Test
+		☐ If not working :3 OUTPUT
+			☐ Change IAControl and Logger to handle 3 (or 4 output) instead of 1
+			☐ Prepare Training et Test Dataset
+			☐ Test
+		☐ Train a successful IA Ship network
 	Config file :
 		☐ Setup a config system
 		☐ Json, xml, or yaml gestion 
