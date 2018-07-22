@@ -8,7 +8,7 @@
 class GameObject;
 class GameSession;
 
-static const std::string fileName = "Inputs.txt"; // Put in the config file
+static const std::string fileName = "misc/Inputs.txt"; // Put in the config file
 
 class Point;
 

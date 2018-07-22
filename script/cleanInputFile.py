@@ -1,5 +1,8 @@
+inputFileName = "Inputs_Many.txt"
+
 imbricatedErrorNbr = 0
-fileName = "C:/Users/selim/Desktop/Projets/asteroids/Misc/Inputs_Beaucoup.txt"
+path = "misc/"
+outputFileName = "Clean_" + inputFileName
 lines = []
 frameLatitude = 30
 err = 0
@@ -26,7 +29,7 @@ def clean(i):
 
 
 # Open and parse
-file = open(fileName)
+file = open(path + inputFileName)
 for line in file:
     lines.append([float(x) for x in line.split("\t")])
 file.close()
@@ -42,7 +45,7 @@ while i<len(lines):
     i += 1
 
 # Write
-file = open("C:/Users/selim/Desktop/Projets/asteroids/Misc/Inputs_Beaucoup_FailClean.txt", 'w')
+file = open(path + outputFileName, 'w')
 for i in lines:
     if i == None :
         cleanedLinesNbr+=1

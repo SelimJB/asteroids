@@ -2,8 +2,8 @@
 .vscode/*properties*
 *.exe
 *.pyc
-Misc
 Old
 PythonEmbeding
 obj
 scripts
+.vscode

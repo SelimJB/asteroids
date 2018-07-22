@@ -1,23 +1,25 @@
+☐ DataSet cleaning script : Check Output repartition
+☐ Game closing cross not working in scripting mode
+☐ Create train script
+	☐ Random selection of few dataset elements
+	
 TODO :
 	☐ Deallocate GetAIInputs pointers : Main.cpp / Logger.cpp. Maybe use float*[] and delete[]
 	☐ Add a setting to invalidate all the logs produced x seconds before and after a death
-	✔ Set up environment in big pc (cf gitignore) @done(18-07-15 19:48)
-	☐ Le problème de freez incompréhensible
+	☐ Create method to handle ship mooving style (manual
 	ML : 
-		✔ Read the neural netwrok chapter of : AI Game Engine Programming @done(18-07-15 18:58)
-		✔ Script : Read / Write Neural Network representation file @done(18-07-09 23:44)
-		✔ Script : Propagation @done(18-07-14 22:04)
-		✔ Script : BackPropagation @done(18-07-15 18:58)
-		☐ Create Use, Test, and Train Script
-		☐ Clean Script
-		☐ 1 OUTPUT
-			☐ Prepare Training et Test Dataset
-			☐ Test
-		☐ If not working :3 OUTPUT
-			☐ Change IAControl and Logger to handle 3 (or 4 output) instead of 1
-			☐ Prepare Training et Test Dataset
-			☐ Test
+		☐ Create train script
+			☐ Random selection of few dataset elements
+		☐ Create dataset cleaning script
+			✔ Clean Death @done(18-07-23 00:25)
+			☐ Check Output repartition
+		☐ Create and train 6 input files (cf Draft)
+			☐ Many asts * 2
+			☐ Few asts / high mobility
+			☐ Few asts / low mobility
+		☐ Clean Scripts
 		☐ Train a successful IA Ship network
+		☐ Tester 3 Outputs
 	Config file :
 		☐ Setup a config system
 		☐ Json, xml, or yaml gestion 
@@ -56,6 +58,7 @@ TODO :
 		☐ Stop using gfx
 		☐ Py_DECREF : managing reference count
 		☐ Adding a GameManager class
+		☐ Clean backlog.todo
 
 RENSEIGNEMENTS :
 	☐ Tester et trouver un truc cool de dataviz
@@ -66,9 +69,14 @@ RENSEIGNEMENTS :
 	☐ Foncteurs 
 
 Bug : 
-	☐ GetNearestAst : Detection de l'asteroide le plus proche ne marche pas pour les astéroids proches mais de l'autre côté d'un bord de l'écran
-	☐ Vitesse commune bizarre (cf debug rouge) quand Asteroid le plus proche et vaisseau immobiles
-Divers : 
+	Prio :
+		☐ Game closing cross not working in scripting mode
+		☐ Freez after few seconds in non admin scripting mode
+	Not prio :
+		☐ GetNearestAst : Detection de l'asteroide le plus proche ne marche pas pour les astéroids proches mais de l'autre côté d'un bord de l'écran
+		☐ Vitesse commune bizarre (cf debug rouge) quand Asteroid le plus proche et vaisseau immobiles
+Divers :
+	☐ Draw a game architecture schema
 	☐ Script Python pour mettre en forme mes Archives
 	☐ voir pour cmake
 	☐ Corriger orthographe backlog
@@ -81,6 +89,12 @@ Idées :
 	☐ Pouvoir scripter d'autres trucs comme des ennemies, des bonus, ...
 
 Archive:
+  ✔ Create Use, Test, and Train Script @done(18-07-22 17:20) @project(TODO .ML )
+  ✔ Set up environment in big pc (cf gitignore) @done(18-07-15 19:48) @project(TODO )
+  ✔ Read the neural netwrok chapter of : AI Game Engine Programming @done(18-07-15 18:58) @project(TODO .ML )
+  ✔ Script : Read / Write Neural Network representation file @done(18-07-09 23:44) @project(TODO .ML )
+  ✔ Script : Propagation @done(18-07-14 22:04) @project(TODO .ML )
+  ✔ Script : BackPropagation @done(18-07-15 18:58) @project(TODO .ML )
   ✔ Inputs as Vector of Float* (to generalize IA inputs handling) @done(18-07-06 18:29) @project(TODO .Handling Python )
   ✔ Specific method for python embeding @done(18-07-06 18:52) @project(TODO .Handling Python )
   ✔ Clean code @done(18-07-06 18:52) @project(TODO .Handling Python )

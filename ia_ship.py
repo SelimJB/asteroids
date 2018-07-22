@@ -1,11 +1,14 @@
 # TODO : add a description of the inputs in the comments
+import sys
+sys.path.insert(0, 'script')
 import neuralnetwork
-n = neuralnetwork.NeuralNetwork("neuralnetwork_4_7_1.txt")
+
+n = neuralnetwork.NeuralNetwork("neuralnetwork.txt")
 
 def GetOutput(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, relativeSpeed=None):
     # print shipAngle, " , ", x_dirShipNearestAst, " , ", y_dirShipNearestAst, " , ", relativeSpeed
     a = abs(round(n.Use([shipAngle,x_dirShipNearestAst,y_dirShipNearestAst,relativeSpeed])[0]*10))
-    print a
+    # print a
     return a
 
 # def GetOutput(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, relativeSpeed=None):

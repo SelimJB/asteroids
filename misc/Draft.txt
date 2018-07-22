@@ -1,0 +1,52 @@
+Selection des hyper parametres
+    https://medium.freecodecamp.org/how-to-pick-the-best-learning-rate-for-your-machine-learning-project-9c28865039a8
+
+Les biais et les seeds
+
+
+Pour générer mon fichier Inputs 
+    Homogéhéniser mes enregistrements
+    Supprimer les erreurs
+
+
+A mettre dans mon rapport Final : 
+    ML : 
+        Les performances des reseaux entrénés ( comparer les output du reseau avec les jeux de données )
+
+
+Annecdotes
+    Le fichier Backlog.todo :
+            Créé pour pouvoir travailler sur le projet même lorsque je n'avais que 15 minutes devant moi, 
+        pour pouvoir me mettre dans le bain rapidement, et ne pas avoir à reflechir et à prendre de décision 
+        vis à vie de ce que j'allais faire pendant ma courte session de travail, me laisser d'avantage me concentrer
+        sur la réalisation plutot que sur quoi que ce soit d'autre
+    Les commits
+            Une experience légère des logiciels de gestion de version -> la question des bonnes pratiques de 
+        nommage de commits c'est posé
+        On peut observer une amélioration du titrage au fil des commits
+        Dans le fichier Backlog.todo je me suis mis à utiliser un style "titre de commit" quand c'était possible
+        (observer l'archive et l'évolution à travers le temps), pratique pour réfléchir encore moins pendant une 
+        session courte
+
+
+ENTRAINEMENT
+
+Enregistrement 1 :
+    Enregistrmeent : 
+        Une session quelconque
+    Résultats : 
+        le vaisseau esquive des astéroides mais meur trop souvent à mon gout, 
+        il utilise beaucoup trop la marche arrière
+    Pb : 
+        * trop de mort à l'enregistrement 
+        * Utilisation excessive de la marche arrière 
+
+AMELIORATION : Logging
+    A chaque crash, les 30 frames suivantes et les 30 frames precedantes sont effacées
+
+Enregistrements à tester :
+    * Beaucoup d'astéroides
+        - Enlever des moments à 0 ou pas
+    * Peu d'astéroides
+        - mobile ou pas
+        - enlever des moments à 0 ou pas

@@ -1,6 +1,6 @@
 import neuralnetwork
 
-n = neuralnetwork.NeuralNetwork("neuralnetwork_4_7_1.txt")
+n = neuralnetwork.NeuralNetwork("neuralnetwork.txt")
 for x in range(1,10000):
     neuralnetwork.InputManager("C:/Users/selim/Desktop/Projets/asteroids/Misc/CLEAN_Inputs_Beaucoup.txt").iterate(n.Train)
     if x % 100 == 0 :

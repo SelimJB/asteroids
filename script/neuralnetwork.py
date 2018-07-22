@@ -123,17 +123,17 @@ class NeuralNetwork():
         print "SIGMO", self.__sigmoid(x)
 
     def Test(self, x):
-        self.InputLayer = x[:n.Dimensions[0]]
-        self.OutputTest = x[n.Dimensions[0]:]
+        self.InputLayer = x[:self.Dimensions[0]]
+        self.OutputTest = x[self.Dimensions[0]:]
         self.Propagate(self.InputLayer)
         self.Costs.append(self.GetQuadraticCost())
-        self.Tests.append(all(round(networkOutput) == realOutput for networkOutput,
+        self.Tests.append(all(round(networkOutput*10) == realOutput for networkOutput,
                               realOutput in zip(self.OutputLayer, self.OutputTest)))    
         self.I += 1
 
     def Train(self,x):
-        self.InputLayer = x[:n.Dimensions[0]]
-        self.OutputTest = [o/10 for o in x[n.Dimensions[0]:]]
+        self.InputLayer = x[:self.Dimensions[0]]
+        self.OutputTest = [o/10 for o in x[self.Dimensions[0]:]]
         self.Propagate(self.InputLayer)
         self.BackPropagate(self.OutputTest)
         self.WeightUpdate(1)
@@ -141,7 +141,7 @@ class NeuralNetwork():
         # print "Output : ", outputs
         # # print "S1 : ", n.SynapseMatrix1
         # # print "S2 : ", n.SynapseMatrix2
-        print "Res : ", round(n.OutputLayer[0]*10)
+        # print "Res : ", round(n.OutputLayer[0]*10)
 
 class InputManager():
     def __init__(self, fileName):
@@ -151,14 +151,6 @@ class InputManager():
         for line in self.file:
             values = [float(x) for x in line.split("\t")]
             function(values)
-
-
-def sigmoid(x):
-    return 1 / (1 + exp(-x))
-
-
-def sigmoid_der(x):
-    return sigmoid(x) * (1 - sigmoid(x))
 
 
 # n = NeuralNetwork("neuralnetwork_4_7_1.txt")
@@ -175,17 +167,17 @@ def sigmoid_der(x):
 # print "Total error : ", n.GetQuadraticCost([1, 2])
 
 
-# TODO
-    #   Enlever les parametres self.Input et self.Output
-    # Generate netwrok random
-    #   Clean code
-    #   Use method
-    # Optimisation  ne pas lire le fichier input a chaque fois
-    #  Fichier log txt avec heure 
+# # TODO
+#     #   Enlever les parametres self.Input et self.Output
+#     # Generate netwrok random
+#     #   Clean code
+#     #   Use method
+#     # Optimisation  ne pas lire le fichier input a chaque fois
+#     #  Fichier log txt avec heure 
 
 
 # # # # Train
-# for x in range(1000):
+# for x in range(10000):
 #     InputManager("Inputs.txt").iterate(n.Train)
 #     if x % 10 == 0 :
 #         print x/10,"%"
@@ -193,7 +185,7 @@ def sigmoid_der(x):
 #         n.CheckTest()
 #         n.WriteNeuralNetwork()
 #         print "Res : ", round(n.OutputLayer[0]*10)
-#     # print "\n"
+    # print "\n"
 
 
 # Test
