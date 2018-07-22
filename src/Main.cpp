@@ -77,6 +77,7 @@ int main(int argc, char* args[]){
 		Debug::ShowIndicators();
 		
 		
+		// TODO : put it a GameSessionMethod
 		if (switch_pythonScript){
 			int output = scriptManager->GetOuput(gameSession->m_sensors->GetIAInputs());
 			gameSession->m_IAControl->MooveShip(output);

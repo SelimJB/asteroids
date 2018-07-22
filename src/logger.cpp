@@ -36,7 +36,11 @@ void Logger::LogInTextFile()
 				*recordFile << *inputs[i] << "\t";
 			}
 		}
-		*recordFile << output << "\n";
+		*recordFile << output << "\t";
+		*recordFile << GameSession::m_mainShip->m_isDeadLogInfo << "\n";
+		if (GameSession::m_mainShip->m_isDeadLogInfo){
+			GameSession::m_mainShip->m_isDeadLogInfo = false;
+		}
 	}
 }
 

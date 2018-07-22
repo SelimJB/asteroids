@@ -33,6 +33,7 @@ class Ship : public GameObject
 	void DoCollision(GameObject *);
 	void UpdatePosition(float deltaTime); 
 	void Log();
+	bool m_isDeadLogInfo = false;
 };
 
 #endif

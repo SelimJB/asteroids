@@ -84,6 +84,9 @@ void Ship::UpdatePosition(float deltaTime){
 
 void Ship::DoCollision(GameObject* obj){
 	m_pos = Point(WINDOW_SIZE/2,WINDOW_SIZE_Y/2);
+	if (Logger::Switch_TxtLog){
+		m_isDeadLogInfo = true;
+	} 	
 }
 
 bool Ship::IsColliding(GameObject* obj){
