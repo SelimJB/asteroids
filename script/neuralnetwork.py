@@ -17,6 +17,10 @@ class NeuralNetwork():
     OutputTest = None
     Tests = []
     Costs = []
+
+    OldSynapseMatrix1 = None
+    OldSynapseMatrix2 = None
+
     I = 0
 
     def __init__(self, fileName):
@@ -41,18 +45,23 @@ class NeuralNetwork():
         assert len(
             self.SynapseMatrix2) == self.Dimensions[2], "Incorrect length for Synapse Matrix 2 in : " + self.FileName
         file.close()
+        self.OldSynapseMatrix1 = self.SynapseMatrix1
+        self.OldSynapseMatrix2 = self.SynapseMatrix2
 
     def Use(self, inputs):
         self.Propagate(inputs)
         return self.OutputLayer
 
     def CheckTest(self):
+        cost = round(sum(self.Costs)/len(self.Costs),10)
+        test = round((self.Tests.count(True))/float(len(self.Tests))*100,2)
         print "Nbr Iterations : ", self.I
-        print "Moyenne cout : ", round(sum(self.Costs)/len(self.Costs),6)
-        print "Moyenne testes : ", round((self.Tests.count(True))/float(len(self.Tests))*100,2)
+        print "Moyenne cout : ", cost
+        print "Moyenne testes : ", test
         self.Tests = []
         self.Costs = []
-        self.I = 0        
+        self.I = 0
+        return [cost, test]        
 
 
     def Propagate(self, inputs):
@@ -76,7 +85,6 @@ class NeuralNetwork():
         self.ErrorHidden = [x*y for x, y in zip(sig, err)]
 
     def WeightUpdate(self, learningRate):
-        # for j,a in zip(self.SynapseMatrix2, self.HiddenLayer):
         self.SynapseMatrix2 = transpose([
             [j+learningRate*e*a for j, e in zip(i, self.ErrorOutput)]
             for i, a in zip(transpose(self.SynapseMatrix2), self.HiddenLayer)
@@ -84,7 +92,31 @@ class NeuralNetwork():
         self.SynapseMatrix1 = transpose([
             [j+learningRate*e*a for j, e in zip(i, self.ErrorHidden)]
             for i, a in zip(transpose(self.SynapseMatrix1), self.InputLayer)
-        ]).tolist()        
+        ]).tolist()   
+
+    def WeightUpdateInertia(self, learningRate, inertiaParameter):
+        # s2
+        newSynapseMatrix = []
+        for i, a, di  in zip(transpose(self.SynapseMatrix2), self.HiddenLayer, transpose(self.OldSynapseMatrix2)):
+            newSynapseMatrixColumn = []
+            for j, e, dj in zip(i, self.ErrorOutput, di):
+                delta = j- dj # delta = old Weight - older Weight
+                w = j+learningRate*e*a*inertiaParameter + (1 - inertiaParameter)*delta
+                newSynapseMatrixColumn.append(w)
+            newSynapseMatrix.append(newSynapseMatrixColumn)
+        self.OldSynapseMatrix2 = self.SynapseMatrix2
+        self.SynapseMatrix2 = transpose(newSynapseMatrix).tolist()
+        # s1
+        newSynapseMatrix = []
+        for i, a, di  in zip(transpose(self.SynapseMatrix1), self.InputLayer, transpose(self.OldSynapseMatrix1)):
+            newSynapseMatrixColumn = []
+            for j, e, dj in zip(i, self.ErrorHidden, di):
+                delta = j- dj
+                w = j+learningRate*e*a*inertiaParameter + (1 - inertiaParameter)*delta
+                newSynapseMatrixColumn.append(w)
+            newSynapseMatrix.append(newSynapseMatrixColumn)
+        self.OldSynapseMatrix1 = self.SynapseMatrix1
+        self.SynapseMatrix1 = transpose(newSynapseMatrix).tolist()
 
     def GetQuadraticCost(self):
         return 0.5*sum([(a-d)**2 for a, d in zip(self.OutputLayer, self.OutputTest)])
@@ -136,7 +168,8 @@ class NeuralNetwork():
         self.OutputTest = [o/10 for o in x[self.Dimensions[0]:]]
         self.Propagate(self.InputLayer)
         self.BackPropagate(self.OutputTest)
-        self.WeightUpdate(1)
+        # self.WeightUpdate(1)
+        self.WeightUpdateInertia(0.9, 0.80)
         # print "Input : ", inputs
         # print "Output : ", outputs
         # # print "S1 : ", n.SynapseMatrix1
