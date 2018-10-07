@@ -21,6 +21,9 @@ class NeuralNetwork():
     OldSynapseMatrix1 = None
     OldSynapseMatrix2 = None
 
+    NormaliseOutputFunc = None
+    GetOutputFunc = None
+
     I = 0
 
     def __init__(self, fileName):
@@ -47,10 +50,17 @@ class NeuralNetwork():
         file.close()
         self.OldSynapseMatrix1 = self.SynapseMatrix1
         self.OldSynapseMatrix2 = self.SynapseMatrix2
+        # Function Initialisation
+        self.NormaliseOutputFunc = self.NormaliseOutput_3
+        self.GetOutputFunc = self.GetOutput_3
 
     def Use(self, inputs):
         self.Propagate(inputs)
-        return self.OutputLayer
+        # print self.OutputLayer
+        # VRAI LIGNE
+        return [self.GetOutputFunc(o) for o in self.OutputLayer]
+        # A MODIFIER
+        # return [self.GetOutput_2(self.OutputLayer[0]), self.GetOutput_3(self.OutputLayer[1])]
 
     def CheckTest(self):
         cost = round(sum(self.Costs)/len(self.Costs),10)
@@ -63,14 +73,26 @@ class NeuralNetwork():
         self.I = 0
         return [cost, test]        
 
-
+    # With Sigmo
     def Propagate(self, inputs):
         assert len(inputs) == self.Dimensions[0], "Wrong input array size"
         self.InputLayer = inputs
-        hiddenLayer = dot(inputs, transpose(self.SynapseMatrix1))
-        self.OutputLayer = dot(hiddenLayer, transpose(
-            self.SynapseMatrix2)).tolist()
+        # BIAS
+        self.InputLayer.append(1)
+        hiddenLayer = self.__RELU(dot(self.InputLayer, transpose(self.SynapseMatrix1)))
         self.HiddenLayer = hiddenLayer.tolist()
+        self.HiddenLayer.append(1)
+        # print self.HiddenLayer, len(self.HiddenLayer)
+        self.OutputLayer = self.__sigmoid(dot(self.HiddenLayer, transpose(
+            self.SynapseMatrix2))).tolist()
+
+    # def Propagate(self, inputs):
+    #     assert len(inputs) == self.Dimensions[0], "Wrong input array size"
+    #     self.InputLayer = inputs
+    #     hiddenLayer = dot(inputs, transpose(self.SynapseMatrix1))
+    #     self.OutputLayer = dot(hiddenLayer, transpose(
+    #         self.SynapseMatrix2)).tolist()
+    #     self.HiddenLayer = hiddenLayer.tolist()
 
     def BackPropagate(self, outputTest):
         self.OutputTest = outputTest
@@ -78,7 +100,7 @@ class NeuralNetwork():
             dot(self.HiddenLayer, transpose(self.SynapseMatrix2)))
         err = [x-y for x, y in zip(outputTest, self.OutputLayer)]
         self.ErrorOutput = [x*y for x, y in zip(sig, err)]
-        sig = self.__sigmoid_der(
+        sig = self.__RELU_der(
             dot(self.InputLayer, transpose(self.SynapseMatrix1)))
         err = [dot(x, self.ErrorOutput)
                for x in transpose(self.SynapseMatrix2).tolist()]
@@ -145,6 +167,13 @@ class NeuralNetwork():
         print "\n\t Synapse Matrix 2 : "
         print "\t", self.SynapseMatrix2
 
+    def __RELU(self, x):
+        res = array([e if e > 0 else 0 for e in x])
+        return res
+
+    def __RELU_der(self, x):
+        return array([1 if e > 0 else 0 for e in x])
+
     def __sigmoid(self, x):
         return 1 / (1 + exp(-x))
 
@@ -159,33 +188,63 @@ class NeuralNetwork():
         self.OutputTest = x[self.Dimensions[0]:]
         self.Propagate(self.InputLayer)
         self.Costs.append(self.GetQuadraticCost())
-        self.Tests.append(all(round(networkOutput*10) == realOutput for networkOutput,
+        self.Tests.append(all(self.GetOutputFunc(networkOutput) == realOutput for networkOutput,
                               realOutput in zip(self.OutputLayer, self.OutputTest)))    
         self.I += 1
 
-    def Train(self,x):
+    def Train(self, x):
         self.InputLayer = x[:self.Dimensions[0]]
-        self.OutputTest = [o/10 for o in x[self.Dimensions[0]:]]
+        # self.OutputTest = [o/10 for o in x[self.Dimensions[0]:]]
+        self.OutputTest = [self.NormaliseOutputFunc(o) for o in x[self.Dimensions[0]:]]
         self.Propagate(self.InputLayer)
         self.BackPropagate(self.OutputTest)
         # self.WeightUpdate(1)
-        self.WeightUpdateInertia(0.9, 0.80)
+        self.WeightUpdateInertia(0.00001, 0.79)
         # print "Input : ", inputs
         # print "Output : ", outputs
         # # print "S1 : ", n.SynapseMatrix1
         # # print "S2 : ", n.SynapseMatrix2
         # print "Res : ", round(n.OutputLayer[0]*10)
 
-class InputManager():
-    def __init__(self, fileName):
-        self.file = open(fileName)
-
-    def iterate(self, function):
-        for line in self.file:
-            values = [float(x) for x in line.split("\t")]
-            function(values)
 
 
+    # First NN version
+    def NormaliseOutput_1(self, output):
+        return output / 10
+    
+    def GetOutput_1(self, res):
+        return round(res*10)
+
+    # Second NN version
+    def NormaliseOutput_2(self, output):
+        return (output + 1)/2
+
+    def GetOutput_2(self, res):
+        temp = res*2-1
+        seuil = 0.23
+        if temp < seuil and temp > -seuil :
+            return 0
+        elif temp > seuil:
+            return 1
+        elif temp < -seuil:
+            return -1
+
+    def GetOutput_2bis(self, res):
+        temp = res*2-1
+        seuil = 0.055
+        if temp < seuil and temp > -seuil :
+            return 0
+        elif temp > seuil:
+            return 1
+        elif temp < -seuil:
+            return -1            
+
+    ## Third NN version
+    def NormaliseOutput_3(self, output):
+        return output
+
+    def GetOutput_3(self, res):
+        return res
 # n = NeuralNetwork("neuralnetwork_4_7_1.txt")
 
 # n.Test([0,1,0,0.1],[1,2])
@@ -228,3 +287,8 @@ class InputManager():
 # Check
 # InputManager("Inputs.txt").iterate(n.Train)
 # print n.Use([1,0,1,0])
+
+
+
+# Todo
+    # Clean code

@@ -1,17 +1,20 @@
-from neuralnetwork import NeuralNetwork, InputManager
+from neuralnetwork import NeuralNetwork
 import random
 import time
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+import numpy as np
 
-networkFile1 = "C:/Users/selim/Projet/0_Projets/Asteroid/misc/NeuralNetwork_NotManyMobile.txt"
-dataFile1 = "C:/Users/selim/Projet/0_Projets/Asteroid/Misc/CLEAN_Inputs_NotMany_NotMobile.txt"
-testResultFile = "C:/Users/selim/Projet/0_Projets/Asteroid/Misc/TRAININGRESULTS_Inputs_NotMany_NotMobile.txt"
-iterationNbr = 300
+networkFile1 = "C:/Users/selim/Projet/0_Projets/Asteroid/misc/NeuralNetwork_FOUROUTPUTS.txt"
+dataFile1 = "C:/Users/selim/Projet/0_Projets/Asteroid/Misc/CLEAN_Inputs_3_NN4_correctedSpeed2andcorrectedDir.txt"
+testResultFile = "C:/Users/selim/Projet/0_Projets/Asteroid/Misc/TRAININGRESULTS_Inputs_FOURINPUTS.txt"
+iterationNbr = 2000
 
 class NeuralNetworkTrainer():
 
     TestResults = []
 
-    def __init__(self, dataFile, networkFile, trainingRangeSize = 3000):
+    def __init__(self, dataFile, networkFile, trainingRangeSize = 1000):
         # self.dataFile = dataFile
         # self.networkFile = networkFile
         self.neuralnetwork = NeuralNetwork(networkFile)
@@ -38,13 +41,13 @@ class NeuralNetworkTrainer():
             # InputManager(self.dataFile).iterate(self.neuralnetwork.Train)    
 
     def iteratePartial(self, function):
-        t1 = round(time.clock()*1000,2)
+        # t1 = round(time.clock()*1000,2)
         rand = self.GetTrainingSetFirstLineNbr()
         for i in range (rand, rand + self.trainingRangeSize):
             values = [float(x) for x in self.inputs[i].split("\t")]
             function(values)
-        t2 = round(time.clock()*1000,2)
-        print "t : ", (t2-t1)            
+        # t2 = round(time.clock()*1000,2)
+        # print "t : ", (t2-t1)            
 
     def iterateAllDatas(self, function):
         t1 = round(time.clock()*1000,2)
@@ -59,6 +62,20 @@ class NeuralNetworkTrainer():
         for a,b in self.TestResults :
             file.write(str(a)+"\t"+str(b)+"\n")
         file.close()
+        # plt.plot([a for a,b in self.TestResults])
+        # plt.savefig('books_read.png')
+        
+        y = np.array([a for a,b in self.TestResults])
+        x = np.array(range(0,len(y)))
+        # plt.scatter(x,y)
+        regr = linear_model.LinearRegression()
+        regr.fit(x[:,np.newaxis], y)
+        # plt.plot(x_test, regr.predict(x_test[:,np.newaxis]), color='blue', linewidth=1)
+        plt.plot(x,y, color='blue', linewidth=1)
+        plt.plot(x,np.array([regr.intercept_ + i* regr.coef_ for i in x]), color='red', linewidth=0.5)
+        print "Reg coef : ", regr.coef_
+        plt.savefig('books_read.png')
+        plt.close('all')
 
 
     def GetTrainingSetFirstLineNbr(self):
@@ -78,4 +95,27 @@ class NeuralNetworkTrainer():
 
     
 n = NeuralNetworkTrainer(dataFile1, networkFile1, 1000)
+# n.GetTrainingSetFirstLineNbr()
 n.train(iterationNbr)
+
+
+# n = NeuralNetwork(networkFile1)
+
+
+# for x in range(1,1000):
+#     InputManager(dataFile1).iterate(n.Train)
+#     if x % 10 == 0 :
+#         print x/10,"%"
+#         InputManager(dataFile1).iterate(n.Test)
+#         n.CheckTest()
+#         n.WriteNeuralNetwork()
+
+
+# # TODO
+# 	# function (choose repetition number)
+# 	# args
+# 	# random inputs (train datas selected in a random range of the dataset, same for test datas)
+#  Comparer temps :
+            # self.iterate(self.neuralnetwork.Train)    
+            # InputManager(self.dataFile).iterate(self.neuralnetwork.Train)  
+    
