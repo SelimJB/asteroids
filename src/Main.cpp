@@ -20,10 +20,27 @@ const Uint32 minimumFrameTime = 1000 / fps;
 int main(int argc, char* args[]){
 
 	ScriptManager* scriptManager;
-    bool switch_pythonScript = true; // TODO : move to config
-	if (switch_pythonScript){
+	ScriptManager* scriptManager2;
+	ScriptManager* scriptManager3;
+	ScriptManager* scriptManager4;
+	ScriptManager* scriptManager5;
+	if (Logger::Switch_PythonScript){
 		try {
-			scriptManager = new ScriptManager("ia_ship", "GetOutput");
+			if (Logger::InputMode == 1){
+				scriptManager = new ScriptManager("ia_ship", "GetOutput2");
+				scriptManager2 = new ScriptManager("ia_ship", "GetThrustOutput");
+				scriptManager3 = new ScriptManager("ia_ship", "GetDirOutput");
+			}
+			else if (Logger::InputMode == 0){
+				scriptManager = new ScriptManager("ia_ship", "GetOutput");
+			}	
+			else if (Logger::InputMode == 2){
+				scriptManager = new ScriptManager("ia_ship", "GetOutput3");
+				scriptManager2 = new ScriptManager("ia_ship", "GetThrustBoolOutput");
+				scriptManager3 = new ScriptManager("ia_ship", "GetReverseThrustBoolOutput");				
+				scriptManager4 = new ScriptManager("ia_ship", "GetLeftBoolOutput");				
+				scriptManager5 = new ScriptManager("ia_ship", "GetRightBoolOutput");				
+			}		
 		}
 		catch (exception const& err){
 			cout << err.what() << endl;
@@ -35,7 +52,8 @@ int main(int argc, char* args[]){
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	SDL_Init(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow("SDL2 Window", 920, 42, WINDOW_SIZE, WINDOW_SIZE_Y, 0); 
+	window = SDL_CreateWindow("SDL2 Window", 500, 42, WINDOW_SIZE, WINDOW_SIZE_Y, 0); 
+	// window = SDL_CreateWindow("SDL2 Window", 20, 20, WINDOW_SIZE, WINDOW_SIZE_Y, 0); 
 	if(window==NULL)
 	{   
 		printf("Could not create window: %s\n", SDL_GetError());
@@ -73,14 +91,39 @@ int main(int argc, char* args[]){
 
 		gameSession->Draw(renderer);
 		gameSession->Update(deltaTime);
-		Logger::LogInTextFile();
+
+		if (Logger::InputMode == 0){
+			Logger::LogInTextFile();
+		}
+		else if (Logger::InputMode == 1){
+			Logger::LogInTextFile2();
+		}
+		else if (Logger::InputMode == 2){
+			Logger::LogInTextFile3();
+		}		
 		Debug::ShowIndicators();
 		
 		
 		// TODO : put it a GameSessionMethod
-		if (switch_pythonScript){
-			int output = scriptManager->GetOuput(gameSession->m_sensors->GetIAInputs());
-			gameSession->m_IAControl->MooveShip(output);
+		if (Logger::Switch_PythonScript){
+			if (Logger::InputMode == 1){
+				scriptManager->GetOuput(gameSession->m_sensors->GetIAInputs());
+				int thrustO = scriptManager2->GetOuput(std::vector<float*>{}); // TODO a surcharger pour avoir une version sans arguments
+				int dirO = scriptManager3->GetOuput(std::vector<float*>{}); 
+				gameSession->m_IAControl->MooveShip2(thrustO, dirO);
+			}
+			else if (Logger::InputMode == 0){
+				int output = scriptManager->GetOuput(gameSession->m_sensors->GetIAInputs());
+				gameSession->m_IAControl->MooveShip(output);
+			}
+			else if (Logger::InputMode == 2){
+				scriptManager->GetOuput(gameSession->m_sensors->GetIAInputs());
+				int oThurst = scriptManager2->GetOuput(std::vector<float*>{});
+				int oReverse = scriptManager3->GetOuput(std::vector<float*>{});
+				int oLeft = scriptManager4->GetOuput(std::vector<float*>{});
+				int oRight = scriptManager5->GetOuput(std::vector<float*>{});
+				gameSession->m_IAControl->MooveShip3(oThurst, oReverse, oLeft, oRight);
+			}			
 		}
 		else {
 			gameSession->m_humanControl->Input();

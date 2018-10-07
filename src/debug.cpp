@@ -17,10 +17,34 @@ void Debug::ShowIndicators()
 		if (ast)
 		{
 			float *relativeSpeed = GameSession::m_sensors->GetRelativeSpeed(ast);
+			float *commonSpeed = GameSession::m_sensors->GetCommonSpeed(ast);
 			Point *dir = GameSession::m_sensors->GetDirectionVectorBetweenShipAndNearestAst(ast);
-			Debug::Draw(vector<Point>{Point(600, 40), Point(600 + dir->x * (*relativeSpeed) * 3, 40 + dir->y * (*relativeSpeed) * 3)}, 255, 0, 0, 255);
+			Point *shipDir = GameSession::m_sensors->GetShipDirection();
+			Debug::Draw(vector<Point>{Point(530,22), Point(530, 28)}, 0, 0, 255, 255);
+			Debug::Draw(vector<Point>{Point(530,25), Point(530 + *relativeSpeed * 5, 25)}, 0, 0, 255, 255);
+			Debug::Draw(vector<Point>{Point(460,22), Point(460, 28)}, 255, 0, 255, 255);
+			Debug::Draw(vector<Point>{Point(460,25), Point(460 + *commonSpeed * 5, 25)}, 255, 0, 255, 255);
+			Debug::Draw(vector<Point>{Point(600, 25), Point(600 + dir->x * 15, 25 + dir->y * 15)}, 255, 0, 0, 255);
+			Debug::Draw(vector<Point>{Point(500, 25), Point(500 + shipDir->x * 15, 25 + shipDir->y * 15)}, 0, 255, 255, 255);
 			Debug::Draw(vector<Point>{GameSession::m_mainShip->m_pos, ast->m_pos}, 0, 255, 0, 255);
+
+			Debug::Draw(vector<Point>{
+				Point(GameSession::m_mainShip->m_pos.x,GameSession::m_mainShip->m_pos.y), 
+				Point(GameSession::m_mainShip->m_pos.x - GameSession::m_mainShip->m_axis.x*15, GameSession::m_mainShip->m_pos.y - GameSession::m_mainShip->m_axis.y*15)}, 
+			0, 0, 255, 255);
+			Debug::Draw(vector<Point>{
+				Point(GameSession::m_mainShip->m_pos.x,GameSession::m_mainShip->m_pos.y), 
+				Point(GameSession::m_mainShip->m_pos.x + shipDir->x*15, GameSession::m_mainShip->m_pos.y + shipDir->y*15)}, 
+			255, 0, 0, 255);	
+			Debug::Draw(vector<Point>{
+				Point(GameSession::m_mainShip->m_pos.x,GameSession::m_mainShip->m_pos.y), 
+				Point(GameSession::m_mainShip->m_pos.x - dir->x*15, GameSession::m_mainShip->m_pos.y - dir->y*15)}, 
+			255, 0, 255, 255);						
+			// Debug::Draw(vector<Point>{Point(530,22), Point(530, 28)}, 0, 0, 255, 255);
+
 			delete relativeSpeed;
+			delete commonSpeed;
+			delete shipDir;
 			delete dir;
 		}
 	}

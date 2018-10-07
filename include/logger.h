@@ -24,7 +24,11 @@ class Logger
 	static std::ofstream *recordFile;
   public:
 	static const bool Switch_TxtLog = true;
-	static const bool Switch_PythonScript = true;
+	// TODO modifier ça 
+	// 0 : 1 Output
+	// 1 : 2 Output
+	static const int InputMode = 2;
+	static const bool Switch_PythonScript = false;
   	static void Initialize(std::string fileName);
 	static void Release();
 	static int FrameNum;
@@ -32,6 +36,8 @@ class Logger
 	static void PrintFrame();
 	static void LogShip();
 	static void LogInTextFile();
+	static void LogInTextFile2();
+	static void LogInTextFile3();
 	static void PrintPoint(const Point&);
 };
 

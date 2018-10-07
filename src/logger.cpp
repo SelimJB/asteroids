@@ -44,6 +44,58 @@ void Logger::LogInTextFile()
 	}
 }
 
+void Logger::LogInTextFile2()
+{
+	if (Switch_TxtLog)
+	{
+		int thrustOutput = GameSession::m_mainShip->m_ThrustState == 2 ? -1 : GameSession::m_mainShip->m_ThrustState;
+		int dirOutput = GameSession::m_mainShip->m_DirState == 2 ? -1 : GameSession::m_mainShip->m_DirState;
+		vector<float*> inputs = GameSession::m_sensors->GetIAInputs();
+		for (size_t i = 0; i<inputs.size(); i++){
+			if( inputs[i] == NULL ){
+				*recordFile << 'X' << "\t";
+			}
+			else {
+				*recordFile << *inputs[i] << "\t";
+			}
+		}
+		*recordFile << thrustOutput << "\t";
+		*recordFile << dirOutput << "\t";
+		*recordFile << GameSession::m_mainShip->m_isDeadLogInfo << "\n";
+		if (GameSession::m_mainShip->m_isDeadLogInfo){
+			GameSession::m_mainShip->m_isDeadLogInfo = false;
+		}
+	}
+}
+
+void Logger::LogInTextFile3()
+{
+	if (Switch_TxtLog)
+	{
+		bool thrustOutput = GameSession::m_mainShip->m_ThrustState == 1 ? 1 : 0;
+		bool backThrustOutput = GameSession::m_mainShip->m_ThrustState == 2 ? 1 : 0;
+		bool leftOutput = GameSession::m_mainShip->m_DirState == 1 ? 1 : 0;
+		bool rightOutput = GameSession::m_mainShip->m_DirState == 2 ? 1 : 0;
+		vector<float*> inputs = GameSession::m_sensors->GetIAInputs();
+		for (size_t i = 0; i<inputs.size(); i++){
+			if( inputs[i] == NULL ){
+				*recordFile << 'X' << "\t";
+			}
+			else {
+				*recordFile << *inputs[i] << "\t";
+			}
+		}
+		*recordFile << thrustOutput << "\t";
+		*recordFile << backThrustOutput << "\t";
+		*recordFile << leftOutput << "\t";
+		*recordFile << rightOutput << "\t";
+		*recordFile << GameSession::m_mainShip->m_isDeadLogInfo << "\n";
+		if (GameSession::m_mainShip->m_isDeadLogInfo){
+			GameSession::m_mainShip->m_isDeadLogInfo = false;
+		}
+	}
+}
+
 void Logger::Log(GameObject *obj)
 {
 	if (Switch_GameObj)

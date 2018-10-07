@@ -12,7 +12,7 @@
 #include "SDL2_gfxPrimitives.h"
 #include "logger.h"
 
-const int WINDOW_SIZE = 640, WINDOW_SIZE_Y = 480;
+const int WINDOW_SIZE = 960, WINDOW_SIZE_Y = 720;
 
 class Matrix2D{
 	public:
