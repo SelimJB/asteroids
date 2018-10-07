@@ -1,29 +1,27 @@
-☐ DataSet cleaning script : Check Output repartition
 ☐ Game closing cross not working in scripting mode
-☐ Create train script
-	☐ Random selection of few dataset elements
-	
+☐ Game freez when launched outside of vscode in small pc
+✔ Good initial Weights @done(18-10-01 00:10)
+
 TODO :
 	☐ Deallocate GetAIInputs pointers : Main.cpp / Logger.cpp. Maybe use float*[] and delete[]
-	☐ Add a setting to invalidate all the logs produced x seconds before and after a death
-	☐ Create method to handle ship mooving style (manual
+	☐ Create method to handle ship mooving style (manual or IA)
 	ML : 
-		☐ Create train script
-			☐ Random selection of few dataset elements
-		☐ Create dataset cleaning script
-			✔ Clean Death @done(18-07-23 00:25)
-			☐ Check Output repartition
-		☐ Create and train 6 input files (cf Draft)
-			☐ Many asts * 2
-			☐ Few asts / high mobility
-			☐ Few asts / low mobility
-		☐ Clean Scripts
-		☐ Train a successful IA Ship network
-		☐ Tester 3 Outputs
+		☐ Finish input file clean script
+		☐ Finish Train script
+		✔ Script to create none trained NN (https://stats.stackexchange.com/questions/47590/what-are-good-initial-weights-in-a-neural-network) @done(18-10-01 00:11)
+		✔ NN optimisation (https://fr.wikipedia.org/wiki/R%C3%A9tropropagation_du_gradient) @done(18-10-01 00:11)
+			✘ Batch mode (cf "Implementation" wikipedia) @cancelled(18-10-01 00:11)
+			✔ Add Inertia @done(18-08-05 22:07)
+		☐ Clean neuralnetwork script
+		☐ Train input datasets : many asts / few asts & many movement / few asts & few movement 
+			☐ Train those datasets with "normalized" outputs
+		☐ Inplement 3 ouputs version (modify C++ and scripts)
+		☐ Train 3 outputs version 
+		☐ Add an "efficacity evaluator" record mode ( configurable; to monitor a neural network quality )
+			-> Neural network name / time / death nbr / death nbr per minutes
+				( play many times to ensure that for a same neural network death number per minutes settle down after a certain time, find this time for the neural network, is it the same time for all NN ?)
 	Config file :
-		☐ Setup a config system
-		☐ Json, xml, or yaml gestion 
-		☐ Add parameter to use python scripting or not : switch_pythonScript	
+		☐ Setup a config system  (Json, xml, or yaml gestion)
 	Architecture : 
 		☐ INJECTION ou Singleton ? (cf mes notes sur le sujet)
 		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
@@ -89,6 +87,7 @@ Idées :
 	☐ Pouvoir scripter d'autres trucs comme des ennemies, des bonus, ...
 
 Archive:
+  ✔ Add a setting to invalidate all the logs produced x seconds before and after a death @done(18-07-24 01:19) @project(TODO )
   ✔ Create Use, Test, and Train Script @done(18-07-22 17:20) @project(TODO .ML )
   ✔ Set up environment in big pc (cf gitignore) @done(18-07-15 19:48) @project(TODO )
   ✔ Read the neural netwrok chapter of : AI Game Engine Programming @done(18-07-15 18:58) @project(TODO .ML )

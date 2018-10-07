@@ -1,0 +1,62 @@
+PRIO
+	* FAIRE MES COMMITS
+	* Avoir un systeme de gestion de configuration
+	* Normaliser mes jeux de données
+	* Pouvoir tester la qualité d'un NN en le laissant jouer jusqu'à ce que le nombre de mort par minutes se stabilise
+	* Clean mes scripts pythons
+	* CLEAN CODE
+
+
+
+
+BUG
+	En mode scripting 
+		* La croix ne marche pas 
+		* Le jeu freez quand le focus est perdu
+PROJET
+	* ~~ CLEAN CODE
+	* -- Traduction back log en anglais
+	* Faire une documentation (.md)
+	Performances 
+		* Tracker et analyser les fuites mémoires
+C++
+	* !! Avoir un systeme de gestion de configuration
+Machine learning
+	* !! NORMALISER MES JEUX DE DONNEES
+	* !! RENDRE PARAMETRABLE : Inertia / Learning rate / Inertia parameter dans NeuralNetwork.py
+	* Pouvoir tester la qualité d'un NN en le laissant jouer jusqu'à ce que le nombre de mort par minutes se stabilise
+	* Reflechir aux Inputs que je souhaiterais ajouter, en ajouter d'autres eventuellement
+	* Noter dans un fichier la liste de tout mes inputs
+	* Comment bien détérminer mes seuils ? (faire des boites a moustaches pour choisir mes seuils)
+	Analyse
+		* Des fonctions d'analyse des fichiers inputs
+		* Methodes génériques pour generer des graphs (refactor neuralnetwork_train.py)
+		* TWEAKING : générer des graphs pour tt mes tweaks (faire apparaitre les tweaks utilisée sur le graph)
+		Tests ML
+			* Retester le modèle à 4 inputs
+			* Retester le modèle à 2 inputs
+			* Retester le modèle à 1 output
+
+~~ GESTION DE PROJET ~~
+	TODO - avoir une backlog par catégories comme ici et une autre backlog par priorité
+
+
+
+FAIT
+	* Utiliser d'autres fonctions d'activation	
+	* Creer script de generation de NN
+	* Ajouter un biais
+		https://stackoverflow.com/questions/2480650/role-of-bias-in-neural-networks
+	* Ajouter angle vaisseau
+	* TESTER LE MODE 4 OUTPUTS
+	* Correction de l'input vecteur entre ast et vaisseau
+		- Passage de vecteur direction à vecteur position
+
+
+IDEES 
+	* Decrease learning rate over time
+		https://www.kdnuggets.com/2017/11/estimating-optimal-learning-rate-deep-neural-network.html
+		(article a ajouter à keep)
+	* Avoir une mesure de l'évolution du reseau durant l'entrainement
+		verifier le calcul du cout (check comment tt a été fait dans le bouquin, check les differents calculs de cout qui existent)
+	

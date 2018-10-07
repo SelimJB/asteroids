@@ -1,3 +1,8 @@
 CLEAN_Inputs_Beaucoup
     10000
     3.566088
+
+NeuralNetwork_NotManyNotMobile
+    Nbr Iterations :  2890
+    Moyenne cout :  4.556887
+    Moyenne testes :  18.41

@@ -1,3 +1,4 @@
+misc/*.txt
 .vscode/*workspace
 .vscode/*properties*
 *.exe
@@ -8,3 +9,5 @@ obj
 scripts
 .vscode
 *.pdf
+Inputs.txt
+misc/CLEAN*
