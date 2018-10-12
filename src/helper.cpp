@@ -7,6 +7,13 @@ void FormRotation(vector<Point> &pts,Matrix2D m){
 	}
 };
 
+Color::Color(int r, int g, int b, int a){
+	Color::r = r;
+	Color::g = g;
+	Color::b = b;
+	Color::a = a;
+}
+
 Matrix2D::Matrix2D(float a1_1,float a1_2,float a2_1,float a2_2){
 	Matrix2D::a1_1 = a1_1;
 	Matrix2D::a1_2 = a1_2;

@@ -30,6 +30,12 @@ class Point{
 
 };
 
+class Color{
+	public:
+	int r, g, b, a;
+	Color(int r, int g, int b, int a);
+};
+
 Point operator*(Matrix2D const& m,Point const& p); 
 Point operator*(int const& i,Point const& p);
 float operator*(Point const& a,Point const& b);

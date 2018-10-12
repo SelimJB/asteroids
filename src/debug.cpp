@@ -3,11 +3,22 @@
 using namespace std;
 
 SDL_Renderer *Debug::renderer = NULL;
+const Point Debug::debugPos = Point(300,300);
 
 void Debug::Initialise(SDL_Renderer *r)
 {
 	renderer = r;
 }
+
+void DrawGaugeIndicator(float indicator, Point pos, Color color){
+	Debug::Draw(vector<Point>{Point(pos.x, pos.y - 4), Point(pos.x, pos.y + 4)}, color);
+	Debug::Draw(vector<Point>{Point(pos.x+1, pos.y - 4), Point(pos.x+1, pos.y + 4)}, color);
+	Debug::Draw(vector<Point>{Point(pos.x-1, pos.y - 4), Point(pos.x-1, pos.y + 4)}, color);
+	Debug::Draw(vector<Point>{pos, Point(pos.x + indicator * 5, pos.y+1)}, color);	
+	Debug::Draw(vector<Point>{pos, Point(pos.x + indicator * 5, pos.y-1)}, color);	
+	Debug::Draw(vector<Point>{pos, Point(pos.x + indicator * 5, pos.y)}, color);	
+}
+
 
 void Debug::ShowIndicators()
 {
@@ -20,27 +31,27 @@ void Debug::ShowIndicators()
 			float *commonSpeed = GameSession::m_sensors->GetCommonSpeed(ast);
 			Point *dir = GameSession::m_sensors->GetDirectionVectorBetweenShipAndNearestAst(ast);
 			Point *shipDir = GameSession::m_sensors->GetShipDirection();
-			Debug::Draw(vector<Point>{Point(530,22), Point(530, 28)}, 0, 0, 255, 255);
-			Debug::Draw(vector<Point>{Point(530,25), Point(530 + *relativeSpeed * 5, 25)}, 0, 0, 255, 255);
-			Debug::Draw(vector<Point>{Point(460,22), Point(460, 28)}, 255, 0, 255, 255);
-			Debug::Draw(vector<Point>{Point(460,25), Point(460 + *commonSpeed * 5, 25)}, 255, 0, 255, 255);
-			Debug::Draw(vector<Point>{Point(600, 25), Point(600 + dir->x * 15, 25 + dir->y * 15)}, 255, 0, 0, 255);
-			Debug::Draw(vector<Point>{Point(500, 25), Point(500 + shipDir->x * 15, 25 + shipDir->y * 15)}, 0, 255, 255, 255);
-			Debug::Draw(vector<Point>{GameSession::m_mainShip->m_pos, ast->m_pos}, 0, 255, 0, 255);
+			DrawGaugeIndicator(*commonSpeed, debugPos, Color(255, 0, 255, 130));
+			DrawGaugeIndicator(*relativeSpeed, debugPos + Point(70,0), Color(0, 0, 255, 130));
+			Debug::Draw(vector<Point>{debugPos + Point(140, 0), debugPos + Point(140, 0) + 15*(*dir)}, Color(255,0,0,130));
+			Debug::Draw(vector<Point>{debugPos + Point(40, 0), debugPos + Point(40, 0) + 15*(*shipDir)}, Color(0,255,255,130));
 
+			Debug::Draw(vector<Point>{GameSession::m_mainShip->m_pos, ast->m_pos}, Color(0,255,0,130));
 			Debug::Draw(vector<Point>{
 				Point(GameSession::m_mainShip->m_pos.x,GameSession::m_mainShip->m_pos.y), 
-				Point(GameSession::m_mainShip->m_pos.x - GameSession::m_mainShip->m_axis.x*15, GameSession::m_mainShip->m_pos.y - GameSession::m_mainShip->m_axis.y*15)}, 
-			0, 0, 255, 255);
+				Point(GameSession::m_mainShip->m_pos - 15*GameSession::m_mainShip->m_axis)}, 
+				Color(0,0,255,255)
+			);
+			Debug::Draw(vector<Point>{
+				Point(GameSession::m_mainShip->m_pos.x,GameSession::m_mainShip->m_pos.y),
+				Point(GameSession::m_mainShip->m_pos + 15*(*shipDir)) },
+				Color(255,0,0,255)
+			);
 			Debug::Draw(vector<Point>{
 				Point(GameSession::m_mainShip->m_pos.x,GameSession::m_mainShip->m_pos.y), 
-				Point(GameSession::m_mainShip->m_pos.x + shipDir->x*15, GameSession::m_mainShip->m_pos.y + shipDir->y*15)}, 
-			255, 0, 0, 255);	
-			Debug::Draw(vector<Point>{
-				Point(GameSession::m_mainShip->m_pos.x,GameSession::m_mainShip->m_pos.y), 
-				Point(GameSession::m_mainShip->m_pos.x - dir->x*15, GameSession::m_mainShip->m_pos.y - dir->y*15)}, 
-			255, 0, 255, 255);						
-			// Debug::Draw(vector<Point>{Point(530,22), Point(530, 28)}, 0, 0, 255, 255);
+				Point(GameSession::m_mainShip->m_pos - 15*(*dir))}, 
+				Color(255,0,255,255)
+			);
 
 			delete relativeSpeed;
 			delete commonSpeed;
@@ -50,11 +61,11 @@ void Debug::ShowIndicators()
 	}
 }
 
-void Debug::Draw(vector<Point> pts, char r, char v, char b, char o)
+void Debug::Draw(vector<Point> pts, Color c)
 {
 	if (Switch_Draw == true)
 	{
-		SDL_SetRenderDrawColor(renderer, r, v, b, o);
+		SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
 		for (vector<Point>::iterator i = pts.begin(); i != pts.end(); ++i)
 		{
 			SDL_RenderDrawLine(renderer,

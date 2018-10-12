@@ -11,8 +11,9 @@ class Debug
 
 public:
 	static void Initialise(SDL_Renderer *);
-	static void Draw(std::vector<Point>, char r, char v, char b, char o);
+	static void Draw(std::vector<Point>, Color c);
 	static void ShowIndicators();
+	static const Point debugPos;
 };
 
 #endif
