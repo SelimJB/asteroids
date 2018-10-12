@@ -2,7 +2,7 @@
 SRC_PATH=./src/
 CC=g++ 
 CFLAGS=-c -Wall
-LDFLAGS=-w -lpython27 -lmingw32 -lSDL2main -lSDL2 
+LDFLAGS=-w -lpython27 -lmingw32 -lSDL2main -lSDL2 -lyaml-cpp
 INCL=-Iinclude -IC:\Python27\include
 LIB=-Llib -LC:\Python27\libs
 EXE=Main
