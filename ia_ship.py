@@ -1,5 +1,5 @@
 # TODO : add a description of the inputs in the comments
-import sys
+import sys, yaml, ntpath
 sys.path.insert(0, 'script')
 import neuralnetwork
 
@@ -16,7 +16,17 @@ import neuralnetwork
 # n = neuralnetwork.NeuralNetwork("./Misc/NeuralNetwork_TWOOUTPUTS.txt")
 
 # NN 4
-n = neuralnetwork.NeuralNetwork("./Misc/NeuralNetwork_FOUROUTPUTS.txt")
+with open("./config.yaml", "r") as stream:
+	try:
+		configuration = yaml.load(stream)
+	except yaml.YAMLError as exc:
+		print(exc)
+		exit()
+
+path = ntpath.join(
+    configuration["neural_network"]["path"],
+    configuration["neural_network"]["neural_network_name"])
+n = neuralnetwork.NeuralNetwork(path)
 
 def GetOutput(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, relativeSpeed=None):
     # print shipAngle, " , ", x_dirShipNearestAst, " , ", y_dirShipNearestAst, " , ", relativeSpeed
@@ -53,7 +63,7 @@ def GetOutput3(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, re
     ]
     global toto
     toto = [0, 0, 0, 0]
-    print a
+    # print a
     if a[0] > tresholds[0] and a[1] > tresholds[1] :
         if a[0] > a[1] :
             toto[0] = 1
@@ -76,7 +86,7 @@ def GetOutput3(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, re
         toto[2] = 1
     elif a[3] > tresholds[3] :
         toto[3] = 1     
-    print toto       
+    # print toto       
     return a
 
 def GetThrustBoolOutput():

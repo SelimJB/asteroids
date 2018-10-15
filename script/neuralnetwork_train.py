@@ -1,14 +1,27 @@
 from neuralnetwork import NeuralNetwork
-import random
-import time
+import random, yaml, time, ntpath
 import matplotlib.pyplot as plt
 from sklearn import linear_model
 import numpy as np
 
-networkFile1 = "C:/Users/selim/Projet/0_Projets/Asteroid/misc/NeuralNetwork_FOUROUTPUTS.txt"
-dataFile1 = "C:/Users/selim/Projet/0_Projets/Asteroid/Misc/CLEAN_Inputs_3_NN4_correctedSpeed2andcorrectedDir.txt"
-testResultFile = "C:/Users/selim/Projet/0_Projets/Asteroid/Misc/TRAININGRESULTS_Inputs_FOURINPUTS.txt"
-iterationNbr = 2000
+with open("./config.yaml", "r") as stream:
+	try:
+		configuration = yaml.load(stream)
+	except yaml.YAMLError as exc:
+		print(exc)
+		exit()
+
+
+path = configuration["neural_network"]["path"] 
+networkFile = ntpath.join(path, configuration["neural_network"]["neural_network_name"])
+dataFile = ntpath.join(path, configuration["neural_network"]["cleaned_input_file_name"])
+testResultFile = ntpath.join(path, configuration["neural_network"]["neural_network_training"]["test_result_file_name"])
+testResultGraphFile = ntpath.join(path, configuration["neural_network"]["neural_network_training"]["test_result_graph_file_name"])
+iterationNbr = configuration["neural_network"]["neural_network_training"]["iteration_nbr"]
+trainingRangeSize = configuration["neural_network"]["neural_network_training"]["training_range_size"]
+learningRate = configuration["neural_network"]["neural_network_training"]["learning_rate"]
+inertiaParameter = configuration["neural_network"]["neural_network_training"]["inertia_parameter"]
+
 
 class NeuralNetworkTrainer():
 
@@ -17,7 +30,7 @@ class NeuralNetworkTrainer():
     def __init__(self, dataFile, networkFile, trainingRangeSize = 1000):
         # self.dataFile = dataFile
         # self.networkFile = networkFile
-        self.neuralnetwork = NeuralNetwork(networkFile)
+        self.neuralnetwork = NeuralNetwork(networkFile, learningRate, inertiaParameter)
         file = open(dataFile)
         self.inputs = file.readlines()
         file.close()
@@ -94,7 +107,7 @@ class NeuralNetworkTrainer():
 
 
     
-n = NeuralNetworkTrainer(dataFile1, networkFile1, 1000)
+n = NeuralNetworkTrainer(dataFile, networkFile, 1000)
 # n.GetTrainingSetFirstLineNbr()
 n.train(iterationNbr)
 

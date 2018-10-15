@@ -4,6 +4,8 @@ from numpy import exp, array, random, dot, transpose, matrix
 class NeuralNetwork():
 
     FileName = None
+    LearningRate = 0
+    InertiaParameter = 0
     InputLayer = None
     HiddenLayer = None
     OutputLayer = None
@@ -26,8 +28,11 @@ class NeuralNetwork():
 
     I = 0
 
-    def __init__(self, fileName):
+    def __init__(self, fileName, learningRate = 0.00001, inertiaParameter = 0.79):
         self.FileName = fileName
+        self.LearningRate = learningRate
+        self.InertiaParameter = inertiaParameter
+        print self.LearningRate, "   ", self.InertiaParameter
         file = open(fileName)
         # Dimensions
         line = file.readline()
@@ -106,24 +111,24 @@ class NeuralNetwork():
                for x in transpose(self.SynapseMatrix2).tolist()]
         self.ErrorHidden = [x*y for x, y in zip(sig, err)]
 
-    def WeightUpdate(self, learningRate):
+    def WeightUpdate(self):
         self.SynapseMatrix2 = transpose([
-            [j+learningRate*e*a for j, e in zip(i, self.ErrorOutput)]
+            [j+self.LearningRate*e*a for j, e in zip(i, self.ErrorOutput)]
             for i, a in zip(transpose(self.SynapseMatrix2), self.HiddenLayer)
         ]).tolist()
         self.SynapseMatrix1 = transpose([
-            [j+learningRate*e*a for j, e in zip(i, self.ErrorHidden)]
+            [j+self.LearningRate*e*a for j, e in zip(i, self.ErrorHidden)]
             for i, a in zip(transpose(self.SynapseMatrix1), self.InputLayer)
         ]).tolist()   
 
-    def WeightUpdateInertia(self, learningRate, inertiaParameter):
+    def WeightUpdateInertia(self):
         # s2
         newSynapseMatrix = []
         for i, a, di  in zip(transpose(self.SynapseMatrix2), self.HiddenLayer, transpose(self.OldSynapseMatrix2)):
             newSynapseMatrixColumn = []
             for j, e, dj in zip(i, self.ErrorOutput, di):
                 delta = j- dj # delta = old Weight - older Weight
-                w = j+learningRate*e*a*inertiaParameter + (1 - inertiaParameter)*delta
+                w = j+self.LearningRate*e*a*self.InertiaParameter + (1 - self.InertiaParameter)*delta
                 newSynapseMatrixColumn.append(w)
             newSynapseMatrix.append(newSynapseMatrixColumn)
         self.OldSynapseMatrix2 = self.SynapseMatrix2
@@ -134,7 +139,7 @@ class NeuralNetwork():
             newSynapseMatrixColumn = []
             for j, e, dj in zip(i, self.ErrorHidden, di):
                 delta = j- dj
-                w = j+learningRate*e*a*inertiaParameter + (1 - inertiaParameter)*delta
+                w = j+self.LearningRate*e*a*self.InertiaParameter + (1 - self.InertiaParameter)*delta
                 newSynapseMatrixColumn.append(w)
             newSynapseMatrix.append(newSynapseMatrixColumn)
         self.OldSynapseMatrix1 = self.SynapseMatrix1
@@ -199,7 +204,7 @@ class NeuralNetwork():
         self.Propagate(self.InputLayer)
         self.BackPropagate(self.OutputTest)
         # self.WeightUpdate(1)
-        self.WeightUpdateInertia(0.00001, 0.79)
+        self.WeightUpdateInertia()
         # print "Input : ", inputs
         # print "Output : ", outputs
         # # print "S1 : ", n.SynapseMatrix1
