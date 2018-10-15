@@ -1,0 +1,50 @@
+# Switch_TxtLog
+enable_input_logging: False
+# Switch_PythonScript
+enable_python_script: False
+input_mode: 2
+
+# Trucs nuls
+Switch_GameSession : False
+Switch_GameObj : False
+Switch_ShipAxis : False
+Switch_ShipPos : False
+Switch_GameObjNum : False
+used_configuration : 0
+
+# A mettre dans configurations plus tard
+neural_network:
+    path: C:/Users/selim/Projet/0_Projets/Asteroid/misc/
+    neural_network_name: NeuralNetwork_FOUROUTPUTS.txt
+    input_file_name: Inputs_3_NN4_correctedSpeed2andcorrectedDir.txt
+    cleaned_input_file_name: CLEAN_Inputs_3_NN4_correctedSpeed2andcorrectedDir.txt
+    neural_network_generation:
+        generate_new_neural_network_file: FALSE
+        input_neuron_nbr: 4
+        hidden_neuron_nbr: 7
+        output_neuron_nbr: 4
+    input_cleaning:
+        clean_input_file: FALSE
+        frame_nbr_to_clean_from_death : 40
+        size_of_the_longest_same_input_sequence : 50 
+    neural_network_training:
+        iteration_nbr: 2000
+        training_range_size: 1000
+        learning_rate: 0.00002222
+        inertia_parameter: 0.82
+        test_result_file_name: TRAININGRESULTS_Inputs_FOURINPUTS.txt
+        test_result_graph_file_name: books_read.png
+
+Configurations : 
+    -
+        toto: 5
+        titi: 10
+        coucou:
+            - a 
+            - b: yo
+    -
+        toto: 5
+        titi: 10
+        coucou:
+            - a 
+            - b: yo

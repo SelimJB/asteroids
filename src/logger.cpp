@@ -3,13 +3,20 @@
 #include <iostream>
 #include "ship.h"
 #include "helper.h"
+#include "configurationmanager.h"
 using namespace std;
 
 int Logger::FrameNum = 0;
 ofstream *Logger::recordFile = new ofstream();
 
+bool Logger::Switch_PythonScript = true;
+bool Logger::Switch_GameSession = true;
+
 void Logger::Initialize(string fileName)
 {
+	ConfigurationManager config = ConfigurationManager();
+	Switch_PythonScript = config.TEMPLATETEST<bool>("enable_python_script");
+	Switch_GameSession = config.TEMPLATETEST<bool>("Switch_GameSession");
 	if (Switch_TxtLog)
 	{
 		recordFile->open(fileName);

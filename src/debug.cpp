@@ -3,7 +3,7 @@
 using namespace std;
 
 SDL_Renderer *Debug::renderer = NULL;
-const Point Debug::debugPos = Point(300,300);
+const Point Debug::debugPos = Point(650,50);
 
 void Debug::Initialise(SDL_Renderer *r)
 {

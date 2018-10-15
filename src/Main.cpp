@@ -18,7 +18,6 @@ const Uint32 fps = 60;
 const Uint32 minimumFrameTime = 1000 / fps;
 
 int main(int argc, char* args[]){
-
 	ScriptManager* scriptManager;
 	ScriptManager* scriptManager2;
 	ScriptManager* scriptManager3;
@@ -65,6 +64,7 @@ int main(int argc, char* args[]){
 		printf("Erreur lors de la creation d'un renderer : %s",SDL_GetError());
 		return 1;
 	}
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	Logger::Initialize(fileName);
 	Debug::Initialise(renderer);
 	

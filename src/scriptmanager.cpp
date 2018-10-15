@@ -13,7 +13,7 @@ ScriptManager::ScriptManager(const char *scriptName, const char *functionName)
 		Py_Initialize();
 		Py_Initialized = true;
 	}
-	PyObject *pName = PyString_FromString(scriptName);
+	pName = PyString_FromString(scriptName);
 	pModule = PyImport_Import(pName);
 	Py_DECREF(pName);
 	if (pModule != NULL)

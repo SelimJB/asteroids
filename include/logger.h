@@ -16,7 +16,7 @@ class Logger
 {
 	private:
 	// Put in config file
-	static const bool Switch_GameSession = false;
+	static bool Switch_GameSession;
 	static const bool Switch_GameObj = false;
 	static const bool Switch_ShipAxis = false;
 	static const bool Switch_ShipPos = false;
@@ -28,7 +28,7 @@ class Logger
 	// 0 : 1 Output
 	// 1 : 2 Output
 	static const int InputMode = 2;
-	static const bool Switch_PythonScript = false;
+	static bool Switch_PythonScript;
   	static void Initialize(std::string fileName);
 	static void Release();
 	static int FrameNum;
