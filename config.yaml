@@ -1,7 +1,7 @@
 # Switch_TxtLog
 enable_input_logging: False
 # Switch_PythonScript
-enable_python_script: False
+enable_python_script: true
 input_mode: 2
 
 # Trucs nuls
@@ -15,7 +15,7 @@ used_configuration : 0
 # A mettre dans configurations plus tard
 neural_network:
     path: C:/Users/selim/Projet/0_Projets/Asteroid/misc/
-    neural_network_name: NeuralNetwork_FOUROUTPUTS.txt
+    neural_network_name: NeuralNetwork_FOUROUTPUTS
     input_file_name: Inputs_3_NN4_correctedSpeed2andcorrectedDir.txt
     cleaned_input_file_name: CLEAN_Inputs_3_NN4_correctedSpeed2andcorrectedDir.txt
     neural_network_generation:
@@ -28,12 +28,12 @@ neural_network:
         frame_nbr_to_clean_from_death : 40
         size_of_the_longest_same_input_sequence : 50 
     neural_network_training:
-        iteration_nbr: 2000
-        training_range_size: 1000
-        learning_rate: 0.00002222
-        inertia_parameter: 0.82
-        test_result_file_name: TRAININGRESULTS_Inputs_FOURINPUTS.txt
-        test_result_graph_file_name: books_read.png
+        iteration_nbr: 4000
+        training_range_size: 100
+        learning_rate: 0.00000222
+        inertia_parameter: 0.81
+        # test_result_file_name: TRAININGRESULTS_Inputs_FOURINPUTS.txt
+        test_result_graph_file_num: 1
 
 Configurations : 
     -

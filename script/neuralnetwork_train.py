@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn import linear_model
 import numpy as np
 
+
 with open("./config.yaml", "r") as stream:
 	try:
 		configuration = yaml.load(stream)
@@ -11,16 +12,15 @@ with open("./config.yaml", "r") as stream:
 		print(exc)
 		exit()
 
-
 path = configuration["neural_network"]["path"] 
-networkFile = ntpath.join(path, configuration["neural_network"]["neural_network_name"])
+networkFile = ntpath.join(path, configuration["neural_network"]["neural_network_name"])+".txt"
 dataFile = ntpath.join(path, configuration["neural_network"]["cleaned_input_file_name"])
-testResultFile = ntpath.join(path, configuration["neural_network"]["neural_network_training"]["test_result_file_name"])
-testResultGraphFile = ntpath.join(path, configuration["neural_network"]["neural_network_training"]["test_result_graph_file_name"])
+testResultGraphName = configuration["neural_network"]["neural_network_name"] + "_TrainingRes"
 iterationNbr = configuration["neural_network"]["neural_network_training"]["iteration_nbr"]
 trainingRangeSize = configuration["neural_network"]["neural_network_training"]["training_range_size"]
 learningRate = configuration["neural_network"]["neural_network_training"]["learning_rate"]
 inertiaParameter = configuration["neural_network"]["neural_network_training"]["inertia_parameter"]
+testResultGraphFile = ntpath.join(path, testResultGraphName+str(configuration["neural_network"]["neural_network_training"]["test_result_graph_file_num"])+".png")
 
 
 class NeuralNetworkTrainer():
@@ -40,16 +40,22 @@ class NeuralNetworkTrainer():
     def train(self, n):
         if n < 100 :
             n = 100
+        # n : plus proche multple de 100 de n
         n = int(round(float(n)/100)*100)
         for x in range(0, n):
-            # print x
             if x % (float(n)/100) == 0 :
                 print x/(float(n)/100),"%"
+            if x % (5*float(n)/100) == 0 :
+                print "\n",x/(float(n)/100),"%"
+                print iterationNbr
+                print trainingRangeSize
                 # InputManager(self.dataFile).iterate(self.neuralnetwork.Test)
                 self.neuralnetwork.WriteNeuralNetwork()
                 self.iterateAllDatas(self.neuralnetwork.Test)
                 self.TestResults.append(self.neuralnetwork.CheckTest())
-                self.writeTestResults()
+                # self.writeTestResults()
+                self.drawTestResults()
+                print "\n"
             self.iteratePartial(self.neuralnetwork.Train)    
             # InputManager(self.dataFile).iterate(self.neuralnetwork.Train)    
 
@@ -70,65 +76,32 @@ class NeuralNetworkTrainer():
         t2 = round(time.clock()*1000,2)
         print "t : ", (t2-t1)
 
-    def writeTestResults(self):
-        file = open(testResultFile, "w")
-        for a,b in self.TestResults :
-            file.write(str(a)+"\t"+str(b)+"\n")
-        file.close()
-        # plt.plot([a for a,b in self.TestResults])
-        # plt.savefig('books_read.png')
-        
-        y = np.array([a for a,b in self.TestResults])
+    def drawTestResults(self):
+        values = [a for a,b in self.TestResults]
+        y = np.array(values)
         x = np.array(range(0,len(y)))
-        # plt.scatter(x,y)
         regr = linear_model.LinearRegression()
         regr.fit(x[:,np.newaxis], y)
-        # plt.plot(x_test, regr.predict(x_test[:,np.newaxis]), color='blue', linewidth=1)
-        plt.plot(x,y, color='blue', linewidth=1)
-        plt.plot(x,np.array([regr.intercept_ + i* regr.coef_ for i in x]), color='red', linewidth=0.5)
-        print "Reg coef : ", regr.coef_
-        plt.savefig('books_read.png')
+        plt.plot(y)
+        plt.plot(np.array([regr.intercept_ + i * regr.coef_ for i in x]))
+        yTextPos = [max(y) - (max(y) - min(y))*i/30 for i in range(6)]
+        xTextPos = min(x) + (max(x) - min(x))*3/4
+        plt.text(xTextPos,yTextPos[0],"Mean : " +  str(values[-1]), fontsize="7", color=(1,0,0))
+        plt.text(xTextPos,yTextPos[1],"Learning rate : " +  str(learningRate), fontsize="7", color=(0,0,1))
+        plt.text(xTextPos,yTextPos[2],"Inertia : " +  str(inertiaParameter), fontsize="7", color=(0,0,1))
+        plt.text(xTextPos,yTextPos[3],"Test file size : " +  str(self.inputNbr), fontsize="7", color=(0,1,0))
+        plt.text(xTextPos,yTextPos[4],"It nbr :"  +  str(iterationNbr), fontsize="7", color=(0,1,0))
+        plt.text(xTextPos,yTextPos[5],"Rng size :"  +  str(trainingRangeSize), fontsize="7", color=(0,1,0))
+        plt.title(testResultGraphName)
+        plt.savefig(testResultGraphFile)
         plt.close('all')
-
 
     def GetTrainingSetFirstLineNbr(self):
         rand = random.randint(0, self.inputNbr - self.trainingRangeSize)
-        # print self.inputNbr - self.trainingRangeSize, rand
-        # print rand
         return rand
-        # for i in range (rand, rand + self.trainingRangeSize):
-            # print "\t",i,"\t",self.inputs[i]
 
-    def monitoringLogs_header(self):
-        print "a"
-
-    def monitoringLogs(self):
-        print "a"
 
 
     
-n = NeuralNetworkTrainer(dataFile, networkFile, 1000)
-# n.GetTrainingSetFirstLineNbr()
+n = NeuralNetworkTrainer(dataFile, networkFile, trainingRangeSize)
 n.train(iterationNbr)
-
-
-# n = NeuralNetwork(networkFile1)
-
-
-# for x in range(1,1000):
-#     InputManager(dataFile1).iterate(n.Train)
-#     if x % 10 == 0 :
-#         print x/10,"%"
-#         InputManager(dataFile1).iterate(n.Test)
-#         n.CheckTest()
-#         n.WriteNeuralNetwork()
-
-
-# # TODO
-# 	# function (choose repetition number)
-# 	# args
-# 	# random inputs (train datas selected in a random range of the dataset, same for test datas)
-#  Comparer temps :
-            # self.iterate(self.neuralnetwork.Train)    
-            # InputManager(self.dataFile).iterate(self.neuralnetwork.Train)  
-    

@@ -25,7 +25,7 @@ with open("./config.yaml", "r") as stream:
 
 path = ntpath.join(
     configuration["neural_network"]["path"],
-    configuration["neural_network"]["neural_network_name"])
+    configuration["neural_network"]["neural_network_name"]+".txt")
 n = neuralnetwork.NeuralNetwork(path)
 
 def GetOutput(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, relativeSpeed=None):
@@ -56,10 +56,10 @@ def GetDirOutput():
 def GetOutput3(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, relativeSpeed=None):
     a = n.Use([shipAngle,x_dirShipNearestAst,y_dirShipNearestAst,relativeSpeed])
     tresholds = [
-        0.51, 
+        0.50, 
         0.0915, 
-        0.22, 
-        0.22
+        0.25, 
+        0.25
     ]
     global toto
     toto = [0, 0, 0, 0]

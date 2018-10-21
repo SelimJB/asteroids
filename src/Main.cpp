@@ -1,5 +1,6 @@
 #include <Python.h>
 #include <stdexcept>
+#include "SDL2/SDL_main.h"
 #include "SDL2/SDL.h"
 #include <stdio.h>
 #include <math.h>
@@ -17,7 +18,7 @@ using namespace std;
 const Uint32 fps = 60;
 const Uint32 minimumFrameTime = 1000 / fps;
 
-int main(int argc, char* args[]){
+int main(int argc, char* argv[]) {
 	ScriptManager* scriptManager;
 	ScriptManager* scriptManager2;
 	ScriptManager* scriptManager3;

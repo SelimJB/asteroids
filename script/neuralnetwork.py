@@ -32,7 +32,6 @@ class NeuralNetwork():
         self.FileName = fileName
         self.LearningRate = learningRate
         self.InertiaParameter = inertiaParameter
-        print self.LearningRate, "   ", self.InertiaParameter
         file = open(fileName)
         # Dimensions
         line = file.readline()
