@@ -5,8 +5,8 @@
 
 void HumanControl::Input(){
 		// Input management
-		while( SDL_PollEvent( event ) != 0 && GameSession::m_mainShip != NULL){
-            if( event->type == SDL_QUIT )
+		while( SDL_PollEvent( GameSession::m_event ) != 0 && GameSession::m_mainShip != NULL){
+            if( GameSession::m_event->type == SDL_QUIT )
             {
                 GameSession::m_quit = true;
             }			

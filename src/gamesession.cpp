@@ -9,7 +9,7 @@ GameObjectList GameSession::m_activeObjectList;
 
 Ship* GameSession::m_mainShip = new Ship();
 Sensors* GameSession::m_sensors = new Sensors();
-
+SDL_Event* GameSession::m_event = new SDL_Event();
 bool GameSession::m_quit = false;
 
 GameSession::GameSession()

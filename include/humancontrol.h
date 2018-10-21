@@ -5,15 +5,8 @@
 
 class HumanControl
 {
-  private:
-	SDL_Event *event;
-
   public:
 	void Input();
-	HumanControl()
-	{
-		event = new SDL_Event();
-	}
 };
 
 #endif

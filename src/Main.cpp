@@ -112,10 +112,12 @@ int main(int argc, char* argv[]) {
 				int thrustO = scriptManager2->GetOuput(std::vector<float*>{}); // TODO a surcharger pour avoir une version sans arguments
 				int dirO = scriptManager3->GetOuput(std::vector<float*>{}); 
 				gameSession->m_IAControl->MooveShip2(thrustO, dirO);
+				gameSession->m_IAControl->EventManagement();
 			}
 			else if (Logger::InputMode == 0){
 				int output = scriptManager->GetOuput(gameSession->m_sensors->GetIAInputs());
 				gameSession->m_IAControl->MooveShip(output);
+				gameSession->m_IAControl->EventManagement();
 			}
 			else if (Logger::InputMode == 2){
 				scriptManager->GetOuput(gameSession->m_sensors->GetIAInputs());
@@ -124,6 +126,7 @@ int main(int argc, char* argv[]) {
 				int oLeft = scriptManager4->GetOuput(std::vector<float*>{});
 				int oRight = scriptManager5->GetOuput(std::vector<float*>{});
 				gameSession->m_IAControl->MooveShip3(oThurst, oReverse, oLeft, oRight);
+				gameSession->m_IAControl->EventManagement();		
 			}			
 		}
 		else {

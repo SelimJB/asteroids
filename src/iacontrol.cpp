@@ -28,3 +28,11 @@ void IAControl::MooveShip3(int thrust, int reverse, int left, int right){
 	else
 		GameSession::m_mainShip->m_DirState = (Ship::ShipDirStates) 0;
 }
+
+void IAControl::EventManagement(){
+	SDL_PollEvent( GameSession::m_event );
+	if( GameSession::m_event->type == SDL_QUIT )
+	{
+		GameSession::m_quit = true;
+	}			
+}

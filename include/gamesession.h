@@ -15,6 +15,7 @@ class GameObject;
 class GameSession
 {
   public:
+	static SDL_Event *m_event;
 	friend Sensors; 
 	GameSession();
 	void Update(float dt);
