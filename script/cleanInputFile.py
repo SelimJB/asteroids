@@ -8,9 +8,18 @@ outputFileName = ""
 
 
 # INPUTS
-frameLatitude = 30
-maxSequenceLength = 50
-verbose = False
+nbrOfFramesToDeleteBeforeAndAfterADeath = 30
+maxSizeOfUniformInputSequences = 50
+
+inputNbr = 4
+columnsNbr = None
+outputNbr = None
+deathColumnNbr = None
+# TODO: remove
+neutral = '[0.0, 0.0, 0.0, 0.0]'
+
+normalise = True
+debug = False
 
 sequencesTotalClean = 0
 linesInput = []
@@ -18,19 +27,17 @@ imbricatedDeathNbr = 0
 linesDeathClean = []
 deathSequencesNbr = 0
 linesSequenceClean = []
+linesSequenceNormalized = []
 
-# NEW
-columnsNbr = None
-deathColumnNbr = None
 
 def clean(i):
-    beg = 0 if i < frameLatitude else i - frameLatitude
+    beg = 0 if i < nbrOfFramesToDeleteBeforeAndAfterADeath else i - nbrOfFramesToDeleteBeforeAndAfterADeath
     for x in range(beg,i):
         linesInput[x] = None
-    if i + frameLatitude > len(linesInput):
+    if i + nbrOfFramesToDeleteBeforeAndAfterADeath > len(linesInput):
         end = len(linesInput)
     else :
-        end = i + frameLatitude + 30
+        end = i + nbrOfFramesToDeleteBeforeAndAfterADeath + 30
         for x in range(i, end):
             if (linesInput[x][deathColumnNbr] == 1):
                 global imbricatedDeathNbr
@@ -38,7 +45,6 @@ def clean(i):
                 end = x + 30
     for x in range(i, end):
         linesInput[x] = None
-    # print beg, " ",end
     return beg
 
 def CleanArray(l):
@@ -58,16 +64,19 @@ def Write(filepath, lines):
 def GetOutputProportion(lines):
     outputProportion = {}
     for i in lines:
-        ind = str(i[4:deathColumnNbr])
+        ind = str(i[inputNbr:deathColumnNbr])
         if ind in outputProportion:
             outputProportion[ind] += 1
         else :
             outputProportion[ind] = 0
     return outputProportion
 
+def Normalise(value, maxV, minV):
+    return (value-minV) / (maxV-minV)
+
 def main(argv):
     if len(argv) == 0 or argv[0] == "--help" :
-        print "ZIBOUBABIBOU"
+        print "\t\tArgs : \tInput file [,nbrOfFramesToDeleteBeforeAndAfterADeath ,[maxSizeOfUniformInputSequences]]"
         exit()
     elif len(argv) > 0 :
         global inputFileName
@@ -75,20 +84,21 @@ def main(argv):
         global outputFileName
         inputFileName = ntpath.basename(argv[0])
         path = ntpath.dirname(argv[0])
-        outputFileName = "CLEAN_"+inputFileName
+        if normalise:
+            outputFileName = "CLEAN_NORMALISED_"+inputFileName
+        else:
+            outputFileName = "CLEAN_"+inputFileName
     if len(argv) > 1 :
-        global frameLatitude
-        frameLatitude =  int(argv[1])
+        global nbrOfFramesToDeleteBeforeAndAfterADeath
+        nbrOfFramesToDeleteBeforeAndAfterADeath =  int(argv[1])
     if len(argv) > 2 :
-        global maxSequenceLength
-        maxSequenceLength = int(argv[2])
-    if len(argv) > 3 and argv[3] == "-v" :
-        global verbose
-        verbose = True
+        global maxSizeOfUniformInputSequences
+        maxSizeOfUniformInputSequences = int(argv[2])
 
 
 if __name__ == "__main__":
     main(sys.argv[1:])
+
 
 
 # Open and parse
@@ -96,16 +106,17 @@ file = open(ntpath.join(path, inputFileName))
 for line in file:
     linesInput.append([float(x) for x in line.split("\t")])
 file.close()
+
+# Initialise global var
 columnsNbr = len(linesInput[0])
 deathColumnNbr = columnsNbr - 1
-
+outputNbr = columnsNbr - inputNbr - 1
 
 # Death nbr
 deathNbr = 0
 for i in linesInput :
     if i[deathColumnNbr] == 1 :
         deathNbr += 1
-
 
 # Clean death linesInput
 i = 0
@@ -120,7 +131,6 @@ linesDeathClean = CleanArray(linesInput)
 
 #  Get Output Proportion
 outputProportion = GetOutputProportion(linesDeathClean)
-
 
 # Get biggest 0 sequences
 zeroSequences = {}
@@ -147,7 +157,7 @@ for i,l in enumerate(linesDeathClean):
 sortedZeroSequences = sorted(zeroSequences.items(), key=itemgetter(1), reverse = True)
 
 # Clean sequences
-toCleanSequences = [(x,x+y) for (x,y) in sortedZeroSequences if y > maxSequenceLength]
+toCleanSequences = [(x,x+y) for (x,y) in sortedZeroSequences if y > maxSizeOfUniformInputSequences]
 cleanedSequencesNbr = len(toCleanSequences)
 for s in toCleanSequences :
     for i in range(s[0],s[1]):
@@ -157,47 +167,42 @@ linesSequenceClean = CleanArray(linesDeathClean)
 # Get Output Proportion
 outputProportion2 = GetOutputProportion(linesSequenceClean)
 
-# Write
-Write(ntpath.join(path,outputFileName), linesSequenceClean)
+# Normalise
+maxArray = [max([line[i] for line in linesSequenceClean]) for i in range(inputNbr)]
+minArray = [min([line[i] for line in linesSequenceClean]) for i in range(inputNbr)]
+for line in linesSequenceClean:
+    ln = []
+    for i in range(inputNbr):
+        ln.append(Normalise(line[i], maxArray[i], minArray[i]))
+    for j in range(inputNbr, inputNbr + outputNbr):
+        ln.append(line[j])
+    linesSequenceNormalized.append(ln)
 
+# Write
+if normalise :
+    Write(ntpath.join(path,outputFileName), linesSequenceNormalized)
+else :
+    Write(ntpath.join(path,outputFileName), linesSequenceClean)
 
 
 # Logs
-if verbose :
-    print "\n", ntpath.join(path,outputFileName)
-    print "\nSorted zero sequences : ", sortedZeroSequences
-print "\nInput lines nbr : ", len(linesInput)  
-print "First path : "
-print "\tDeath sequences nbr : ", deathSequencesNbr
-print "\tDeath nbr : ", deathNbr
-print "\tNested death nbr : ", imbricatedDeathNbr
-print "\tNumber of cleaned lines : ", len(linesInput) - len(linesDeathClean)
-print "\tOutput proportion : ",outputProportion
-print "\tNumber of lines : ", len(linesDeathClean)
+if debug :
+    print "\n\tSorted zero sequences : ", sortedZeroSequences
+print "\n\tRes : ", ntpath.join(path,outputFileName)
+print "\tNormalized" if normalise else "Not normalized"
+print "\n\tbrOfFramesToDeleteBeforeAndAfterADeath = ", nbrOfFramesToDeleteBeforeAndAfterADeath, ", maxSizeOfUniformInputSequences = ", maxSizeOfUniformInputSequences
+print "\tInput lines nbr : ", len(linesInput)  
 
-print "Second path :"
-print "\tNumber of cleaned lines : ", len(linesDeathClean) - len(linesSequenceClean)
-print "\tNumber of cleaned sequences : ", cleanedSequencesNbr
-print "\tOutput proportion 2 : ", outputProportion2
-print "\tNumber of lines : ", len(linesSequenceClean)
-print "\n"
+print "\n\tClean death frames : "
+print "\t\tDeath sequences nbr : ", deathSequencesNbr
+print "\t\tDeath nbr : ", deathNbr
+print "\t\tNested death nbr : ", imbricatedDeathNbr
+print "\t\tNumber of cleaned lines : ", len(linesInput) - len(linesDeathClean)
+print "\t\tOutput proportion : ",outputProportion
+print "\t\tNumber of lines : ", len(linesDeathClean)
 
-
-# TODO
-    # OK    Finish clean sequences
-    # OK    Write
-    # Other sequences than 0 sequences
-    # Possibility to show stats before rightinh
-    # Write Main methode
-        # Arg :
-            # Show sortedSequences
-            # Write
-    # Clean code, good names
-    # Modulate
-
-    # Clean Inputs file
-
-
-# TODO
-    # FONCTION HELP
-    # Finir Get Biggest 0 Sequence generique
+print "\n\tClean long sequence frames :"
+print "\t\tNumber of cleaned lines : ", len(linesDeathClean) - len(linesSequenceClean)
+print "\t\tNumber of cleaned sequences : ", cleanedSequencesNbr
+print "\t\tOutput proportion 2 : ", outputProportion2
+print "\t\tNumber of lines : ", len(linesSequenceClean)

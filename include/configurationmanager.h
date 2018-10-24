@@ -7,7 +7,7 @@ class ConfigurationManager{
 	public:
 	ConfigurationManager();
 	template<typename T>
-	T TEMPLATETEST(const char *str){
+	T GetFirstNodeValue(const char *str){
 		return config[str].as<T>();
 	}
 };

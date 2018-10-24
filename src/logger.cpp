@@ -15,8 +15,8 @@ bool Logger::Switch_GameSession = true;
 void Logger::Initialize(string fileName)
 {
 	ConfigurationManager config = ConfigurationManager();
-	Switch_PythonScript = config.TEMPLATETEST<bool>("enable_python_script");
-	Switch_GameSession = config.TEMPLATETEST<bool>("Switch_GameSession");
+	Switch_PythonScript = config.GetFirstNodeValue<bool>("enable_python_script");
+	Switch_GameSession = config.GetFirstNodeValue<bool>("Switch_GameSession");
 	if (Switch_TxtLog)
 	{
 		recordFile->open(fileName);

@@ -20,8 +20,10 @@ iterationNbr = configuration["neural_network"]["neural_network_training"]["itera
 trainingRangeSize = configuration["neural_network"]["neural_network_training"]["training_range_size"]
 learningRate = configuration["neural_network"]["neural_network_training"]["learning_rate"]
 inertiaParameter = configuration["neural_network"]["neural_network_training"]["inertia_parameter"]
-testResultGraphFile = ntpath.join(path, testResultGraphName+str(configuration["neural_network"]["neural_network_training"]["test_result_graph_file_num"])+".png")
+testResultGraphNum = str(configuration["neural_network"]["neural_network_training"]["test_result_graph_file_num"])
+testResultGraphFile = ntpath.join(path, testResultGraphName+testResultGraphNum+".png")
 
+print dataFile
 
 class NeuralNetworkTrainer():
 
@@ -92,7 +94,7 @@ class NeuralNetworkTrainer():
         plt.text(xTextPos,yTextPos[3],"Test file size : " +  str(self.inputNbr), fontsize="7", color=(0,1,0))
         plt.text(xTextPos,yTextPos[4],"It nbr :"  +  str(iterationNbr), fontsize="7", color=(0,1,0))
         plt.text(xTextPos,yTextPos[5],"Rng size :"  +  str(trainingRangeSize), fontsize="7", color=(0,1,0))
-        plt.title(testResultGraphName)
+        plt.title(testResultGraphName+testResultGraphNum)
         plt.savefig(testResultGraphFile)
         plt.close('all')
 
