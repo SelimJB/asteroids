@@ -1,5 +1,5 @@
-☐ Game closing cross not working in scripting mode
-☐ Game freez when launched outside of vscode in small pc
+✔ Game closing cross not working in scripting mode @done(18-10-24 18:03)
+✔ Game freez when launched outside of vscode in small pc @done(18-10-24 18:03)
 ✔ Good initial Weights @done(18-10-01 00:10)
 
 TODO :
@@ -13,6 +13,7 @@ TODO :
 			✘ Batch mode (cf "Implementation" wikipedia) @cancelled(18-10-01 00:11)
 			✔ Add Inertia @done(18-08-05 22:07)
 		☐ Clean neuralnetwork script
+		☐ Automatic Learning rate adjustment
 		☐ Train input datasets : many asts / few asts & many movement / few asts & few movement 
 			☐ Train those datasets with "normalized" outputs
 		☐ Inplement 3 ouputs version (modify C++ and scripts)

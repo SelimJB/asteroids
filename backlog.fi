@@ -1,33 +1,28 @@
 PRIO
-	* FAIRE MES COMMITS
-	* Avoir un systeme de gestion de configuration
-	* Normaliser mes jeux de données
-	* Pouvoir tester la qualité d'un NN en le laissant jouer jusqu'à ce que le nombre de mort par minutes se stabilise
-	* Clean mes scripts pythons
-	* CLEAN CODE
+	* Finaliser systeme de configuration
+		- Mapper tt mes variables présentes dans logger.h
+	* Test des fuites mémoires
+	Code qualité
+		* Pouvoir tester la qualité d'un NN en le laissant jouer jusqu'à ce que le nombre de mort par minutes se stabilise
 
 
+MOINS PRIO
+	* Avoir un logger cool et un bon systeme de logs
+	* Organiser / documenter mes petits projets C++ :
+		- Scripting pythons / C++
+		- Gestion configuration
+	* Tester l'apprentissage automatique de mon NN avec une bibliotheque tierce
+	Scripts python
+		NeuralNetwork.py
+			* Revoir mes fonctions get_output dans neural network.py, les mettres dans ia_ship plutot peut etre
+			* Pouvoir configurer l'utilisation des fonctions d'activations pour les différentes couches
 
-
-BUG
-	En mode scripting 
-		* La croix ne marche pas 
-		* Le jeu freez quand le focus est perdu
-PROJET
-	* ~~ CLEAN CODE
-	* -- Traduction back log en anglais
-	* Faire une documentation (.md)
-	Performances 
-		* Tracker et analyser les fuites mémoires
-C++
-	* !! Avoir un systeme de gestion de configuration
 Machine learning
-	* !! NORMALISER MES JEUX DE DONNEES
-	* !! RENDRE PARAMETRABLE : Inertia / Learning rate / Inertia parameter dans NeuralNetwork.py
+	* Comment bien détérminer mes seuils ? (faire des boites a moustaches pour choisir mes seuils)
+	* Avoir un taux d'apprentissage qui évolue avec le temps
 	* Pouvoir tester la qualité d'un NN en le laissant jouer jusqu'à ce que le nombre de mort par minutes se stabilise
 	* Reflechir aux Inputs que je souhaiterais ajouter, en ajouter d'autres eventuellement
 	* Noter dans un fichier la liste de tout mes inputs
-	* Comment bien détérminer mes seuils ? (faire des boites a moustaches pour choisir mes seuils)
 	Analyse
 		* Des fonctions d'analyse des fichiers inputs
 		* Methodes génériques pour generer des graphs (refactor neuralnetwork_train.py)
@@ -37,12 +32,38 @@ Machine learning
 			* Retester le modèle à 2 inputs
 			* Retester le modèle à 1 output
 
+
+
+
+PROJET
+	* ~~ CLEAN CODE C++
+	* CLEAN CODE PYTHON
+	* -- Traduction back log en anglais
+	* Faire une documentation (.md)
+	Performances 
+		* Tracker et analyser les fuites mémoires
+		* Libérer mes pointers de PyObjects
+
 ~~ GESTION DE PROJET ~~
 	TODO - avoir une backlog par catégories comme ici et une autre backlog par priorité
 
 
 
+
+
+
+
+
+
 FAIT
+	* BUG :En mode scripting 
+		* La croix ne marche pas 
+		* Le jeu freez quand le focus est perdu
+	* Améliorer la portion génératrice de PNG
+		- Marquer les parametres utilisées : nom du modèle / nombre d'itérations / taille des iterations / inertie / apprentissage, / taille du jeu testé / Derniere moyenne
+	* Define tasks and Keyboard shortcut for tasks : Clean Obj / Compile / Execut current python script / Launch game
+	* OK Avoir un systeme de gestion de configuration
+			- OK Mapper le systeme de gestion de configuration avec python
 	* Utiliser d'autres fonctions d'activation	
 	* Creer script de generation de NN
 	* Ajouter un biais

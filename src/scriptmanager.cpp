@@ -45,5 +45,9 @@ int ScriptManager::GetOuput(vector<float *> inputs)
 		}
 	}
 	pyResult = PyObject_CallObject(pFunc, pArgs);
+	// TODO METTRE CETTE AMELIORATION AVANT / APRES CHECK FUITES MEMOIRES
+	// delete pyResult; é
+	// int res = PyInt_AsLong(pyResult);
+	// return res; 
 	return PyInt_AsLong(pyResult);
 }

@@ -1,7 +1,7 @@
 # Switch_TxtLog
 enable_input_logging: False
 # Switch_PythonScript
-enable_python_script: true
+enable_python_script: True
 input_mode: 2
 
 # Trucs nuls
@@ -15,26 +15,27 @@ used_configuration : 0
 # A mettre dans configurations plus tard
 neural_network:
     path: C:/Users/selim/Projet/0_Projets/Asteroid/misc/
-    neural_network_name: NeuralNetwork_FOUROUTPUTS
-    input_file_name: Inputs_3_NN4_correctedSpeed2andcorrectedDir.txt
-    cleaned_input_file_name: CLEAN_Inputs_3_NN4_correctedSpeed2andcorrectedDir.txt
+    neural_network_name: inputMode3_9ClassesClassification_NN
+    input_file_name: Inputs_InputMode3.txt
+    cleaned_input_file_name: CLEAN_NORMALISED_Inputs_InputMode3.txt
     neural_network_generation:
         generate_new_neural_network_file: FALSE
         input_neuron_nbr: 4
-        hidden_neuron_nbr: 7
-        output_neuron_nbr: 4
+        hidden_neuron_nbr: 10
+        output_neuron_nbr: 9
     input_cleaning:
         clean_input_file: FALSE
         frame_nbr_to_clean_from_death : 40
         size_of_the_longest_same_input_sequence : 50 
     neural_network_training:
-        iteration_nbr: 4000
-        training_range_size: 100
-        learning_rate: 0.00000222
+        iteration_nbr: 1000
+        training_range_size: 500
+        learning_rate: 0.000009
         inertia_parameter: 0.81
         # test_result_file_name: TRAININGRESULTS_Inputs_FOURINPUTS.txt
-        test_result_graph_file_num: 1
+        test_result_graph_file_num: 3
 
+        
 Configurations : 
     -
         toto: 5
@@ -48,3 +49,27 @@ Configurations :
         coucou:
             - a 
             - b: yo
+
+# CONFIGURATION INPUT MODE 2
+inputmode2configuration:
+    path: C:/Users/selim/Projet/0_Projets/Asteroid/misc/
+    neural_network_name: NeuralNetwork_FOUROUTPUTS_NORMALISED
+    input_file_name: Inputs_3_NN4_correctedSpeed2andcorrectedDir.txt
+    cleaned_input_file_name: CLEAN_NORMALISED_Inputs_3_NN4_correctedSpeed2andcorrectedDir.txt
+    neural_network_generation:
+        generate_new_neural_network_file: FALSE
+        input_neuron_nbr: 4
+        hidden_neuron_nbr: 10
+        output_neuron_nbr: 9
+    input_cleaning:
+        clean_input_file: FALSE
+        frame_nbr_to_clean_from_death : 40
+        size_of_the_longest_same_input_sequence : 50 
+    neural_network_training:
+        iteration_nbr: 2000
+        training_range_size: 500
+        learning_rate: 0.000000722
+        inertia_parameter: 0.81
+        # test_result_file_name: TRAININGRESULTS_Inputs_FOURINPUTS.txt
+        test_result_graph_file_num: 3
+            

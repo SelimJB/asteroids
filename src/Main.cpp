@@ -40,6 +40,9 @@ int main(int argc, char* argv[]) {
 				scriptManager3 = new ScriptManager("ia_ship", "GetReverseThrustBoolOutput");				
 				scriptManager4 = new ScriptManager("ia_ship", "GetLeftBoolOutput");				
 				scriptManager5 = new ScriptManager("ia_ship", "GetRightBoolOutput");				
+			}
+			else if (Logger::InputMode == 3){
+				scriptManager = new ScriptManager("ia_ship", "GetOutput4");
 			}		
 		}
 		catch (exception const& err){
@@ -102,6 +105,9 @@ int main(int argc, char* argv[]) {
 		else if (Logger::InputMode == 2){
 			Logger::LogInTextFile3();
 		}		
+		else if (Logger::InputMode == 3){
+			Logger::LogInTextFile4();
+		}				
 		Debug::ShowIndicators();
 		
 		
@@ -127,7 +133,13 @@ int main(int argc, char* argv[]) {
 				int oRight = scriptManager5->GetOuput(std::vector<float*>{});
 				gameSession->m_IAControl->MooveShip3(oThurst, oReverse, oLeft, oRight);
 				gameSession->m_IAControl->EventManagement();		
-			}			
+			}		
+			else if (Logger::InputMode == 3)
+			{
+				int output = scriptManager->GetOuput(gameSession->m_sensors->GetIAInputs());
+				gameSession->m_IAControl->MooveShip(output);
+				gameSession->m_IAControl->EventManagement();					
+			}	
 		}
 		else {
 			gameSession->m_humanControl->Input();

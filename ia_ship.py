@@ -56,14 +56,14 @@ def GetDirOutput():
 def GetOutput3(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, relativeSpeed=None):
     a = n.Use([shipAngle,x_dirShipNearestAst,y_dirShipNearestAst,relativeSpeed])
     tresholds = [
-        0.50, 
+        0.60, 
         0.0915, 
-        0.25, 
-        0.25
+        0.16, 
+        0.16
     ]
     global toto
     toto = [0, 0, 0, 0]
-    # print a
+    print a
     if a[0] > tresholds[0] and a[1] > tresholds[1] :
         if a[0] > a[1] :
             toto[0] = 1
@@ -104,3 +104,26 @@ def GetRightBoolOutput():
     
 # TODO
     # Un GetOutput qui retourne 2 outputs
+
+def GetShipMoveState(stateArray):
+    for key, val in enumerate(stateArray):
+        if val == 1 :
+            return key
+    return -1
+
+def GetShipMoveState2(stateArray):
+    i = 0
+    v = 0
+    print enumerate(stateArray)
+    for key, val in enumerate(stateArray):
+        if val > v :
+            v = val
+            i = key
+    return i
+
+def GetOutput4(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, relativeSpeed=None):
+    res = n.Use([shipAngle,x_dirShipNearestAst,y_dirShipNearestAst,relativeSpeed])
+    print(res)
+    shipMoveState = GetShipMoveState2(res)
+    print(shipMoveState)
+    return shipMoveState

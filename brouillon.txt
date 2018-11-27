@@ -1,0 +1,50 @@
+TODO 
+	* Lancer un run du début à la fin et Faire un script qui me lance tt ce dont j'ai besoin en fonction de ma conf
+	* Avoir un fichier de configuration pour mes scripts python
+	* Finir la configuration pour le C++
+
+	* Comprendre les différents GetOutput de ia_ship, de main.cpp et de neuralnetwork, et configuriser tt ça
+	* neuralnetwork_train : améliorer la partie génération de graph et avoir les parametres utilisées dans le nom du graph
+
+	* Clean mon NeuralNetworkCleanInputFile
+		- les arguments
+		- la methode help
+
+cleanInputFile
+	RES : 
+		* Assainir un fichier d'inputs
+	CONF : X
+	ARGS : 
+		- InputFileName
+		- FrameLatitude
+		- Max Sequence Length
+
+neuralnetwork_initializer
+	RES : Génère un NN non entrainé avec un biais et le nombre spécifié de neurones dans les différentes couches
+	ARGS : path, inputNeuronsNbr, hiddenNeuronsNbr, outputNbr
+	CONF : le cas default (conf pas necessaire à mapper)
+
+neuralnetwork_train
+	RES : 
+	Conf :
+		- NN path
+		- Clean Inputs file path
+		- TestResultFile 
+		- TestResultGraphFile
+		- iteration nbr 
+		- training range size
+		- LearningRate
+		- InertiaParameter
+	Args: pas d'args
+
+
+neuralnetwork
+	RES : Bibliotheque custom d'entrainement et d'utilisation de NN
+	Utilisée par neuralnetwork_train pour entrainer et par ia_ship pour utiliser
+	ARGS : X
+	CONF : X
+
+ia_ship
+	RES : le comportement du vaisseau
+	ARG : X
+	CONF : neuralnetwork file

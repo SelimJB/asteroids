@@ -137,13 +137,14 @@ zeroSequences = {}
 switch = False
 currentIndex = 0
 for i,l in enumerate(linesDeathClean):
-    output = str(l[4:deathColumnNbr])
+    output = str(l[inputNbr:deathColumnNbr])
     # Boucler dans le tableau outputProportion
     # NN 2
     # if output == '[0.0, 0.0]' :
     # NN 4 Outputs
     # if output == '[0.0, 0.0, 0.0, 0.0]' or output == '[1.0, 0.0, 0.0, 0.0]' :
-    if output == '[0.0, 0.0, 0.0, 0.0]' :
+    # if output == '[0.0, 0.0, 0.0, 0.0]' : # Pour inputMode 3
+    if output == '[1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]' : 
         if switch == False :
             switch = True
             currentIndex = i
@@ -189,8 +190,9 @@ else :
 if debug :
     print "\n\tSorted zero sequences : ", sortedZeroSequences
 print "\n\tRes : ", ntpath.join(path,outputFileName)
-print "\tNormalized" if normalise else "Not normalized"
-print "\n\tbrOfFramesToDeleteBeforeAndAfterADeath = ", nbrOfFramesToDeleteBeforeAndAfterADeath, ", maxSizeOfUniformInputSequences = ", maxSizeOfUniformInputSequences
+print "\tNormalized" if normalise else "\tNot normalized"
+print "\n\tInputNbr : ", inputNbr,"\tOutputNbr : ", outputNbr
+print "\tbrOfFramesToDeleteBeforeAndAfterADeath = ", nbrOfFramesToDeleteBeforeAndAfterADeath, ", maxSizeOfUniformInputSequences = ", maxSizeOfUniformInputSequences
 print "\tInput lines nbr : ", len(linesInput)  
 
 print "\n\tClean death frames : "

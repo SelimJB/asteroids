@@ -8,7 +8,7 @@
 class GameObject;
 class GameSession;
 
-static const std::string fileName = "misc/Inputs.txt"; // Put in the config file
+static const std::string fileName = "./Inputs.txt"; // TODO CONFIG
 
 class Point;
 
@@ -27,7 +27,7 @@ class Logger
 	// TODO modifier ça 
 	// 0 : 1 Output
 	// 1 : 2 Output
-	static const int InputMode = 2;
+	static const int InputMode = 3;
 	static bool Switch_PythonScript;
   	static void Initialize(std::string fileName);
 	static void Release();
@@ -38,6 +38,7 @@ class Logger
 	static void LogInTextFile();
 	static void LogInTextFile2();
 	static void LogInTextFile3();
+	static void LogInTextFile4();
 	static void PrintPoint(const Point&);
 };
 

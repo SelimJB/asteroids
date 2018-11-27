@@ -33,7 +33,7 @@ void Logger::LogInTextFile()
 {
 	if (Switch_TxtLog)
 	{
-		int output = GameSession::m_mainShip->m_ThrustState + GameSession::m_mainShip->m_DirState * 3;
+		int output = GameSession::m_mainShip->GetShipMoveState();
 		vector<float*> inputs = GameSession::m_sensors->GetIAInputs();
 		for (size_t i = 0; i<inputs.size(); i++){
 			if( inputs[i] == NULL ){
@@ -96,6 +96,33 @@ void Logger::LogInTextFile3()
 		*recordFile << backThrustOutput << "\t";
 		*recordFile << leftOutput << "\t";
 		*recordFile << rightOutput << "\t";
+		*recordFile << GameSession::m_mainShip->m_isDeadLogInfo << "\n";
+		if (GameSession::m_mainShip->m_isDeadLogInfo){
+			GameSession::m_mainShip->m_isDeadLogInfo = false;
+		}
+	}
+}
+
+void Logger::LogInTextFile4()
+{
+	if (Switch_TxtLog)
+	{
+		// AI Inputs 
+		vector<float*> inputs = GameSession::m_sensors->GetIAInputs();
+		for (size_t i = 0; i<inputs.size(); i++){
+			if( inputs[i] == NULL ){
+				*recordFile << 'X' << "\t";
+			}
+			else {
+				*recordFile << *inputs[i] << "\t";
+			}
+		}
+		// AI Outputs
+		int output = GameSession::m_mainShip->GetShipMoveState();
+		for (int i = 0; i<9; i++){
+			int state = i == output ? 1 : 0;
+			*recordFile << state << "\t";
+		}
 		*recordFile << GameSession::m_mainShip->m_isDeadLogInfo << "\n";
 		if (GameSession::m_mainShip->m_isDeadLogInfo){
 			GameSession::m_mainShip->m_isDeadLogInfo = false;

@@ -21,6 +21,8 @@ class Ship : public GameObject
 	~Ship();
 	ShipDirStates m_DirState = CENTER;
 	ShipThrustStates m_ThrustState = THRUSTOFF;
+	// 
+	int GetShipMoveState();
 	bool m_ShipCanShoot = true;
 	Ship();
 	void TurnLeft(float deltaTime);

@@ -112,3 +112,7 @@ Ship::~Ship(){
 void Ship::Log(){
 	cout << "\tType : SHIP" << endl;
 }
+
+int Ship::GetShipMoveState(){
+	return m_DirState * 3 + m_ThrustState;
+}
