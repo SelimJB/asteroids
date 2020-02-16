@@ -1,3 +1,6 @@
+Ajouter tache : Journaliser tt ce qui a deja été fait (cf C:\Users\selim\Projet\0_Projets\journal.txt)
+histoire de faciliter la création d'un blog / article / démo
+
 ✔ Game closing cross not working in scripting mode @done(18-10-24 18:03)
 ✔ Game freez when launched outside of vscode in small pc @done(18-10-24 18:03)
 ✔ Good initial Weights @done(18-10-01 00:10)
@@ -58,6 +61,15 @@ TODO :
 		☐ Py_DECREF : managing reference count
 		☐ Adding a GameManager class
 		☐ Clean backlog.todo
+	Fin de projet :
+		☐ Utiliser valgrind C++
+		☐ Séparer logique jeu de logique SDL
+	Projet terminé : 
+		☐ Prendre des notes et faire un bilan de mon experience : les technologies utilisées, les bibliothèques, les algorithmes, les methodes
+		☐ Bien organiser mon dossier de projet, éventuellement faire un GIT
+		☐ Pour chaque projet avoir un readme qui explique comment on entre dans le projet
+		☐ Mettre à jours mes fiches Fiches_C++ et Fiches_SDL
+		☐ Créer une fiche projets ou je détaillerais tt les projets réalisés + en profondeur
 
 RENSEIGNEMENTS :
 	☐ Tester et trouver un truc cool de dataviz

@@ -4,7 +4,7 @@ enable_input_logging: False
 enable_python_script: True
 input_mode: 2
 
-# Trucs nuls
+# Trucs 
 Switch_GameSession : False
 Switch_GameObj : False
 Switch_ShipAxis : False
@@ -28,9 +28,9 @@ neural_network:
         frame_nbr_to_clean_from_death : 40
         size_of_the_longest_same_input_sequence : 50 
     neural_network_training:
-        iteration_nbr: 1000
-        training_range_size: 500
-        learning_rate: 0.000009
+        iteration_nbr: 500
+        training_range_size: 100
+        learning_rate: 0.000015
         inertia_parameter: 0.81
         # test_result_file_name: TRAININGRESULTS_Inputs_FOURINPUTS.txt
         test_result_graph_file_num: 3

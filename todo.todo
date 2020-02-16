@@ -1,5 +1,23 @@
-☐ Finish InputMode 3 (9 classes classification)
-	☐ LogInTextFile4
-	☐ MooveShip4
-☐ Convert python list to C++ vector
-	☐ Refactor ScriptManager to handle vectors
+Maintenant : 
+	Entrainement :
+		☐ Homogénéiser un peut + la vitesse des astéroides
+		☐ Entrainer pour une situation spécifique uniquement
+		☐ Faire un vrai long recod
+	TensorFlow :
+		☐ Tester un entrainement avec TensorFlow
+		
+Principaux sujets :
+	☐ Continuer a rendre tout configurable
+
+	☐ Tester un entrainement avec les algos TensorFlow
+
+	☐ Mesure efficacité d'un NN
+
+	☐ Pouvoir faire Joujou facilement avec les fonctions de transfert
+
+	☐ Documenter tt ce qui a été fait et tt mes expérimentations
+
+
+Archive:
+  ✔ Finish InputMode 3 (9 classes classification) @done(18-11-27 23:48)
+  ✔ LogInTextFile4 @done(18-11-27 23:48)

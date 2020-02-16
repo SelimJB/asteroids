@@ -1,0 +1,23 @@
+ENREGISTREMENT INPUTS
+	Logger.h
+		Modifier InputMode
+	Logger.cpp
+		Ajouter LogIntTextFile methode associé à l'input mode
+	Main.cpp 
+		Ajouter Condition sur LogInTextFileAssociée à l'input mode
+
+UTILISATION PYTHON
+	ia_ship.py
+		Ajouter fonction getoutput
+	IAControl
+		Ajouter MooveShip
+	Main.cpp
+		Instancier les bon scripts managers en fonction de l'InputMode
+		Utiliser les bon scripts managers en fonction de l'InputMode
+		Utiliser MooveShip et Event Management
+
+PREMIER TEST : 
+	Creer le NN garce à nn_initialize
+	Clean les inputs grace au scripts
+		CHANGER MON NEUTRE dans le processus de clean les longues sequences
+	Entrainer
