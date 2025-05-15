@@ -1,145 +1,145 @@
-Ajouter tache : Journaliser tt ce qui a deja été fait (cf C:\Users\selim\Projet\0_Projets\journal.txt)
-histoire de faciliter la création d'un blog / article / démo
+Add task: Log everything already done (see C:/Users/selim/Projet/0_Projets/journal.txt)
+to facilitate the creation of a blog/article/demo
 
 ✔ Game closing cross not working in scripting mode @done(18-10-24 18:03)
-✔ Game freez when launched outside of vscode in small pc @done(18-10-24 18:03)
-✔ Good initial Weights @done(18-10-01 00:10)
+✔ Game freezes when launched outside of VSCode on small PC @done(18-10-24 18:03)
+✔ Good initial weights @done(18-10-01 00:10)
 
-TODO :
-	☐ Deallocate GetAIInputs pointers : Main.cpp / Logger.cpp. Maybe use float*[] and delete[]
-	☐ Create method to handle ship mooving style (manual or IA)
-	ML : 
-		☐ Finish input file clean script
-		☐ Finish Train script
-		✔ Script to create none trained NN (https://stats.stackexchange.com/questions/47590/what-are-good-initial-weights-in-a-neural-network) @done(18-10-01 00:11)
-		✔ NN optimisation (https://fr.wikipedia.org/wiki/R%C3%A9tropropagation_du_gradient) @done(18-10-01 00:11)
-			✘ Batch mode (cf "Implementation" wikipedia) @cancelled(18-10-01 00:11)
-			✔ Add Inertia @done(18-08-05 22:07)
-		☐ Clean neuralnetwork script
-		☐ Automatic Learning rate adjustment
-		☐ Train input datasets : many asts / few asts & many movement / few asts & few movement 
+TODO:
+	☐ Deallocate GetAIInputs pointers: Main.cpp / Logger.cpp. Maybe use float*[] and delete[]
+	☐ Create method to handle ship moving style (manual or AI)
+	ML:
+		☐ Finish input file cleaning script
+		☐ Finish training script
+		✔ Script to create untrained NN (https://stats.stackexchange.com/questions/47590/what-are-good-initial-weights-in-a-neural-network) @done(18-10-01 00:11)
+		✔ NN optimization (https://en.wikipedia.org/wiki/Backpropagation) @done(18-10-01 00:11)
+			✘ Batch mode (see "Implementation" on Wikipedia) @cancelled(18-10-01 00:11)
+			✔ Add inertia @done(18-08-05 22:07)
+		☐ Clean neural network script
+		☐ Automatic learning rate adjustment
+		☐ Train input datasets: many asteroids / few asteroids & much movement / few asteroids & little movement
 			☐ Train those datasets with "normalized" outputs
-		☐ Inplement 3 ouputs version (modify C++ and scripts)
-		☐ Train 3 outputs version 
-		☐ Add an "efficacity evaluator" record mode ( configurable; to monitor a neural network quality )
-			-> Neural network name / time / death nbr / death nbr per minutes
-				( play many times to ensure that for a same neural network death number per minutes settle down after a certain time, find this time for the neural network, is it the same time for all NN ?)
-	Config file :
-		☐ Setup a config system  (Json, xml, or yaml gestion)
-	Architecture : 
-		☐ INJECTION ou Singleton ? (cf mes notes sur le sujet)
+		☐ Implement 3 outputs version (modify C++ and scripts)
+		☐ Train 3 outputs version
+		☐ Add an "efficacy evaluator" record mode (configurable; to monitor neural network quality)
+			-> Neural network name / time / death count / death count per minute
+				(play many times to ensure that for a given neural network, the death count per minute settles down after a certain time, find this time for the neural network, is it the same time for all NNs?)
+	Config file:
+		☐ Setup a config system (JSON, XML, or YAML)
+	Architecture:
+		☐ INJECTION or Singleton? (see my notes on the subject)
 		☐ GameSession singleton @https://gamedev.stackexchange.com/questions/31824/should-the-main-game-object-be-static-in-c
-		☐ Singleton for :   ?????? A reflechir, cf remarque
-			☐ sensor 
-			☐ logger 
-			☐ debug 
-			" SI il ne doit y avoir qu'une seule instance, il suffit de n'en créer qu'une "
-			=> GameSession Singleton avec Parametre Sensor, Logger, Debug
-		☐ Sensor, logger, debbug as member of gamesession : Initialise Logger, Debbug, Member, and then pass them as the GameSession Initialiser / Constructor
-	Handle / Catch errors : 
-		☐ Read Handling and Catching errors in C/C++ : Game Engine Architecture
-		☐ Handle and Catch errors
-	Drawing : 
+		☐ Singleton for: ?????? To think about, see remark
+			☐ sensor
+			☐ logger
+			☐ debug
+			"If there should only be one instance, just create one"
+			=> GameSession Singleton with Sensor, Logger, Debug as parameters
+		☐ Sensor, logger, debug as members of GameSession: Initialize Logger, Debug, Member, and then pass them as the GameSession Initializer / Constructor
+	Handle / Catch errors:
+		☐ Read about handling and catching errors in C/C++: Game Engine Architecture
+		☐ Handle and catch errors
+	Drawing:
 		☐ Encapsulate renderer / drawing elements
 		☐ Better color choice
-		☐ Shape Class
+		☐ Shape class
 		☐ Clean code
-	Collider : 
-		☐ Collider class 
-		☐ Implement collider class for point, pentagone, circle
-		☐ Use this collider class in CheckCollisions methodes instead of dynamic_cast
-	Todo more latter : 
-		☐ Verifier que tt est correctement désaloué
+	Collider:
+		☐ Collider class
+		☐ Implement collider class for point, pentagon, circle
+		☐ Use this collider class in CheckCollisions methods instead of dynamic_cast
+	Todo more later:
+		☐ Verify that everything is properly deallocated
 		☐ Encapsulation
-		☐ Having the possibility to have IA ships and Player ships
-		☐ Tester les fuites de mémoire
+		☐ Having the possibility to have AI ships and Player ships
+		☐ Test for memory leaks
 		☐ Menu
 		☐ Collider
 		☐ Drawing
 		☐ Gameplay
 		☐ Stop using gfx
-		☐ Py_DECREF : managing reference count
+		☐ Py_DECREF: managing reference count
 		☐ Adding a GameManager class
 		☐ Clean backlog.todo
-	Fin de projet :
-		☐ Utiliser valgrind C++
-		☐ Séparer logique jeu de logique SDL
-	Projet terminé : 
-		☐ Prendre des notes et faire un bilan de mon experience : les technologies utilisées, les bibliothèques, les algorithmes, les methodes
-		☐ Bien organiser mon dossier de projet, éventuellement faire un GIT
-		☐ Pour chaque projet avoir un readme qui explique comment on entre dans le projet
-		☐ Mettre à jours mes fiches Fiches_C++ et Fiches_SDL
-		☐ Créer une fiche projets ou je détaillerais tt les projets réalisés + en profondeur
+	End of project:
+		☐ Use Valgrind C++
+		☐ Separate game logic from SDL logic
+	Project completed:
+		☐ Take notes and make a summary of my experience: technologies used, libraries, algorithms, methods
+		☐ Organize my project folder well, possibly make a GIT
+		☐ For each project, have a README explaining how to get started
+		☐ Update my C++ and SDL notes
+		☐ Create a project sheet where I will detail all completed projects in depth
 
-RENSEIGNEMENTS :
-	☐ Tester et trouver un truc cool de dataviz
-	☐ Les jeux avec la sdl en général (gestion des assets graphiques)
-	☐ Comment limiter le taf de la carte graphique
+INFORMATION:
+	☐ Test and find a cool dataviz tool
+	☐ Games with SDL in general (graphics asset management)
+	☐ How to limit GPU workload
 	☐ Collision Flag
 	☐ Dynamic cast cost
-	☐ Foncteurs 
+	☐ Functors
 
-Bug : 
-	Prio :
+Bug:
+	Priority:
 		☐ Game closing cross not working in scripting mode
-		☐ Freez after few seconds in non admin scripting mode
-	Not prio :
-		☐ GetNearestAst : Detection de l'asteroide le plus proche ne marche pas pour les astéroids proches mais de l'autre côté d'un bord de l'écran
-		☐ Vitesse commune bizarre (cf debug rouge) quand Asteroid le plus proche et vaisseau immobiles
-Divers :
+		☐ Freeze after a few seconds in non-admin scripting mode
+	Not priority:
+		☐ GetNearestAst: Detection of the nearest asteroid does not work for asteroids close but on the other side of a screen edge
+		☐ Strange common speed (see red debug) when the nearest asteroid and ship are both stationary
+Miscellaneous:
 	☐ Draw a game architecture schema
-	☐ Script Python pour mettre en forme mes Archives
-	☐ voir pour cmake
-	☐ Corriger orthographe backlog
-Configuration : 
-	☐ GameSession flag for disabling / enabling collisions
+	☐ Python script to format my Archives
+	☐ Look into CMake
+	☐ Correct spelling in backlog
+Configuration:
+	☐ GameSession flag for disabling/enabling collisions
 	☐ Recording Inputs
 	☐ Using Python Script
 	☐ Debug
-Idées : 
-	☐ Pouvoir scripter d'autres trucs comme des ennemies, des bonus, ...
+Ideas:
+	☐ Ability to script other things like enemies, bonuses, ...
 
 Archive:
   ✔ Add a setting to invalidate all the logs produced x seconds before and after a death @done(18-07-24 01:19) @project(TODO )
   ✔ Create Use, Test, and Train Script @done(18-07-22 17:20) @project(TODO .ML )
-  ✔ Set up environment in big pc (cf gitignore) @done(18-07-15 19:48) @project(TODO )
-  ✔ Read the neural netwrok chapter of : AI Game Engine Programming @done(18-07-15 18:58) @project(TODO .ML )
-  ✔ Script : Read / Write Neural Network representation file @done(18-07-09 23:44) @project(TODO .ML )
-  ✔ Script : Propagation @done(18-07-14 22:04) @project(TODO .ML )
-  ✔ Script : BackPropagation @done(18-07-15 18:58) @project(TODO .ML )
-  ✔ Inputs as Vector of Float* (to generalize IA inputs handling) @done(18-07-06 18:29) @project(TODO .Handling Python )
-  ✔ Specific method for python embeding @done(18-07-06 18:52) @project(TODO .Handling Python )
+  ✔ Set up environment in big PC (see gitignore) @done(18-07-15 19:48) @project(TODO )
+  ✔ Read the neural network chapter of: AI Game Engine Programming @done(18-07-15 18:58) @project(TODO .ML )
+  ✔ Script: Read / Write Neural Network representation file @done(18-07-09 23:44) @project(TODO .ML )
+  ✔ Script: Propagation @done(18-07-14 22:04) @project(TODO .ML )
+  ✔ Script: BackPropagation @done(18-07-15 18:58) @project(TODO .ML )
+  ✔ Inputs as Vector of Float* (to generalize AI inputs handling) @done(18-07-06 18:29) @project(TODO .Handling Python )
+  ✔ Specific method for Python embedding @done(18-07-06 18:52) @project(TODO .Handling Python )
   ✔ Clean code @done(18-07-06 18:52) @project(TODO .Handling Python )
-  ✔ Input sensors into ia_ship python script @done(18-07-02 23:29) @project(TODO )
-  ✔ Sensors : method for getting all rounded sensors in an object @done(18-07-01 23:09) @project(TODO )
-  ✔ Make : write error @done(18-07-01 20:17) @project(Divers )
-  ✔ Embeding python @done(18-06-30 12:51) @project(TODO )
-  ✔ AI controler : method for mooving the ship with scripting @done(18-06-28 23:42) @project(TODO )
+  ✔ Input sensors into ia_ship Python script @done(18-07-02 23:29) @project(TODO )
+  ✔ Sensors: method for getting all rounded sensors in an object @done(18-07-01 23:09) @project(TODO )
+  ✔ Make: write error @done(18-07-01 20:17) @project(Miscellaneous )
+  ✔ Embedding Python @done(18-06-30 12:51) @project(TODO )
+  ✔ AI controller: method for moving the ship with scripting @done(18-06-28 23:42) @project(TODO )
   ✔ Log sensors method @done(18-06-27 21:38) @project(TODO )
-  ✔ Round Sensors and handle null case @done(18-06-28 09:03) @project(TODO )
+  ✔ Round sensors and handle null case @done(18-06-28 09:03) @project(TODO )
   ✔ Output and Log output @done(18-06-27 21:38) @project(TODO )
-  ✔ Un beau debug pour la direction du vaisseau +  vaisseau @done(18-06-26 18:31) @project(TODO )
+  ✔ Nice debug for ship direction + ship @done(18-06-26 18:31) @project(TODO )
   ✔ Header file without using namespace std @done(18-06-23 17:30) @project(TODO )
   ✔ Sensors @done(18-06-26 18:42) @project(TODO )
-  ✔ X et Y du vecteur entre le vaisseau et le plus proche asteroid @done(18-06-26 16:26) @project(TODO )
-  ✔ vitesse commune des objets (produit scalaire entre v vaisseau et v asteroid ) (donne aussi le sens) @done(18-06-26 18:34) @project(TODO )
-  ✔ Gerer les cas null @done(18-06-26 15:49) @project(TODO )
-  ✔ Gerer les vitesses negatives @done(18-06-26 16:24) @project(TODO )
-  ✔ Clean code et debug @done(18-06-26 18:34) @project(TODO )
-  ✔ Rotation du vaisseau @done(18-06-23 17:56) @project(TODO )
+  ✔ X and Y of the vector between the ship and the nearest asteroid @done(18-06-26 16:26) @project(TODO )
+  ✔ Common speed of objects (dot product between ship and asteroid velocity) (also gives the direction) @done(18-06-26 18:34) @project(TODO )
+  ✔ Handle null cases @done(18-06-26 15:49) @project(TODO )
+  ✔ Handle negative speeds @done(18-06-26 16:24) @project(TODO )
+  ✔ Clean code and debug @done(18-06-26 18:34) @project(TODO )
+  ✔ Ship rotation @done(18-06-23 17:56) @project(TODO )
   ✔ Debug Class @done(18-06-23 09:15) @project(TODO )
   ✔ Recording logs in a txt file @done(18-06-23 09:18) @project(TODO )
-  ✔ Sensors classe @done(18-06-23 09:18) @project(TODO )
+  ✔ Sensors class @done(18-06-23 09:18) @project(TODO )
   ✔ Get nearest asteroid @done(18-06-23 09:18) @project(TODO )
   ✔ Clean code @done(18-06-21 16:34) @project(TODO )
   ✔ Finish GameSession @done(18-06-21 16:21) @project(TODO )
   ✔ Ship in GameSession @done(18-06-21 16:21) @project(TODO )
   ✔ Human Control @done(18-06-21 15:53) @project(TODO )
-  ✔ pb de vitesse des asteroides qui est différente en fonction de la boucle d'update @done(18-06-21 11:16) @project(Bug )
+  ✔ Asteroid speed bug depending on update loop @done(18-06-21 11:16) @project(Bug )
   ✔ Implement IsColliding for Bullet, Ship, and GameObject @done(18-06-18 16:04) @project(GameSession )
-  ✔ Spliting responsabilities of Update -> Implement DoCollid and Update for positions @done(18-06-19 11:07) @project(GameSession )
-  ✔ Implement a working Gamesession Update method @done(18-06-20 16:42) @project(GameSession )
-  ✔ Implement a working Gamesession Draw method @done(18-06-21 11:25) @project(GameSession )
-  ✔ Single GameObject List, managed by game session, and handeling object destruction @done(18-06-21 11:25) @project(GameSession )
-  ✔ Logger @done(18-06-21 11:12) @project(Divers )
-  ✔ Tag : Object Type and collision Flag @done(18-06-17 23:28) @project(GameSession )
+  ✔ Splitting responsibilities of Update -> Implement DoCollid and Update for positions @done(18-06-19 11:07) @project(GameSession )
+  ✔ Implement a working GameSession Update method @done(18-06-20 16:42) @project(GameSession )
+  ✔ Implement a working GameSession Draw method @done(18-06-21 11:25) @project(GameSession )
+  ✔ Single GameObject List, managed by GameSession, and handling object destruction @done(18-06-21 11:25) @project(GameSession )
+  ✔ Logger @done(18-06-21 11:12) @project(Miscellaneous )
+  ✔ Tag: Object Type and collision Flag @done(18-06-17 23:28) @project(GameSession )

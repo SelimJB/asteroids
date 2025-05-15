@@ -1,4 +1,5 @@
-# TODO : add a description of the inputs in the comments
+# Interface allowing the Asteroids game to be controlled by a neural network AI: computes ship actions from game state inputs.
+
 import sys, yaml, ntpath
 sys.path.insert(0, 'script')
 import neuralnetwork
@@ -31,26 +32,26 @@ n = neuralnetwork.NeuralNetwork(path)
 def GetOutput(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, relativeSpeed=None):
     # print shipAngle, " , ", x_dirShipNearestAst, " , ", y_dirShipNearestAst, " , ", relativeSpeed
     a = n.Use([shipAngle,x_dirShipNearestAst,y_dirShipNearestAst,relativeSpeed])[0]
-    print a
+    print(a)
     return a
 
-toto = None
+last_nn_output = None
 
 # NN 2
 def GetOutput2(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, relativeSpeed=None):
     a = n.Use([shipAngle,x_dirShipNearestAst,y_dirShipNearestAst,relativeSpeed])
-    print a
-    global toto
-    toto = a
+    print(a)
+    global last_nn_output
+    last_nn_output = a
     return a
 
 def GetThrustOutput():
-    global toto
-    return toto[0]
+    global last_nn_output
+    return last_nn_output[0]
 
 def GetDirOutput():
-    global toto
-    return toto[1]
+    global last_nn_output
+    return last_nn_output[1]
     
 # NN 3
 def GetOutput3(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, relativeSpeed=None):
@@ -61,46 +62,46 @@ def GetOutput3(shipAngle, x_dirShipNearestAst=None, y_dirShipNearestAst=None, re
         0.16, 
         0.16
     ]
-    global toto
-    toto = [0, 0, 0, 0]
-    print a
+    global last_nn_output
+    last_nn_output = [0, 0, 0, 0]
+    print(a)
     if a[0] > tresholds[0] and a[1] > tresholds[1] :
         if a[0] > a[1] :
-            toto[0] = 1
-            toto[1] = 0
+            last_nn_output[0] = 1
+            last_nn_output[1] = 0
         else :
-            toto[0] = 0
-            toto[1] = 1
+            last_nn_output[0] = 0
+            last_nn_output[1] = 1
     elif a[0] > tresholds[0] :
-        toto[0] = 1
+        last_nn_output[0] = 1
     elif a[1] > tresholds[1] :
-        toto[1] = 1 
+        last_nn_output[1] = 1 
     if a[2] > tresholds[2] and a[3] > tresholds[3] :
         if a[2] > a[3] :
-            toto[2] = 1
-            toto[3] = 0
+            last_nn_output[2] = 1
+            last_nn_output[3] = 0
         else :
-            toto[2] = 0
-            toto[3] = 1
+            last_nn_output[2] = 0
+            last_nn_output[3] = 1
     elif a[2] > tresholds[2] :
-        toto[2] = 1
+        last_nn_output[2] = 1
     elif a[3] > tresholds[3] :
-        toto[3] = 1     
-    # print toto       
+        last_nn_output[3] = 1     
+    # print last_nn_output       
     return a
 
 def GetThrustBoolOutput():
-    global toto
-    return toto[0]
+    global last_nn_output
+    return last_nn_output[0]
 def GetReverseThrustBoolOutput():
-    global toto
-    return toto[1]
+    global last_nn_output
+    return last_nn_output[1]
 def GetLeftBoolOutput():
-    global toto
-    return toto[2]
+    global last_nn_output
+    return last_nn_output[2]
 def GetRightBoolOutput():
-    global toto
-    return toto[3]
+    global last_nn_output
+    return last_nn_output[3]
     
 # TODO
     # Un GetOutput qui retourne 2 outputs
@@ -114,7 +115,7 @@ def GetShipMoveState(stateArray):
 def GetShipMoveState2(stateArray):
     i = 0
     v = 0
-    print enumerate(stateArray)
+    print(enumerate(stateArray))
     for key, val in enumerate(stateArray):
         if val > v :
             v = val

@@ -1,50 +1,93 @@
-TODO 
-	* Lancer un run du début à la fin et Faire un script qui me lance tt ce dont j'ai besoin en fonction de ma conf
-	* Avoir un fichier de configuration pour mes scripts python
-	* Finir la configuration pour le C++
+# Project Draft & Technical Notes
 
-	* Comprendre les différents GetOutput de ia_ship, de main.cpp et de neuralnetwork, et configuriser tt ça
-	* neuralnetwork_train : améliorer la partie génération de graph et avoir les parametres utilisées dans le nom du graph
+## General TODOs
+- Run a full session and create a script to automate all necessary steps based on configuration
+- Create a configuration file for Python scripts
+- Finalize configuration for both C++ and Python parts
+- Clarify and standardize GetOutput functions in `ia_ship`, `main.cpp`, and `neuralnetwork`; make them configurable
+- Improve graph generation in `neuralnetwork_train` and include parameters in graph filenames
+- Clean `NeuralNetworkCleanInputFile` (arguments, help method)
 
-	* Clean mon NeuralNetworkCleanInputFile
-		- les arguments
-		- la methode help
+## Python Scripts Overview
+- `cleanInputFile`: Cleans input files (arguments: InputFileName, FrameLatitude, Max Sequence Length)
+- `neuralnetwork_initializer`: Generates an untrained NN with bias and specified neurons (arguments: path, inputNeuronsNbr, hiddenNeuronsNbr, outputNbr)
+- `neuralnetwork_train`: Trains the NN (config: NN path, cleaned input file, test result file, graph file, iterations, training size, learning rate, inertia)
+- `neuralnetwork`: Custom library for training and using NNs (used by `neuralnetwork_train` and `ia_ship`)
+- `ia_ship`: Handles ship behavior (config: neuralnetwork file)
 
-cleanInputFile
-	RES : 
-		* Assainir un fichier d'inputs
-	CONF : X
-	ARGS : 
-		- InputFileName
-		- FrameLatitude
-		- Max Sequence Length
+## Machine Learning & AI
+- Validate trained NNs using TensorFlow and custom forward propagation (results match)
+- Test NN quality: script to count deaths per minute, number of asteroids, and test duration
+- Determine at what point the death rate stabilizes for a given number of asteroids
+- Associate each NN with its quality and thresholds
+- Parameter tuning: find optimal thresholds for each NN (box plots, etc.)
+- Easily launch new runs and test new models (classification vs regression)
+- Track and analyze memory leaks (especially PyObject pointers)
+- Continue mapping `logger.h` variables to configuration
+- Update backlog files
+- Create a diagram of all code steps
+- Study NN quality and test different models (classification, regression, softmax, merging left/right outputs)
 
-neuralnetwork_initializer
-	RES : Génère un NN non entrainé avec un biais et le nombre spécifié de neurones dans les différentes couches
-	ARGS : path, inputNeuronsNbr, hiddenNeuronsNbr, outputNbr
-	CONF : le cas default (conf pas necessaire à mapper)
+## Asteroids Project
+- Memory leak investigation
+- Continue ML and gameplay development
+- Document the project (write an article about the process)
 
-neuralnetwork_train
-	RES : 
-	Conf :
-		- NN path
-		- Clean Inputs file path
-		- TestResultFile 
-		- TestResultGraphFile
-		- iteration nbr 
-		- training range size
-		- LearningRate
-		- InertiaParameter
-	Args: pas d'args
+## Current Focus
+- Training:
+    - Make asteroid speed more consistent
+    - Train for specific situations only
+    - Record a long session
+- TensorFlow:
+    - Test training with TensorFlow algorithms
 
+## Main Topics
+- Continue making everything configurable
+- Test training with TensorFlow algorithms
+- Measure NN efficiency
+- Experiment with transfer functions
+- Document all work and experiments
 
-neuralnetwork
-	RES : Bibliotheque custom d'entrainement et d'utilisation de NN
-	Utilisée par neuralnetwork_train pour entrainer et par ia_ship pour utiliser
-	ARGS : X
-	CONF : X
+## Priorities
+- Finalize configuration system (map all `logger.h` variables)
+- Test for memory leaks
+- Code quality: test NN quality by letting it play until the death rate stabilizes
 
-ia_ship
-	RES : le comportement du vaisseau
-	ARG : X
-	CONF : neuralnetwork file
+## Lower Priority
+- Improve logger and logging system
+- Organize/document small C++ projects (Python scripting, configuration management)
+- Test NN training with third-party libraries
+- Refactor get_output functions in `neuralnetwork.py` (move to `ia_ship` if needed)
+- Allow configuration of activation functions for each layer
+- Experiment with learning rate schedules
+- List all NN inputs in a file
+- Add analysis functions for input files
+- Generic methods for graph generation (refactor `neuralnetwork_train.py`)
+- Generate graphs for all tweaks (show used tweaks on the graph)
+- Test models with 4, 2, and 1 input/output
+
+## Project Management
+- CLEAN CODE for C++ and Python
+- Translate backlog to English
+- Write documentation (.md)
+- Track and analyze memory leaks
+- Free PyObject pointers
+- Maintain categorized and prioritized backlogs
+
+## Completed
+- Fixed: Scripting mode window close button not working
+- Fixed: Game freezes when focus is lost
+- Improved PNG generation (parameters in filename: model name, iterations, size, inertia, learning rate, test size, last average)
+- Defined tasks and keyboard shortcuts: Clean Obj, Compile, Run Python script, Launch game
+- Configuration management system (mapped with Python)
+- Added more activation functions
+- Created NN generation script
+- Added bias to NN
+- Added ship angle as input
+- Tested 4-output mode
+- Fixed input vector between asteroid and ship (direction to position vector)
+
+## Ideas
+- Decrease learning rate over time ([see article](https://www.kdnuggets.com/2017/11/estimating-optimal-learning-rate-deep-neural-network.html))
+- Measure network evolution during training
+- Verify cost calculation (compare with book, check different cost calculations)

@@ -1,97 +1,77 @@
-Selection des hyper parametres
-	https://medium.freecodecamp.org/how-to-pick-the-best-learning-rate-for-your-machine-learning-project-9c28865039a8
+Hyperparameter Selection
+https://medium.freecodecamp.org/how-to-pick-the-best-learning-rate-for-your-machine-learning-project-9c28865039a8
 
-Les biais et les seeds
+Biases and Seeds
 
-
-Pour générer mon fichier Inputs 
-	Homogéhéniser mes enregistrements
-	Supprimer les erreurs
-
-
-A mettre dans mon rapport Final : 
-	ML : 
-		Les performances des reseaux entrénés ( comparer les output du reseau avec les jeux de données )
-
-!	* Les différents modes d'enregistrement :
-		- "Efficacity evaluator" record mode
-		- "Input collector" record mode
+Generating the Inputs File
+- Standardize recordings
+- Remove errors
 
 
+! Different recording modes:
+- "Efficacy evaluator" record mode
+- "Input collector" record mode
 
 
-Annecdotes
-	Le fichier Backlog.todo :
-			Créé pour pouvoir travailler sur le projet même lorsque je n'avais que 15 minutes devant moi, 
-		pour pouvoir me mettre dans le bain rapidement, et ne pas avoir à reflechir et à prendre de décision 
-		vis à vie de ce que j'allais faire pendant ma courte session de travail, me laisser d'avantage me concentrer
-		sur la réalisation plutot que sur quoi que ce soit d'autre
-	Les commits
-			Une experience légère des logiciels de gestion de version -> la question des bonnes pratiques de 
-		nommage de commits c'est posé
-		On peut observer une amélioration du titrage au fil des commits
-		Dans le fichier Backlog.todo je me suis mis à utiliser un style "titre de commit" quand c'était possible
-		(observer l'archive et l'évolution à travers le temps), pratique pour réfléchir encore moins pendant une 
-		session courte
+The Backlog.todo file:
+    Created so I could work on the project even when I only had 15 minutes available,
+    to quickly get back into the flow and not have to think or decide what to do during a short session,
+    allowing me to focus more on execution rather than planning.
 
 
-ENTRAINEMENT
+TRAINING
+Recording 1:
+    Recording:
+        A random session
+    Results:
+        The ship dodges asteroids but dies too often for my taste,
+        it uses reverse too much
+    Issues:
+        * Too many deaths in the recording
+        * Excessive use of reverse
 
-Enregistrement 1 :
-	Enregistrmeent : 
-		Une session quelconque
-	Résultats : 
-		le vaisseau esquive des astéroides mais meur trop souvent à mon gout, 
-		il utilise beaucoup trop la marche arrière
-	Pb : 
-		* trop de mort à l'enregistrement 
-		* Utilisation excessive de la marche arrière 
+IMPROVEMENT: Logging
+    After each crash, the 30 frames before and after are deleted
 
-AMELIORATION : Logging
-	A chaque crash, les 30 frames suivantes et les 30 frames precedantes sont effacées
-
-Enregistrements à tester :
-	* Beaucoup d'astéroides
-		- Enlever des moments à 0 ou pas
-	* Peu d'astéroides
-		- mobile ou pas
-		- enlever des moments à 0 ou pas
-
+Recordings to test:
+    * Many asteroids
+        - Remove zero-movement moments or not
+    * Few asteroids
+        - Mobile or not
+        - Remove zero-movement moments or not
 
 
+Subproject
+Python Embedding
+    * Write an explanatory README / entry point
+    * Copy the folder into C++ / Misc
+IN PARALLEL
+    * Write a README to explain how to get started with the project
 
 
-Sous projet
-	Python Embeding
-		* Faire un readme explicatif / point entrée
-		* Copier le dossier dans C++ / Divers
-	EN PARALLELE
-		* Faire un readme pour expliquer comment on entre dans le projet
+END OF PROJECT
+    * How to reduce GPU performance usage?
+    * Clean code
+    * Write the Readme.md
+    * Push sources and .exe
+
+PROJECT README
+Launching the project for the first time
+    1- The main project is named ateroids
+    2- To launch it, choose:
+        - with the makefile: "mingw32-make all"
+        - via command line:
+            "g++  -g -o Main   ./obj/ship.o  ./obj/helper.o  ./obj/bullet.o  ./obj/Main.o  ./obj/ast.o  ./obj/gameobject.o -Llib -w -lmingw32 -lSDL2main -lSDL2"
+        - launch the task: "Build and run main asteroid project"
+Used libraries
+    * SDL2
+    * Mingw32
+    * gfxlibrary
+
+TODO README:
+    * Dependency tree for third-party libraries used
 
 
-FIN DE PROJET	
-	* Comment réduire performances GPU ?
-	* Clean code
-	* Faire le Readme.md
-	* Push les sources et le .exe
-	
-LE README DU PROJET
-	Lancer le projet pour la premiere fois
-		1- Le projet principale à pour nom ~~[INSERER LE NOM]~~ et a pour répértoire principale ~~[INSERER LE NOM]~~
-		2- Pour le lancer, au choix : 
-			- avec le makefile :"mingw32-make all"
-			- en ligne de commande : 
-				"g++  -g -o Main   ./obj/ship.o  ./obj/helper.o  ./obj/bullet.o  ./obj/Main.o  ./obj/ast.o  ./obj/gameobject.o -Llib -w -lmingw32 -lSDL2main -lSDL2"
-			- lancer la tache : "Build and run main asteroid project"
-	Bibliotheques utilisées 
-		* SDL2
-		* Mingw32
-		* gfxlibrary
-
-TODO README : 
-	* Arbre de dépendances vis à vis des bibliotheques tierces utilisées
-
-
-Trucs appris : 
-	Architecture :
-		- SINGLETON VS Dependency Injection
+Things learned:
+Architecture:
+    - SINGLETON VS Dependency Injection

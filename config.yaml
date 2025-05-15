@@ -35,21 +35,6 @@ neural_network:
         # test_result_file_name: TRAININGRESULTS_Inputs_FOURINPUTS.txt
         test_result_graph_file_num: 3
 
-        
-Configurations : 
-    -
-        toto: 5
-        titi: 10
-        coucou:
-            - a 
-            - b: yo
-    -
-        toto: 5
-        titi: 10
-        coucou:
-            - a 
-            - b: yo
-
 # CONFIGURATION INPUT MODE 2
 inputmode2configuration:
     path: C:/Users/selim/Projet/0_Projets/Asteroid/misc/
